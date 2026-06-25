@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* ============================================================
+   John Deere Nepal — "Cultivating Nepal"
+   Cinematic, image-led, dark agricultural theme.
+   ============================================================ */
+
+@theme {
+  /* Brand */
+  --color-jd-green: #367c2b;
+  --color-jd-green-bright: #4ca832;
+  --color-jd-green-deep: #16331a;
+  --color-jd-yellow: #ffde00;
+  --color-jd-yellow-soft: #f5c518;
+
+  /* Surfaces (light theme) */
+  --color-ink: #f5f7f1;       /* page background */
+  --color-ink-soft: #eaeee3;  /* alternate section background */
+  --color-ink-card: #ffffff;  /* cards */
+  --color-mist: #16210f;      /* primary text (near-black, green-tinted) */
+  --color-mist-dim: #54614c;  /* muted body text */
+
+  /* Type */
+  --font-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --font-body: "Hanken Grotesk", "Segoe UI", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-mist);
+    font-family: var(--font-body);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--color-jd-yellow);
+    color: #16210f;
+  }
+}
+
+/* Custom scrollbar — industrial */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-jd-green);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-jd-green-bright);
+}
+
+/* Reusable atmospheric utilities */
+@layer utilities {
+  /* Film grain overlay */
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+  }
+
+  /* Animated yellow underline marker */
+  .marker {
+    background-image: linear-gradient(var(--color-jd-yellow), var(--color-jd-yellow));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 100% 0.28em;
+  }
+}

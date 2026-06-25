@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Large binaries / local tooling
+ffmpeg.zip
+ffmpeg/
+
+# Media assets kept out of the repo
+frontend/src/assets/videoplayback.mp4
+
+# Env / editor / OS
+.env
+.env.local
+.env.*.local
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
