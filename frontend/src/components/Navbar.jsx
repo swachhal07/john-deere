@@ -9,10 +9,19 @@ const leftNavItems = [
 
 const rightNavItems = [
   { to: '/why-us', label: 'Why Us' },
-  { to: '/about', label: 'About Us' },
+  {
+    to: '/about',
+    label: 'About Us',
+    children: [
+      { to: '/about', label: 'About Us' },
+      { to: '/leadership', label: 'Leadership' },
+    ],
+  },
 ]
 
-const allNavItems = [...leftNavItems, ...rightNavItems]
+const flattenItems = (items) =>
+  items.flatMap((it) => (it.children ? it.children : [it]))
+const allNavItems = [...leftNavItems, ...flattenItems(rightNavItems)]
 
 function NavItem({ item, isHome }) {
   return (
@@ -31,6 +40,102 @@ function NavItem({ item, isHome }) {
     >
       {item.label}
     </NavLink>
+  )
+}
+
+function NavDropdown({ item, isHome }) {
+  const { pathname } = useLocation()
+  const [open, setOpen] = useState(false)
+  const wrapperRef = useRef(null)
+  const isActive = item.children.some(
+    (c) => pathname === c.to || pathname.startsWith(c.to + '/')
+  )
+
+  // Close on outside click
+  useEffect(() => {
+    if (!open) return
+    const handler = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [open])
+
+  // Close whenever the route changes
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        className={`relative inline-flex items-center gap-1.5 pb-1 text-lg font-medium transition after:absolute after:inset-x-0 after:-bottom-0.5 after:h-[2px] after:bg-jd-green after:transition-transform after:duration-200 after:origin-left ${
+          isActive || open ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'
+        } ${
+          isHome
+            ? 'text-white group-hover/nav:text-gray-900'
+            : 'text-gray-800 hover:text-black'
+        }`}
+      >
+        {item.label}
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          aria-hidden
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+
+      {/* Dropdown panel */}
+      <div
+        className={`absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 transition-all duration-150 ${
+          open
+            ? 'visible translate-y-0 opacity-100'
+            : 'invisible translate-y-1 opacity-0'
+        }`}
+      >
+        <div className="min-w-[14rem] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-[0_18px_40px_-12px_rgba(0,0,0,0.18)]">
+          <ul className="py-2">
+            {item.children.map((child) => (
+              <li key={child.to}>
+                <NavLink
+                  to={child.to}
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    `block px-5 py-3 text-base font-medium transition-colors ${
+                      isActive
+                        ? 'bg-jd-green/10 text-jd-green'
+                        : 'text-gray-700 hover:bg-jd-green/5 hover:text-jd-green'
+                    }`
+                  }
+                >
+                  {child.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -119,9 +224,13 @@ export default function Navbar() {
 
         {/* Right links */}
         <nav className="hidden flex-1 items-center justify-start gap-14 md:flex">
-          {rightNavItems.map((item) => (
-            <NavItem key={item.to} item={item} isHome={isHome} />
-          ))}
+          {rightNavItems.map((item) =>
+            item.children ? (
+              <NavDropdown key={item.to} item={item} isHome={isHome} />
+            ) : (
+              <NavItem key={item.to} item={item} isHome={isHome} />
+            )
+          )}
         </nav>
 
         {/* Mobile toggle */}

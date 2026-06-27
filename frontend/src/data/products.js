@@ -1,104 +1,311 @@
-// Product catalogue for John Deere Nepal.
-// Imagery uses Unsplash agricultural/machinery photography as placeholders —
-// swap `image` URLs for official John Deere brand assets before launch.
+// John Deere Nepal — 5-Series tractor line-up sold by MV Dugar.
+
+import img5075e from '../assets/5075e-4wd-trem- iv-001-5053.avif'
+import img5405e from '../assets/john-deere-5405-tractor-termiv.jpeg'
+import img5310mfwd from '../assets/john_deere_india_trem4_5310_right_angle_large_1a5dd6f40ebd3c6aac80321ed0a29f52e44dbe57.avif'
+import img5310e from '../assets/john_deere_india_trem4_5310_right_angle_large_1a5dd6f40ebd3c6aac80321ed0a29f52e44dbe57 (1)e.avif'
+import img5050d from '../assets/5050d_large_cc106457ecc18698f1788e23df3db14e776405e7.avif'
+import img5045dfwd from '../assets/john-deere-india-d-series-tractors 5045d.avif'
+import img5045dreverse from '../assets/5045d_2_large_0a647ddeee97819a6d9e43032dd85cd18689a8ed.avif'
+import img5045ddual from '../assets/tractor_5045d_campo1_large_ed2760b5297c0960b3c8543d2fb4cf487019a06f.avif'
+import img5045dsingle from '../assets/tractor_5045d_campo2_large_b2f5baf37a5e6bc74a95606328e3374bf00488db.avif'
+import img5036d from '../assets/7469975a-e360-4d06-af81-0062afa6bae3-small-New Project (1).webp'
 
 export const products = [
   {
-    id: '5e-series',
-    name: '5E Series Tractor',
-    category: 'Tractors',
-    power: '45–75 HP',
-    tagline: 'The backbone of the Nepali farm.',
+    id: '5075e-mfwd',
+    name: '5075E',
+    trim: 'MFWD',
+    hp: 75,
+    drive: 'MFWD',
+    clutch: 'Dual',
+    tagline: 'Top of the line. EQRL hydraulics, dual PTO, sync shuttle.',
     description:
-      'Built for terraced fields and tight orchards alike. The 5E balances raw pulling power with the agility small and mid-size holdings demand.',
-    image:
-      'https://images.unsplash.com/photo-1591741535018-d042766c62eb?auto=format&fit=crop&w=1600&q=80',
+      'The flagship of the 5-Series. Sync shuttle transmission, EQRL rockshaft with Go-Home and 5-in-1 MFD make this the tractor to reach for when the work-day is long and the loads are heavy.',
+    image: img5075e,
+    features: [
+      'Dual clutch',
+      'MFWD paddy-sealed',
+      'Sync shuttle (TSS)',
+      'Tilt steering',
+      'Dual PTO',
+      'JD EQRL rockshaft',
+      'Single SCV',
+      'ROPS · 5-in-1 MFD',
+      'Arm-rest seat',
+      'In-line FIP · Heater',
+    ],
     specs: [
-      { label: 'Engine', value: '3-cyl turbocharged' },
-      { label: 'Transmission', value: '9F + 3R Collarshift' },
-      { label: 'Lift capacity', value: '2,000 kg' },
+      { label: 'Power', value: '75 HP' },
+      { label: 'Drive', value: 'MFWD' },
+      { label: 'Transmission', value: 'Sync shuttle' },
+      { label: 'Front tire', value: '12.4×24 / 18.4×30' },
     ],
   },
   {
-    id: '5d-series',
-    name: '5D Series Tractor',
-    category: 'Tractors',
-    power: '36–55 HP',
-    tagline: 'Reliable economy, day after day.',
+    id: '5405e-mfwd',
+    name: '5405E',
+    trim: 'MFWD',
+    hp: 63,
+    drive: 'MFWD',
+    clutch: 'Dual',
+    tagline: '12×4 speed, deluxe seat, paddy-sealed MFWD.',
     description:
-      'Low running costs, simple maintenance and proven durability — the workhorse chosen by thousands of Nepali farmers.',
-    image:
-      'https://images.unsplash.com/photo-1605338803155-8b46c2a9f8e0?auto=format&fit=crop&w=1600&q=80',
+      '63 HP of refined cabin comfort. Deluxe seat, 5-in-1 cluster display and an air pre-heater make long Terai sessions noticeably easier on the operator.',
+    image: img5405e,
+    features: [
+      'Dual clutch',
+      'MFWD paddy-sealed',
+      '12×4 speed',
+      'Collar shift',
+      'Tilt steering',
+      'Dual PTO',
+      'Single SCV',
+      'JD Standard rockshaft',
+      'Deluxe seat',
+      'Sway bar · Air pre-heater',
+    ],
     specs: [
-      { label: 'Engine', value: '3-cyl diesel' },
-      { label: 'Transmission', value: '8F + 2R' },
-      { label: 'Fuel tank', value: '60 L' },
+      { label: 'Power', value: '63 HP' },
+      { label: 'Drive', value: 'MFWD' },
+      { label: 'Transmission', value: '12×4 collar shift' },
+      { label: 'Front tire', value: '11.2×24 / 16.9×30' },
     ],
   },
   {
-    id: 'w70-harvester',
-    name: 'W70 Combine Harvester',
-    category: 'Harvesters',
-    power: '75 HP',
-    tagline: 'Bring the harvest home, faster.',
+    id: '5310-mfwd',
+    name: '5310',
+    trim: 'MFWD',
+    hp: 55,
+    drive: 'MFWD',
+    clutch: 'Dual',
+    tagline: '55 HP MFWD muscle with paddy-sealed transmission.',
     description:
-      'Compact combine engineered for paddy and wheat across Nepal’s Terai belt. High throughput with minimal grain loss.',
-    image:
-      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1600&q=80',
+      'Built for the rice belt. Hydraulic steering, paddy-sealed MFWD axle and the proven JD Standard rockshaft handle puddled fields and heavy implements without complaint.',
+    image: img5310mfwd,
+    features: [
+      'Dual clutch',
+      'MFWD paddy-sealed',
+      'Collar shift',
+      'Hydraulic steering',
+      'Single SCV',
+      'Standard PTO',
+      'JD Standard rockshaft',
+      'Standard seat',
+      'Standard display',
+    ],
     specs: [
-      { label: 'Cutting width', value: '2.0 m' },
-      { label: 'Grain tank', value: '1,400 L' },
-      { label: 'Threshing', value: 'Tangential + axial' },
+      { label: 'Power', value: '55 HP' },
+      { label: 'Drive', value: 'MFWD' },
+      { label: 'Transmission', value: 'Collar shift' },
+      { label: 'Front tire', value: '9.5×24 / 16.9×28' },
     ],
   },
   {
-    id: 'rotary-tiller',
-    name: 'Rotary Tiller',
-    category: 'Implements',
-    power: 'PTO driven',
-    tagline: 'Seedbed-ready in a single pass.',
+    id: '5310-e',
+    name: '5310',
+    trim: 'E',
+    hp: 55,
+    drive: '2WD',
+    clutch: 'Dual',
+    tagline: '55 HP 2WD with reverse PTO for puddling and rotavating.',
     description:
-      'Pulverises and levels soil in one go, cutting preparation time dramatically. Matched precisely to John Deere tractor PTOs.',
-    image:
-      'https://images.unsplash.com/photo-1530267981375-f0de937f5f13?auto=format&fit=crop&w=1600&q=80',
+      'Reverse PTO is the headline — it turns the 5310 E into a serious puddling and rotavating tractor. 4-pinion oiled rear axle for durability through the wet season.',
+    image: img5310e,
+    features: [
+      'Dual clutch',
+      '2WD fixed-track axle',
+      'Oiled 4-pinion rear',
+      'Collar shift',
+      'Open op. station',
+      'Hydraulic steering',
+      'Reverse PTO',
+      'JD MQRL rockshaft',
+      'Heater',
+    ],
     specs: [
-      { label: 'Working width', value: '1.25–1.75 m' },
-      { label: 'Blades', value: '36–54 L-type' },
-      { label: 'Gearbox', value: 'Multi-speed' },
+      { label: 'Power', value: '55 HP' },
+      { label: 'Drive', value: '2WD' },
+      { label: 'PTO', value: 'Reverse' },
+      { label: 'Front tire', value: '6.5×20 / 16.9×28' },
     ],
   },
   {
-    id: 'disc-plough',
-    name: 'Disc Plough',
-    category: 'Implements',
-    power: 'Mounted',
-    tagline: 'Break the toughest ground.',
+    id: '5050d',
+    name: '5050D',
+    trim: null,
+    hp: 50,
+    drive: '2WD',
+    clutch: 'Single',
+    tagline: '50 HP 2WD economy. Naturally aspirated, easy to service.',
     description:
-      'Cuts cleanly through hard, dry and root-bound soils where conventional ploughs stall. Built for Nepal’s varied terrain.',
-    image:
-      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1600&q=80',
+      'A dependable workhorse. Naturally aspirated, single-clutch and the MITA Standard rockshaft keep parts simple and repairs quick — a favourite of farmer cooperatives.',
+    image: img5050d,
+    features: [
+      'Single clutch',
+      '2WD fixed-track axle',
+      'Oiled rear axle',
+      'Collar shift',
+      'Open op. station',
+      'Hydraulic steering',
+      'Standard PTO',
+      'MITA Standard rockshaft',
+      'Naturally aspirated',
+    ],
     specs: [
-      { label: 'Discs', value: '2 / 3 furrow' },
-      { label: 'Disc size', value: '26 in' },
-      { label: 'Penetration', value: 'High-clearance' },
+      { label: 'Power', value: '50 HP' },
+      { label: 'Drive', value: '2WD' },
+      { label: 'Engine', value: 'Naturally aspirated' },
+      { label: 'Front tire', value: '7.5×16 / 16.9×28' },
     ],
   },
   {
-    id: 'seed-drill',
-    name: 'Seed Drill',
-    category: 'Implements',
-    power: 'Mounted',
-    tagline: 'Precision sowing, even rows.',
+    id: '5045dfwd',
+    name: '5045D',
+    trim: 'FWD',
+    hp: 45,
+    drive: 'MFWD',
+    clutch: 'Dual',
+    tagline: '45 HP MFWD with dual PTO and JD MQRL rockshaft.',
     description:
-      'Accurate seed and fertiliser placement for higher germination and uniform crops. Less waste, stronger yields.',
-    image:
-      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80',
+      'The compact end of MFWD. Paddy-sealed front axle and dual PTO let it punch above its weight on rotavators and heavy puddlers in tight plots.',
+    image: img5045dfwd,
+    features: [
+      'Dual clutch',
+      'MFWD paddy-sealed',
+      'Oiled 2-pinion rear',
+      'Collar shift',
+      'Open op. station',
+      'Hydraulic steering',
+      'Dual PTO',
+      'JD MQRL rockshaft',
+    ],
     specs: [
-      { label: 'Rows', value: '9 / 11 / 13' },
-      { label: 'Metering', value: 'Fluted roller' },
-      { label: 'Hopper', value: 'Seed + fertiliser' },
+      { label: 'Power', value: '45 HP' },
+      { label: 'Drive', value: 'MFWD' },
+      { label: 'PTO', value: 'Dual' },
+      { label: 'Front tire', value: '8×18 / 14.9×28' },
+    ],
+  },
+  {
+    id: '5045d-reverse-pto',
+    name: '5045D',
+    trim: 'Reverse PTO',
+    hp: 46,
+    drive: '2WD',
+    clutch: 'Dual',
+    tagline: '46 HP 2WD with reverse PTO — puddling specialist.',
+    description:
+      'Reverse PTO meets a dual clutch and JD MQRL hitch. Built for the operator who spends most of the season behind a rotavator in flooded paddies.',
+    image: img5045dreverse,
+    features: [
+      'Dual clutch',
+      'Reverse PTO',
+      '2WD fixed-track axle',
+      'Oiled rear axle',
+      'Collar shift',
+      'Hydraulic steering',
+      'Dual PTO',
+      'JD MQRL rockshaft',
+    ],
+    specs: [
+      { label: 'Power', value: '46 HP' },
+      { label: 'Drive', value: '2WD' },
+      { label: 'PTO', value: 'Reverse + Dual' },
+      { label: 'Front tire', value: '6.0×16 / 14.9×28' },
+    ],
+  },
+  {
+    id: '5045d-dual-clutch',
+    name: '5045D',
+    trim: 'Dual Clutch',
+    hp: 46,
+    drive: '2WD',
+    clutch: 'Dual',
+    tagline: '46 HP 2WD with dual PTO and MQRL hitch.',
+    description:
+      'The mid-tier 5045D. Dual clutch and dual PTO bring smoother implement work, while the JD MQRL hitch keeps lift action precise.',
+    image: img5045ddual,
+    features: [
+      'Dual clutch',
+      '2WD fixed-track axle',
+      'Oiled rear axle',
+      'Collar shift',
+      'Hydraulic steering',
+      'Dual PTO',
+      'JD MQRL rockshaft',
+    ],
+    specs: [
+      { label: 'Power', value: '46 HP' },
+      { label: 'Drive', value: '2WD' },
+      { label: 'PTO', value: 'Dual' },
+      { label: 'Front tire', value: '6.0×16 / 14.9×28' },
+    ],
+  },
+  {
+    id: '5045d-single-clutch',
+    name: '5045D',
+    trim: 'Single Clutch',
+    hp: 46,
+    drive: '2WD',
+    clutch: 'Single',
+    tagline: '46 HP 2WD entry build with MITA rockshaft.',
+    description:
+      'Simplest 5045D in the line-up. Single clutch, MITA Standard rockshaft and standard PTO — the lowest cost of ownership entry to the 46 HP class.',
+    image: img5045dsingle,
+    features: [
+      'Single clutch',
+      '2WD fixed-track axle',
+      'Oiled rear axle',
+      'Collar shift',
+      'Hydraulic steering',
+      'Standard PTO',
+      'MITA Standard rockshaft',
+    ],
+    specs: [
+      { label: 'Power', value: '46 HP' },
+      { label: 'Drive', value: '2WD' },
+      { label: 'Clutch', value: 'Single' },
+      { label: 'Front tire', value: '6.0×16 / 14.9×28' },
+    ],
+  },
+  {
+    id: '5036d',
+    name: '5036D',
+    trim: null,
+    hp: 36,
+    drive: '2WD',
+    clutch: 'Single',
+    tagline: 'Entry-point 5-Series. 36 HP built simple, built to last.',
+    description:
+      'The most accessible 5-Series. Light enough for terraced fields, simple enough to service anywhere in Nepal, and built on the same chassis logic as its bigger siblings.',
+    image: img5036d,
+    features: [
+      'Single clutch',
+      '2WD fixed-track axle',
+      'Oiled rear axle',
+      'Collar shift',
+      'Open op. station',
+      'Hydraulic steering',
+      'Standard PTO',
+      'MITA Standard rockshaft',
+      'LH-traffic headlights',
+    ],
+    specs: [
+      { label: 'Power', value: '36 HP' },
+      { label: 'Drive', value: '2WD' },
+      { label: 'Clutch', value: 'Single' },
+      { label: 'Front tire', value: '6.0×16 / 13.6×28' },
     ],
   },
 ]
 
-export const categories = ['All', 'Tractors', 'Harvesters', 'Implements']
+export const categories = ['All', 'MFWD', '2WD', 'Dual Clutch', 'Single Clutch']
+
+export function filterProducts(filter) {
+  if (filter === 'All') return products
+  if (filter === 'MFWD' || filter === '2WD') return products.filter((p) => p.drive === filter)
+  if (filter === 'Dual Clutch') return products.filter((p) => p.clutch === 'Dual')
+  if (filter === 'Single Clutch') return products.filter((p) => p.clutch === 'Single')
+  return products
+}

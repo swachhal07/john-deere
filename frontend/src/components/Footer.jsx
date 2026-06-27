@@ -1,63 +1,77 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/john-deere-logo.png'
+import bg from '../assets/john-deere-tractor-and-harvesters-8vy92xu1qcrorfub.jpg'
+
+const nav = [
+  { to: '/', label: 'Home' },
+  { to: '/products', label: 'Products' },
+  { to: '/why-us', label: 'Why Us' },
+  { to: '/about', label: 'About' },
+  { to: '/contact', label: 'Contact' },
+]
 
 export default function Footer() {
+  const year = new Date().getFullYear()
+
   return (
-    <footer className="relative bg-black border-t border-white/10 pt-20 pb-8 overflow-hidden">
-      {/* Oversized watermark */}
-      <div className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 select-none">
-        <span className="font-display font-extrabold text-[18vw] leading-none text-white/[0.05] whitespace-nowrap">
-          JOHN DEERE
-        </span>
-      </div>
+    <footer className="relative isolate overflow-hidden bg-black text-white">
+      {/* Background image */}
+      <img
+        src={bg}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover opacity-40"
+      />
+      {/* Dark gradient overlay for legibility */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black/90"
+      />
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <img src={logo} alt="John Deere" className="h-10 w-auto" />
-              <span className="font-display font-extrabold text-lg text-white">JOHN DEERE</span>
-            </div>
-            <p className="text-white/70 max-w-xs leading-relaxed">
-              Equipping Nepal’s farmers with world-class machinery, genuine parts and
-              trusted service, from the Terai plains to the hill terraces.
-            </p>
-          </div>
+      <div className="relative mx-auto max-w-5xl px-6 py-24 text-center">
+        <img src={logo} alt="John Deere" className="mx-auto h-14 w-auto" />
 
-          <div>
-            <h4 className="eyebrow text-jd-green mb-5">Explore</h4>
-            <ul className="space-y-3 text-white/70">
-              <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">Products</Link></li>
-              <li><Link to="/why-us" className="hover:text-white transition-colors">Why Us</Link></li>
-              <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-            </ul>
-          </div>
+        <h2 className="mt-10 font-display text-5xl font-extrabold tracking-tight md:text-7xl">
+          Cultivating <span className="text-jd-green-bright">Nepal.</span>
+        </h2>
 
-          <div>
-            <h4 className="eyebrow text-jd-green mb-5">Range</h4>
-            <ul className="space-y-3 text-white/70">
-              <li><Link to="/products" className="hover:text-white transition-colors">Tractors</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">Harvesters</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">Implements</Link></li>
-              <li><Link to="/products" className="hover:text-white transition-colors">Genuine Parts</Link></li>
-            </ul>
-          </div>
+        <nav className="mt-14 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-lg text-white/80">
+          {nav.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="transition-colors hover:text-white"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
-          <div>
-            <h4 className="eyebrow text-jd-green mb-5">Reach Us</h4>
-            <ul className="space-y-3 text-white/70">
-              <li>Kathmandu, Nepal</li>
-              <li><a href="tel:+97714000000" className="hover:text-white transition-colors">+977 1 400 0000</a></li>
-              <li><a href="mailto:info@johndeere.com.np" className="hover:text-white transition-colors">info@johndeere.com.np</a></li>
-            </ul>
-          </div>
+        <div className="mx-auto mt-14 flex max-w-3xl flex-wrap items-center justify-center gap-x-10 gap-y-3 text-lg text-white/70">
+          <span>Kathmandu, Nepal</span>
+          <span className="hidden h-1.5 w-1.5 rounded-full bg-white/30 md:inline-block" />
+          <a href="tel:+9779802960739" className="transition-colors hover:text-white">
+            +977 980-2960739
+          </a>
+          <span className="hidden h-1.5 w-1.5 rounded-full bg-white/30 md:inline-block" />
+          <a href="mailto:info@johndeere.com.np" className="transition-colors hover:text-white">
+            info@johndeere.com.np
+          </a>
         </div>
 
-        <div className="mt-16 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-3 justify-between text-sm text-white/50">
-          <p>© {new Date().getFullYear()} Vivek Automobiles. All rights reserved.</p>
-          <p>Authorized distributor of John Deere Nepal.</p>
+        <div className="mt-20 flex flex-col items-center gap-3 border-t border-white/10 pt-8 text-base text-white/55">
+          <p>© {year} Vivek Automobiles · Authorized distributor of John Deere Nepal</p>
+          <p>
+            Developed by{' '}
+            <a
+              href="https://swachhalportfolio.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-jd-green-bright transition-colors hover:text-white"
+            >
+              Swachhal Lamsal
+            </a>
+          </p>
         </div>
       </div>
     </footer>

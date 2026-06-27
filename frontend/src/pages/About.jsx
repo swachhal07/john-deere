@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import jdLogo from '../assets/john-deere-logo.png'
-import storySlide1 from '../assets/wp9633811.jpg'
-import storySlide2 from '../assets/john-deere-tractor-and-harvesters-8vy92xu1qcrorfub.jpg'
-import storySlide3 from '../assets/wp3183062.jpg'
-import storySlide4 from '../assets/wp3183064.jpg'
+import coverFieldBg from '../assets/wp9212100.jpg'
+import storySlide1 from '../assets/WhatsApp Image 2026-06-26 at 8.30.45 AM.jpeg'
+import storySlide2 from '../assets/WhatsApp Image 2026-06-26 at 8.30.46 AM.jpeg'
+import storySlide3 from '../assets/WhatsApp Image 2026-06-26 at 8.30.47 AM.jpeg'
+import storySlide4 from '../assets/WhatsApp Image 2026-06-26 at 8.33.10 AM.jpeg'
+import serviceTeamPhoto from '../assets/_DSC5954.jpg.jpeg'
+import serviceTeamPhoto2 from '../assets/_DSC5898.jpg.jpeg'
 
 /* ────────────────────────────────────────────────────────────
    ABOUT — "Field Almanac"
@@ -23,10 +26,8 @@ const trustPillars = [
   { num: '04', label: 'Genuine parts supply',   detail: 'OEM stock at the central warehouse and at every one of sixteen branches.' },
 ]
 
-const SALES_PHOTO =
-  'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=1600&q=80'
-const SERVICE_PHOTO =
-  'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1600&q=80'
+const SALES_PHOTO = serviceTeamPhoto2
+const SERVICE_PHOTO = serviceTeamPhoto
 
 const teamProfiles = [
   {
@@ -84,8 +85,22 @@ export default function About() {
 
       {/* ── COVER ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-[#1a261a]/15 bg-[#f4f6f0]">
+        {/* Cultivation backdrop */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0"
+        >
+          <img
+            src={coverFieldBg}
+            alt=""
+            className="h-full w-full object-cover opacity-[0.12]"
+            style={{ filter: 'grayscale(35%) contrast(1.05)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#f4f6f0]/40 via-[#f4f6f0]/10 to-[#f4f6f0]/85" />
+        </div>
+
         {/* Top masthead ribbon */}
-        <div className="border-b border-[#1a261a]/15">
+        <div className="relative z-10 border-b border-[#1a261a]/15">
           <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.45em] text-[#1a261a]/55 lg:px-12">
             <span>MV Dugar &middot; John Deere Nepal</span>
             <span className="hidden sm:inline">Field Almanac &middot; Issue I</span>
@@ -93,7 +108,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-[1400px] px-6 pt-20 pb-10 md:pt-28 md:pb-12 lg:px-12">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-6 pt-20 pb-10 md:pt-28 md:pb-12 lg:px-12">
           <div className="cx-rise text-center">
             <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
               <span className="h-px w-16 bg-jd-green" />
@@ -339,12 +354,9 @@ export default function About() {
                 </h2>
               </header>
 
-              {/* Footprint marquee */}
-              <div className="relative mb-16 -mx-6 lg:-mx-12">
-                <div
-                  className="overflow-hidden border-y border-[#1a261a]/15 bg-[#f4f6f0] py-6"
-                  style={{ maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)' }}
-                >
+              {/* Footprint marquee — full-bleed across viewport */}
+              <div className="relative left-1/2 right-1/2 mb-16 -ml-[50vw] -mr-[50vw] w-screen">
+                <div className="overflow-hidden border-y border-[#1a261a]/15 bg-[#f4f6f0] py-6">
                   <div className="cx-marquee-track flex items-center gap-12 whitespace-nowrap font-['Fraunces'] text-4xl text-[#1a261a] md:text-5xl">
                     {[...Array(2)].flatMap((_, copy) =>
                       ['Kathmandu', 'Biratnagar', 'Jeetpur', 'Bardibaas', 'Nepalgunj', 'Dhangadi', 'Surkhet', 'Dang', 'Pokhara', 'Butwal'].map((city) => (

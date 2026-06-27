@@ -199,10 +199,6 @@ export default function WhyUs() {
                 <p className="mt-4 text-base leading-relaxed text-gray-600">
                   {r.body}
                 </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.28em] text-gray-400 opacity-0 transition-opacity group-hover:text-jd-green group-hover:opacity-100">
-                  Learn more
-                  <span aria-hidden>→</span>
-                </span>
               </article>
             ))}
           </div>
@@ -300,7 +296,7 @@ export default function WhyUs() {
       <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-12">
           <div
-            className="mb-6 flex items-center justify-center gap-3 text-sm font-bold uppercase tracking-[0.32em] text-jd-green md:text-base"
+            className="mb-6 flex items-center justify-center gap-4 text-lg font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl lg:text-2xl"
             style={{ animation: 'fade-up 0.7s ease-out both' }}
           >
             <span className="h-px w-12 bg-jd-green" />
@@ -308,12 +304,29 @@ export default function WhyUs() {
             <span className="h-px w-12 bg-jd-green" />
           </div>
           <p
-            className="font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-[#16210f] md:text-4xl lg:text-5xl"
+            className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-[#16210f] md:text-5xl lg:text-6xl"
             style={{ animation: 'fade-up 0.7s ease-out 0.1s both' }}
           >
             Buying a tractor is easy. Keeping it running, season after season,
             is where we{' '}
-            <span className="text-jd-green">earn your trust</span>.
+            <span className="relative whitespace-nowrap text-jd-green">
+              earn your trust
+              <svg
+                className="absolute -bottom-1.5 left-0 w-full"
+                viewBox="0 0 300 16"
+                fill="none"
+                preserveAspectRatio="none"
+                aria-hidden
+              >
+                <path
+                  d="M2 11 C 70 4, 150 4, 298 9"
+                  stroke="#ffde00"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+            .
           </p>
         </div>
       </section>

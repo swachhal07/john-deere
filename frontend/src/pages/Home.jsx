@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
 import Reveal from '../components/Reveal'
 
+import serviceTeam from '../assets/WhatsApp Image 2026-06-26 at 2.44.17 PM.jpeg'
+import genuineParts from '../assets/WhatsApp Image 2026-06-26 at 3.25.57 PM.jpeg'
 import heroVideo from '../assets/hero-clip.mp4'
 import hero1 from '../assets/wp9633811.jpg'
 import hero2 from '../assets/wp3183062.jpg'
@@ -132,91 +134,185 @@ const reviews = [
   },
 ]
 
-// Big-quote slideshow. Auto-advances every 7s; pauses on hover; manual dots.
-function ReviewSlideshow({ items, interval = 5000 }) {
+function ArrowBtn({ dir, onClick, label }) {
+  const slide = dir === 'prev' ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      className="group grid h-[68px] w-[68px] flex-none place-items-center rounded-full bg-jd-green text-white shadow-[0_22px_40px_-18px_rgba(54,124,43,0.55)] transition-all duration-300 hover:scale-[1.06] hover:bg-jd-green-deep"
+    >
+      <svg viewBox="0 0 24 24" className={`h-6 w-6 transition-transform duration-300 ${slide}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        {dir === 'prev' ? (
+          <>
+            <path d="M19 12H5" />
+            <path d="M12 19l-7-7 7-7" />
+          </>
+        ) : (
+          <>
+            <path d="M5 12h14" />
+            <path d="M12 5l7 7-7 7" />
+          </>
+        )}
+      </svg>
+    </button>
+  )
+}
+
+// Editorial review slideshow: title + big counter (left) / quote + reviewer (right).
+function ReviewSlideshow({ items, interval = 7000 }) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
+  const total = items.length
+  const pad = (n) => String(n).padStart(2, '0')
 
   useEffect(() => {
     if (paused) return
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % items.length)
-    }, interval)
+    const id = setInterval(() => setIndex((i) => (i + 1) % total), interval)
     return () => clearInterval(id)
-  }, [paused, items.length, interval])
+  }, [paused, total, interval])
 
-  const go = (next) => setIndex(((next % items.length) + items.length) % items.length)
+  const go = (next) => setIndex(((next % total) + total) % total)
   const r = items[index]
 
-  // Split the quote around its highlight so the middle phrase renders in green.
   const parts = (() => {
     if (!r.highlight) return [r.quote, '', '']
-    const idx = r.quote.indexOf(r.highlight)
-    if (idx === -1) return [r.quote, '', '']
-    return [
-      r.quote.slice(0, idx),
-      r.highlight,
-      r.quote.slice(idx + r.highlight.length),
-    ]
+    const i = r.quote.indexOf(r.highlight)
+    if (i === -1) return [r.quote, '', '']
+    return [r.quote.slice(0, i), r.highlight, r.quote.slice(i + r.highlight.length)]
   })()
 
   return (
     <div
-      className="relative mx-auto max-w-4xl text-center"
+      className="relative"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Slide */}
-      <div className="min-h-[20rem] md:min-h-[22rem]">
-        <motion.div
-          key={r.name + index}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center"
-        >
-          <blockquote className="font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-[#16210f] md:text-4xl lg:text-5xl">
-            &ldquo;{parts[0]}
-            {parts[1] && <span className="text-jd-green">{parts[1]}</span>}
-            {parts[2]}&rdquo;
-          </blockquote>
-
-          <div className="mt-10 flex flex-col items-center justify-center gap-3">
-            <span
-              aria-hidden
-              className="grid h-12 w-12 place-items-center rounded-full bg-jd-green font-display text-xl font-extrabold text-white"
-            >
-              {r.name.charAt(0)}
-            </span>
-            <div>
-              <p className="font-display text-base font-extrabold uppercase tracking-tight text-black">
-                {r.name}
-              </p>
-              <p className="mt-1 text-xs font-bold uppercase tracking-[0.24em] text-gray-500">
-                {r.location}
-              </p>
-            </div>
-          </div>
-        </motion.div>
+      {/* Edge arrows (xl+ only — needs whitespace outside the content) */}
+      <div className="pointer-events-none absolute inset-y-0 z-20 hidden items-center justify-between xl:flex" style={{ left: '-9rem', right: '-9rem' }}>
+        <div className="pointer-events-auto">
+          <ArrowBtn dir="prev" onClick={() => go(index - 1)} label="Previous testimonial" />
+        </div>
+        <div className="pointer-events-auto">
+          <ArrowBtn dir="next" onClick={() => go(index + 1)} label="Next testimonial" />
+        </div>
       </div>
 
-      {/* Pagination dots */}
-      <div className="mt-8 flex items-center justify-center gap-2">
-        {items.map((it, i) => {
-          const active = i === index
-          return (
-            <button
-              key={it.name}
-              type="button"
-              onClick={() => go(i)}
-              aria-label={`Show review ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all ${
-                active ? 'w-8 bg-jd-green' : 'w-1.5 bg-black/20 hover:bg-black/40'
-              }`}
-            />
-          )
-        })}
+      <div>
+        {/* Content: title + counter | quote + reviewer */}
+        <div className="grid items-center gap-12 lg:grid-cols-[0.72fr_1fr] lg:gap-16 xl:gap-20">
+          {/* LEFT */}
+          <div className="flex flex-col items-center text-center lg:ml-8 xl:ml-16">
+            <h2 className="font-display text-5xl font-extrabold leading-[1.02] tracking-[-0.02em] text-mist md:text-6xl lg:text-[3.75rem]">
+              Voices from
+              <br />
+              <span className="text-jd-green">Nepal’s farms.</span>
+            </h2>
+
+            <div className="mt-1 flex items-end justify-center leading-[0.88] md:mt-2">
+              <motion.span
+                key={`n-${index}`}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="font-display text-[6.5rem] font-extrabold tracking-tight text-jd-yellow-soft md:text-[8.5rem] lg:text-[9.5rem]"
+              >
+                {pad(index + 1)}
+              </motion.span>
+              <span className="mx-1 -translate-y-2 font-display text-[4.5rem] font-light text-mist/25 md:text-[6rem] lg:text-[7rem]">
+                /
+              </span>
+              <span className="font-display text-[6.5rem] font-extrabold tracking-tight text-mist md:text-[8.5rem] lg:text-[9.5rem]">
+                {pad(total)}
+              </span>
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <motion.div
+            key={r.name + index}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto flex w-full max-w-2xl flex-col items-center text-center"
+          >
+            {/* Trust badge */}
+            <div className="inline-flex items-center gap-4 rounded-lg border border-mist/10 bg-white px-5 py-3 shadow-[0_10px_30px_-22px_rgba(22,33,15,0.35)]">
+              <p className="font-display text-2xl font-extrabold leading-none text-mist md:text-3xl">
+                20<span className="text-jd-green">+</span>
+              </p>
+              <div className="leading-tight">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-mist-dim">
+                  Years of trust
+                </p>
+                <div className="mt-1 flex items-center gap-1 text-jd-yellow-soft" aria-hidden>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <svg key={i} viewBox="0 0 20 20" className="h-3 w-3" fill="currentColor">
+                      <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.2 1 5.8L10 15l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Quote */}
+            <p className="mt-7 text-xl leading-[1.5] text-mist md:mt-9 md:text-2xl lg:text-3xl">
+              {parts[0]}
+              {parts[1] && (
+                <span className="relative whitespace-normal font-semibold text-jd-green">
+                  {parts[1]}
+                  <svg
+                    className="absolute left-0 w-full"
+                    style={{ bottom: '-0.3em', height: '0.3em' }}
+                    viewBox="0 0 300 16"
+                    fill="none"
+                    preserveAspectRatio="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M2 11 C 70 4, 150 4, 298 9"
+                      stroke="#ffde00"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+              )}
+              {parts[2]}
+            </p>
+
+            {/* Reviewer */}
+            <div className="mt-9 w-full max-w-xs border-t border-mist/10 pt-5 md:mt-10">
+              <div className="flex items-center justify-center gap-4">
+                <span
+                  aria-hidden
+                  className="grid h-12 w-12 flex-none place-items-center rounded-full bg-jd-green font-display text-base font-extrabold text-white"
+                >
+                  {r.name.charAt(0)}
+                </span>
+                <div className="min-w-0 text-left">
+                  <p className="font-display text-base font-extrabold tracking-tight text-mist">
+                    {r.name}
+                  </p>
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-mist-dim">
+                    {r.location}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+      </div>
+
+      {/* Bottom controls (sm – lg). Hidden at xl where edge arrows take over. */}
+      <div className="mt-12 flex items-center justify-center gap-6 xl:hidden">
+        <ArrowBtn dir="prev" onClick={() => go(index - 1)} label="Previous testimonial" />
+        <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.32em] text-mist-dim">
+          {pad(index + 1)} <span className="text-mist-dim/40">/</span> {pad(total)}
+        </span>
+        <ArrowBtn dir="next" onClick={() => go(index + 1)} label="Next testimonial" />
       </div>
     </div>
   )
@@ -327,13 +423,13 @@ const specialties = [
   {
     title: 'Genuine Parts',
     blurb: 'Authentic John Deere parts, stocked and ready across Nepal.',
-    icon: <PackageIcon />,
+    image: genuineParts,
     to: '/about',
   },
   {
     title: 'Service & Maintenance',
     blurb: 'Trained technicians and field support that keep your machines running.',
-    icon: <ToolIcon />,
+    image: serviceTeam,
     to: '/about',
   },
 ]
@@ -464,13 +560,31 @@ export default function Home() {
       {/* ============ WHAT WE DO (interactive split) ============ */}
       <section className="relative overflow-hidden pt-20 pb-24 md:pt-24 md:pb-32">
         <div className="relative mx-auto max-w-[92rem] px-6">
-          <Reveal className="mb-14 mx-auto max-w-4xl text-center">
-            <p className="eyebrow !text-lg text-jd-green mb-4">What we do</p>
-            <h2 className="text-6xl leading-[1.05] text-mist md:text-7xl">
+          <Reveal className="mb-14 mx-auto max-w-5xl text-center">
+            <div className="mb-6 flex items-center justify-center gap-3 text-base font-bold uppercase tracking-[0.3em] text-jd-green md:text-lg">
+              <span className="h-px w-12 bg-jd-green" />
+              What we do
+              <span className="h-px w-12 bg-jd-green" />
+            </div>
+            <h2 className="font-display text-5xl font-extrabold uppercase leading-[0.95] tracking-tight text-mist md:text-6xl lg:text-7xl">
               More than machines.
               <br />
-              <span className="text-jd-green md:whitespace-nowrap">
+              <span className="relative inline-block text-jd-green">
                 A partner for every season.
+                <svg
+                  className="absolute -bottom-3 left-0 h-4 w-full"
+                  viewBox="0 0 240 16"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M2 11 C 60 4, 130 4, 238 9"
+                    stroke="#ffde00"
+                    strokeWidth="10"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </span>
             </h2>
           </Reveal>
@@ -554,22 +668,93 @@ export default function Home() {
       </section>
 
       {/* ============ REVIEWS (farmer testimonials) ============ */}
-      <section className="relative overflow-hidden bg-white pt-12 pb-16 md:pt-14 md:pb-20">
+      <section className="relative overflow-hidden bg-white py-24 md:py-32">
+        {/* Terraced hillside lines — curvy stepped contour bands with gentle drift animation */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 opacity-[0.08]"
+        >
+          <svg
+            className="h-full w-full"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1600 800"
+            preserveAspectRatio="xMidYMid slice"
+            fill="none"
+            stroke="#367c2b"
+            strokeLinecap="round"
+          >
+            <style>{`
+              .terrace {
+                animation-name: terraceDrift;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+                animation-timing-function: ease-in-out;
+                will-change: transform;
+              }
+              @keyframes terraceDrift {
+                from { transform: translateX(-45px); }
+                to   { transform: translateX(45px); }
+              }
+              @media (prefers-reduced-motion: reduce) {
+                .terrace { animation: none; }
+              }
+            `}</style>
 
-        <div className="relative mx-auto w-full max-w-[88rem] px-6">
-          <Reveal className="mx-auto mb-10 flex max-w-2xl flex-col items-center text-center">
-            <div className="flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
-              <span className="h-px w-16 bg-jd-green" />
-              In their own words
-              <span className="h-px w-16 bg-jd-green" />
-            </div>
-          </Reveal>
+            {/* 14 stacked terrace lines — each drifts horizontally at a different pace,
+                creating a parallax "wind over the terraces" effect */}
+            {[
+              { d: "M -60 65   C 180 15, 380 110, 560 60  C 760 5, 980 110, 1180 55  C 1380 0, 1540 95, 1660 60",   t: 4.5, e: 0   },
+              { d: "M -60 118  C 190 70, 390 162, 570 110 C 770 55, 990 162, 1190 105 C 1390 50, 1550 145, 1660 112", t: 5.2, e: 0.4 },
+              { d: "M -60 172  C 200 125, 400 215, 580 162 C 780 105, 1000 215, 1200 158 C 1400 100, 1560 198, 1660 165", t: 6.1, e: 0.2 },
+              { d: "M -60 228  C 210 180, 410 270, 590 218 C 790 160, 1010 270, 1210 212 C 1410 155, 1570 252, 1660 220", t: 4.8, e: 0.7 },
+              { d: "M -60 286  C 220 238, 420 328, 600 276 C 800 220, 1020 328, 1220 270 C 1420 215, 1580 310, 1660 280", t: 7.0, e: 0.1 },
+              { d: "M -60 346  C 230 298, 430 388, 610 334 C 810 280, 1030 388, 1230 332 C 1430 275, 1590 370, 1660 340", t: 5.4, e: 0.6 },
+              { d: "M -60 408  C 240 360, 440 450, 620 396 C 820 340, 1040 450, 1240 394 C 1440 340, 1600 430, 1660 402", t: 6.6, e: 0.3 },
+              { d: "M -60 470  C 250 422, 450 510, 630 458 C 830 402, 1050 510, 1250 454 C 1450 400, 1610 490, 1660 462", t: 4.2, e: 0.9 },
+              { d: "M -60 530  C 240 484, 440 568, 620 518 C 820 462, 1040 568, 1240 514 C 1440 462, 1600 548, 1660 522", t: 5.8, e: 0.0 },
+              { d: "M -60 590  C 230 546, 430 626, 610 576 C 810 522, 1030 626, 1230 572 C 1430 520, 1590 606, 1660 580", t: 7.4, e: 0.5 },
+              { d: "M -60 648  C 220 606, 420 682, 600 632 C 800 580, 1020 682, 1220 628 C 1420 578, 1580 660, 1660 634", t: 4.6, e: 1.0 },
+              { d: "M -60 704  C 210 664, 410 736, 590 686 C 790 638, 1010 736, 1210 682 C 1410 634, 1570 716, 1660 690", t: 6.0, e: 0.2 },
+              { d: "M -60 752  C 200 716, 400 786, 580 736 C 780 690, 1000 786, 1200 732 C 1400 686, 1560 762, 1660 738", t: 5.0, e: 0.6 },
+              { d: "M -60 794  C 190 762, 390 798, 570 776 C 770 754, 990 798, 1190 774 C 1390 752, 1550 794, 1660 778", t: 7.8, e: 0.0 },
+            ].map((line, i) => (
+              <path
+                key={i}
+                className="terrace"
+                d={line.d}
+                strokeWidth="1.4"
+                style={{ animationDuration: `${line.t}s`, animationDelay: `-${line.e}s` }}
+              />
+            ))}
 
+            {/* Tiny vertical "step" notches — short marks to suggest terrace walls */}
+            <g strokeWidth="0.9" strokeOpacity="0.55">
+              <line x1="120"  y1="65"   x2="120"  y2="118" />
+              <line x1="420"  y1="172"  x2="420"  y2="228" />
+              <line x1="720"  y1="55"   x2="720"  y2="105" />
+              <line x1="980"  y1="240"  x2="980"  y2="300" />
+              <line x1="1240" y1="118"  x2="1240" y2="170" />
+              <line x1="1500" y1="290"  x2="1500" y2="350" />
+
+              <line x1="200"  y1="380"  x2="200"  y2="440" />
+              <line x1="540"  y1="450"  x2="540"  y2="510" />
+              <line x1="860"  y1="335"  x2="860"  y2="395" />
+              <line x1="1140" y1="470"  x2="1140" y2="528" />
+              <line x1="1400" y1="405"  x2="1400" y2="465" />
+
+              <line x1="280"  y1="620"  x2="280"  y2="678" />
+              <line x1="620"  y1="575"  x2="620"  y2="632" />
+              <line x1="940"  y1="685"  x2="940"  y2="734" />
+              <line x1="1280" y1="640"  x2="1280" y2="695" />
+            </g>
+          </svg>
+        </div>
+
+        <div className="relative z-10 mx-auto w-full max-w-[80rem] px-6">
           <div
             role="region"
             aria-label="Farmer testimonials"
             aria-roledescription="carousel"
-            className="mx-auto flex w-full flex-col items-center text-center"
           >
             <ReviewSlideshow items={reviews} />
           </div>
@@ -594,10 +779,10 @@ export default function Home() {
               ask us most often.
             </p>
             <a
-              href="tel:+97714000000"
+              href="tel:9802960739"
               className="mt-9 inline-flex items-center gap-3 rounded-sm bg-mist px-8 py-5 text-sm font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-jd-green"
             >
-              <PhoneIcon /> Still unsure? Just call: +977 1 400 0000
+              <PhoneIcon /> Still unsure? Just call: 980-2960739
             </a>
           </Reveal>
 

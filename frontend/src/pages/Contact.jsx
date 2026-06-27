@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 
 /* ────────────────────────────────────────────────────────────
    CONTACT — Swiss/industrial editorial.
@@ -19,19 +21,171 @@ const interests = [
   'Something else',
 ]
 
-// MV Dugar service & parts network across Nepal.
+// MV Dugar branch & sales-point network across Nepal.
+// `lng` / `lat` = approximate centroid in WGS84 degrees, used for the map plot.
+// `labelDir` = preferred label placement around the pin (only used for branches).
 const offices = [
-  { city: 'Kathmandu',  activeFor: 'Sales · Service · Parts', phone: '9800018809' },
-  { city: 'Biratnagar', activeFor: 'Service & Parts',         phone: '9801558692' },
-  { city: 'Jeetpur',    activeFor: 'Service & Parts',         phone: '9802919537' },
-  { city: 'Bardibaas',  activeFor: 'Service',                 phone: '9801558692' },
-  { city: 'Nepalgunj',  activeFor: 'Service & Parts',         phone: '9802573217' },
-  { city: 'Dhangadi',   activeFor: 'Service',                 phone: '9802573217' },
-  { city: 'Surkhet',    activeFor: 'Service',                 phone: '9802573217' },
-  { city: 'Dang',       activeFor: 'Service',                 phone: '9802573217' },
-  { city: 'Pokhara',    activeFor: 'Service & Parts',         phone: '9802773245' },
-  { city: 'Butwal',     activeFor: 'Service',                 phone: '9802773245' },
+  { city: 'Birtamode', type: 'Branch', address: 'Bhagwan Chowk, Birtamod-01, Jhapa', manager: 'Ankit Thapa Magar', phone: '9802750877', lng: 87.99, lat: 26.65, province: 'Koshi', labelDir: 'right' },
+  { city: 'Taplejung', type: 'Sales point', address: 'Phungling N.P.-01, Taplejung', manager: 'Ankit Thapa Magar', phone: '9802750877', lng: 87.67, lat: 27.35, province: 'Koshi' },
+  { city: 'Phidim', type: 'Sales point', address: 'Phidim-02, Panchthar', manager: 'Ankit Thapa Magar', phone: '9802750877', lng: 87.75, lat: 27.15, province: 'Koshi' },
+  { city: 'Gauriganj', type: 'Sales point', address: 'Ganapur-6, Janaki R.M.', manager: 'Harish Regmi', phone: '9802902128', lng: 87.27, lat: 26.75, province: 'Koshi' },
+  { city: 'Biratnagar', type: 'Branch', address: 'Kanchanwari, Ward 3, Morang', manager: 'Deepak Poudel', phone: '9802701808', lng: 87.27, lat: 26.45, province: 'Koshi', labelDir: 'below' },
+  { city: 'Mangalwari', type: 'Sales point', address: 'Rangeli M.P.-2, Morang', manager: 'Deepak Poudel', phone: '9802701808', lng: 87.45, lat: 26.55, province: 'Koshi' },
+  { city: 'Lahan', type: 'Branch', address: 'Lahan-3, Siraha', manager: 'Abdul Qudir Jeelani', phone: '9801169058', lng: 86.49, lat: 26.72, province: 'Madhesh', labelDir: 'below' },
+  { city: 'Katari', type: 'Sales point', address: 'Katari-4, Udaypur', manager: 'Abdul Qudir Jeelani', phone: '9801169058', lng: 86.65, lat: 26.92, province: 'Koshi' },
+  { city: 'Janakpur', type: 'Branch', address: 'Mujheliya-14, Dhanusha', manager: 'Lalit Kumar Jha', phone: '9802961266', lng: 85.93, lat: 26.73, province: 'Madhesh', labelDir: 'below' },
+  { city: 'Bardibas', type: 'Sales point', address: 'Bardibas-1, Mahottari', manager: 'Lalit Kumar Jha', phone: '9802961266', lng: 85.90, lat: 26.83, province: 'Madhesh' },
+  { city: 'Hile', type: 'Branch', address: 'Dhankuta-1, Dhankuta', manager: 'Nirmal Bhandari', phone: '9802701823', lng: 87.33, lat: 27.05, province: 'Koshi', labelDir: 'left' },
+  { city: 'Jeetpur', type: 'Branch', address: 'Chhatapipra, Ward 9, Jeetpur-Simara', manager: 'Lilaraj Wagle', phone: '9802794315', lng: 84.98, lat: 27.17, province: 'Madhesh', labelDir: 'left' },
+  { city: 'Harion', type: 'Branch', address: 'Nayaroad, Hariwon-9, Sarlahi', manager: 'Sujan Rokka Kshetri', phone: '9801558687', lng: 85.50, lat: 27.07, province: 'Madhesh', labelDir: 'below' },
+  { city: 'Hetauda', type: 'Branch', address: 'Hetauda H.I.D.-8, Makwanpur', manager: 'Dipak Sharma', phone: '9802902124', lng: 85.04, lat: 27.43, province: 'Bagmati', labelDir: 'right' },
+  { city: 'Narayan Ghat', type: 'Branch', address: 'Bharatpur-12, Milanchowk, Chitwan', manager: 'Ramesh Prasad Dahal', phone: '9802902131', lng: 84.43, lat: 27.68, province: 'Bagmati', labelDir: 'above' },
+  { city: 'Pokhara', type: 'Branch', address: 'Swagat Nagar-14, Pokhara, Kaski', manager: 'Sunil Kumar Thakur', phone: '9802921039', lng: 83.99, lat: 28.21, province: 'Gandaki', labelDir: 'above' },
+  { city: 'Butwal', type: 'Branch', address: 'Tilottama-2, Janakinagar, Butwal', manager: 'Rajesh Kumar Sah', phone: '9802902103', lng: 83.45, lat: 27.70, province: 'Lumbini', labelDir: 'left' },
+  { city: 'Kapilvastu', type: 'Sales point', address: 'Kapilvastu N.P.-1, Purano Atbazar', manager: 'Rajesh Kumar Sah', phone: '9802902103', lng: 83.05, lat: 27.55, province: 'Lumbini' },
+  { city: 'Parasi', type: 'Sales point', address: 'Ramgram N.P.-12', manager: 'Rajesh Kumar Sah', phone: '9802902103', lng: 83.69, lat: 27.52, province: 'Lumbini' },
+  { city: 'Nepalganj', type: 'Branch', address: 'Khajura Rd-1, Nepalganj', manager: 'Harish Regmi', phone: '9802902128', lng: 81.62, lat: 28.05, province: 'Lumbini', labelDir: 'below' },
+  { city: 'Dhangadhi', type: 'Branch', address: 'Dhangadhi-13, Mohanpur, Kailali', manager: 'Binay Kumar Jha', phone: '9802971502', lng: 80.59, lat: 28.69, province: 'Sudurpaschim', labelDir: 'left' },
+  { city: 'Mahendra Nagar', type: 'Sales point', address: 'Bhimdutta N.P.-1, Bhasi, Kanchanpur', manager: 'Binay Kumar Jha', phone: '9802971502', lng: 80.18, lat: 28.96, province: 'Sudurpaschim' },
+  { city: 'Tikapur', type: 'Sales point', address: 'Tikapur N.P.-1, Kailali', manager: 'Binay Kumar Jha', phone: '9802971502', lng: 81.12, lat: 28.53, province: 'Sudurpaschim' },
+  { city: 'Surkhet', type: 'Branch', address: 'Birendranagar-11, Surkhet', manager: 'Madhav Regmi', phone: '9802075800', lng: 81.62, lat: 28.60, province: 'Karnali', labelDir: 'above' },
+  { city: 'Dang', type: 'Branch', address: 'Ghorahi S.M.-14, Dang', manager: 'Dhiraj Regmi', phone: '9802500803', lng: 82.42, lat: 28.04, province: 'Lumbini', labelDir: 'above' },
 ]
+
+/* ────────────────────────────────────────────────────────────
+   Nepal map — Leaflet-based with CARTO Positron (OSM) tiles.
+   All 25 sites plotted at their real lat/lng. Branches get
+   permanent uppercase labels; sales points show on hover.
+   ──────────────────────────────────────────────────────────── */
+const NEPAL_BOUNDS = [
+  [26.30, 79.95],
+  [30.45, 88.30],
+]
+
+function NepalMap() {
+  const containerRef = useRef(null)
+  const mapRef = useRef(null)
+  const branchCount = offices.filter((o) => o.type === 'Branch').length
+  const salesCount = offices.length - branchCount
+
+  useEffect(() => {
+    if (mapRef.current || !containerRef.current) return
+
+    const map = L.map(containerRef.current, {
+      zoomControl: true,
+      attributionControl: true,
+      scrollWheelZoom: false,
+      doubleClickZoom: true,
+      minZoom: 6,
+      maxZoom: 11,
+    })
+    map.fitBounds(NEPAL_BOUNDS, { padding: [10, 10] })
+    mapRef.current = map
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &middot; &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
+    }).addTo(map)
+
+    offices.forEach((o) => {
+      const isBranch = o.type === 'Branch'
+      const marker = L.circleMarker([o.lat, o.lng], {
+        radius: isBranch ? 7 : 5,
+        color: '#16210f',
+        weight: 1.6,
+        fillColor: isBranch ? '#367c2b' : '#ffffff',
+        fillOpacity: 1,
+        interactive: true,
+      }).addTo(map)
+
+      if (isBranch) {
+        const dirMap = { above: 'top', below: 'bottom', left: 'left', right: 'right' }
+        const offsetMap = {
+          above: [0, -10],
+          below: [0, 10],
+          left: [-10, 0],
+          right: [10, 0],
+        }
+        const dir = dirMap[o.labelDir] || 'right'
+        const off = offsetMap[o.labelDir] || [10, 0]
+        marker.bindTooltip(o.city.toUpperCase(), {
+          permanent: true,
+          direction: dir,
+          offset: off,
+          className: 'mvd-branch-label',
+        })
+      } else {
+        const tooltip = L.tooltip({
+          permanent: false,
+          direction: 'top',
+          offset: [0, -8],
+          className: 'mvd-sales-label',
+          opacity: 1,
+        }).setContent(o.city.toUpperCase())
+        marker.bindTooltip(tooltip)
+        marker.on('mouseover', function () { this.openTooltip() })
+        marker.on('mouseout', function () { this.closeTooltip() })
+      }
+    })
+
+    return () => {
+      map.remove()
+      mapRef.current = null
+    }
+  }, [])
+
+  return (
+    <figure className="relative">
+      <div className="relative overflow-hidden border border-black/15 bg-white">
+        {/* Top meta strip */}
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-black/10 px-6 py-3 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gray-500 md:px-8">
+          <span>Fig. 01 &middot; Nepal &mdash; branch coverage map</span>
+          <span className="tabular-nums">
+            <span className="text-jd-green">{String(branchCount).padStart(2, '0')}</span> branches
+            <span className="mx-2 text-gray-300">&middot;</span>
+            <span className="text-gray-700">{String(salesCount).padStart(2, '0')}</span> sales points
+          </span>
+        </div>
+
+        {/* The Leaflet map */}
+        <div
+          ref={containerRef}
+          className="relative z-0"
+          style={{ height: '620px', width: '100%' }}
+        />
+
+        {/* Legend strip */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/10 px-6 py-3 font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gray-500 md:px-8">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5">
+            <span className="inline-flex items-center gap-2">
+              <span className="block h-3 w-3 rounded-full bg-jd-green ring-[1.5px] ring-black" />
+              Branch (labelled)
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="block h-3 w-3 rounded-full border-[1.5px] border-jd-green bg-white" />
+              Sales point (hover)
+            </span>
+          </div>
+          <span>Tiles &middot; OpenStreetMap / CARTO Positron</span>
+        </div>
+      </div>
+
+      <figcaption className="mt-3 flex items-baseline justify-between font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gray-500">
+        <span>Drag to pan &middot; scroll-zoom disabled &middot; sales-point names show on hover.</span>
+        <span className="tabular-nums">&Sigma; {offices.length} sites</span>
+      </figcaption>
+    </figure>
+  )
+}
+
+
+function initials(name) {
+  const parts = name.trim().split(/\s+/)
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+}
 
 const inputClass =
   'block w-full appearance-none rounded-md border border-gray-300 bg-white px-4 py-3 text-base text-black placeholder:text-gray-400 shadow-sm transition focus:border-jd-green focus:outline-none'
@@ -173,7 +327,7 @@ export default function Contact() {
                   <h2 className="mt-3 font-display text-3xl font-extrabold leading-[1.02] tracking-tight text-[#16210f] md:text-[2.6rem]">
                     Tell us about{' '}
                     <span className="relative whitespace-nowrap text-jd-green">
-                      your land
+                      your project
                       <svg
                         className="absolute -bottom-1.5 left-0 w-full"
                         viewBox="0 0 300 16"
@@ -211,11 +365,10 @@ export default function Contact() {
                               key={opt}
                               type="button"
                               onClick={() => setForm((f) => ({ ...f, interest: opt }))}
-                              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
-                                active
-                                  ? 'border-jd-green bg-jd-green text-white shadow-sm'
-                                  : 'border-gray-300 bg-white text-gray-700 hover:border-jd-green hover:text-jd-green'
-                              }`}
+                              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${active
+                                ? 'border-jd-green bg-jd-green text-white shadow-sm'
+                                : 'border-gray-300 bg-white text-gray-700 hover:border-jd-green hover:text-jd-green'
+                                }`}
                             >
                               {opt}
                             </button>
@@ -227,7 +380,7 @@ export default function Contact() {
                         type="text"
                         required
                         value={form.interest}
-                        onChange={() => {}}
+                        onChange={() => { }}
                         tabIndex={-1}
                         aria-hidden
                         className="sr-only"
@@ -374,15 +527,15 @@ export default function Contact() {
 
                 {/* Primary call CTA */}
                 <a
-                  href="tel:+9779801571065"
+                  href="tel:+97714012628"
                   className="group mt-8 flex items-center justify-between gap-4 rounded-xl bg-white/[0.04] p-4 ring-1 ring-white/10 transition hover:bg-white/[0.08] hover:ring-jd-yellow/50"
                 >
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-jd-yellow">
-                      Toll Free · 24/7 sales
+                      Head Office · Naxal, Kathmandu
                     </p>
                     <p className="mt-1 font-display text-2xl font-extrabold tracking-tight text-white">
-                      +977 9801 571 065
+                      01 - 4012628
                     </p>
                   </div>
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-jd-yellow text-[#16210f] transition-transform group-hover:scale-110">
@@ -396,7 +549,7 @@ export default function Contact() {
                 <ul className="mt-6 space-y-px overflow-hidden rounded-xl ring-1 ring-white/10">
                   <li className="bg-white/[0.025]">
                     <a
-                      href="tel:+9779801007228"
+                      href="tel:+9779802960739"
                       className="flex items-center justify-between gap-4 px-4 py-4 transition hover:bg-white/[0.06]"
                     >
                       <div>
@@ -404,7 +557,7 @@ export default function Contact() {
                           Sales
                         </p>
                         <p className="mt-0.5 text-base font-semibold text-white">
-                          +977 9801007228
+                          +977 980-2960739
                         </p>
                       </div>
                       <Icon kind="phone" />
@@ -486,22 +639,34 @@ export default function Contact() {
       {/* ─── Showroom map ──────────────────────────────────────── */}
       <section className="bg-white py-24">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-10 flex flex-col items-center text-center">
             <div>
-              <div className="mb-5 flex items-center gap-3 text-sm font-bold uppercase tracking-[0.3em] text-jd-green md:text-base">
-                <span className="h-px w-10 bg-jd-green" />
+              <div className="mb-6 flex items-center justify-center gap-3 text-base font-bold uppercase tracking-[0.3em] text-jd-green md:text-lg">
+                <span className="h-px w-12 bg-jd-green" />
                 Find us
+                <span className="h-px w-12 bg-jd-green" />
               </div>
-              <h3 className="font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight text-black md:text-5xl">
+              <h3 className="font-display text-5xl font-extrabold uppercase leading-[0.95] tracking-tight text-black md:text-7xl">
                 Our showroom.{' '}
-                <span className="text-jd-green">In Kathmandu.</span>
+                <span className="relative whitespace-nowrap text-jd-green">
+                  In Kathmandu.
+                  <svg
+                    className="absolute -bottom-3 left-0 h-4 w-full"
+                    viewBox="0 0 240 16"
+                    fill="none"
+                    preserveAspectRatio="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M2 11 C 60 4, 130 4, 238 9"
+                      stroke="#ffde00"
+                      strokeWidth="10"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
               </h3>
             </div>
-            <p className="max-w-sm text-sm leading-relaxed text-gray-600 sm:text-right">
-              On the ring road in Balaju, north Kathmandu. Walk-ins welcome
-              during business hours — or call ahead to schedule a meeting with
-              our sales team.
-            </p>
           </div>
 
           <div className="relative overflow-hidden border border-gray-200">
@@ -534,82 +699,144 @@ export default function Contact() {
       </section>
 
       {/* ─── Service network ───────────────────────────────────── */}
-      <section className="border-t border-gray-200 bg-[#f4f6f0] py-24">
+      <section className="border-t border-gray-200 bg-[#f4f6f0] py-24 md:py-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="mb-14 grid grid-cols-1 items-end gap-8 lg:grid-cols-[1fr_1.4fr]">
-            <div>
-              <div className="mb-5 flex items-center gap-3 text-sm font-bold uppercase tracking-[0.3em] text-jd-green md:text-base">
-                <span className="h-px w-10 bg-jd-green" />
-                Our network
-              </div>
-              <h3 className="font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight text-black md:text-5xl">
-                On the ground.
-                <br />
-                <span className="font-['Fraunces'] font-medium italic normal-case tracking-normal text-jd-green">
-                  Across Nepal.
-                </span>
-              </h3>
+
+          {/* Header */}
+          <div className="mb-14 text-center">
+            <div className="mb-6 flex items-center justify-center gap-3 text-base font-bold uppercase tracking-[0.3em] text-jd-green md:text-lg">
+              <span className="h-px w-12 bg-jd-green" />
+              Network — {offices.length} sites
+              <span className="h-px w-12 bg-jd-green" />
             </div>
-            <p className="max-w-xl text-base leading-relaxed text-gray-700 lg:justify-self-end lg:text-right">
-              Service centres and field-deployable technicians in every major
-              region. A machine in your field is never more than a day&rsquo;s
-              reach from genuine parts and help — wherever you&rsquo;re working.
-            </p>
+            <h3 className="font-display text-5xl font-extrabold uppercase leading-[0.95] tracking-tight text-black md:text-7xl">
+              On the ground.{' '}
+              <span className="relative whitespace-nowrap text-jd-green">
+                Across Nepal.
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  viewBox="0 0 240 16"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M2 11 C 60 4, 130 4, 238 9"
+                    stroke="#ffde00"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </h3>
           </div>
 
-          <div className="mb-6 flex items-baseline justify-between gap-4 border-b border-gray-300 pb-4">
-            <h4 className="font-display text-2xl font-extrabold uppercase tracking-tight text-black md:text-3xl">
-              Sales · Service · Parts
+          {/* Nepal map — the geographic hero */}
+          <div className="mb-16">
+            <NepalMap />
+          </div>
+
+          {/* Divider into the detail roster */}
+          <div className="mb-6 flex items-baseline justify-between gap-4 border-b border-black/20 pb-3">
+            <h4 className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.42em] text-jd-green">
+              Detail roster — every site
             </h4>
-            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-gray-500">
-              {offices.length} locations
+            <span className="font-mono text-[0.6rem] tabular-nums uppercase tracking-[0.3em] text-gray-500">
+              {String(offices.length).padStart(2, '0')} entries
             </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-px overflow-hidden border border-gray-300 bg-gray-300 md:grid-cols-3 lg:grid-cols-5">
+          {/* Ledger header (desktop only) */}
+          <div className="hidden border-y border-black/20 py-3 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.4em] text-gray-500 lg:grid lg:grid-cols-[3rem_1.4fr_7rem_2.3fr_1.5fr_1fr] lg:items-baseline lg:gap-6">
+            <span>#</span>
+            <span>Location</span>
+            <span>Type</span>
+            <span>Address</span>
+            <span>Branch manager</span>
+            <span className="text-right">Contact</span>
+          </div>
+
+          {/* Ledger rows */}
+          <ol className="divide-y divide-black/10">
             {offices.map((o, i) => (
-              <div
-                key={o.city}
-                className="group relative flex flex-col bg-[#f4f6f0] p-6 transition-colors hover:bg-white"
+              <li
+                key={`${o.city}-${i}`}
+                className="group relative grid grid-cols-1 gap-y-2.5 px-1 py-5 transition-colors hover:bg-white/70 lg:grid-cols-[3rem_1.4fr_7rem_2.3fr_1.5fr_1fr] lg:items-baseline lg:gap-6 lg:py-4"
               >
-                <div className="mb-5 flex items-center justify-between">
-                  <span className="text-[11px] font-bold tabular-nums tracking-[0.2em] text-jd-green">
-                    {String(i + 1).padStart(2, '0')}
+                {/* Index */}
+                <span className="font-mono text-[0.78rem] font-semibold tabular-nums tracking-[0.2em] text-jd-green">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+
+                {/* Location (with inline type chip on mobile) */}
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+                  <span className="font-display text-xl font-extrabold uppercase leading-none tracking-tight text-black md:text-[1.4rem]">
+                    {o.city}
                   </span>
-                  <span className="text-[11px] uppercase tracking-[0.25em] text-gray-400 transition-colors group-hover:text-jd-green">
-                    NP
+                  <span
+                    className={`inline-flex items-center rounded-sm px-2 py-0.5 font-mono text-[0.55rem] font-bold uppercase tracking-[0.28em] lg:hidden ${o.type === 'Branch'
+                      ? 'bg-jd-green text-white'
+                      : 'border border-gray-400 text-gray-600'
+                      }`}
+                  >
+                    {o.type === 'Branch' ? '◆ Branch' : '◇ Sales pt.'}
                   </span>
                 </div>
-                <p className="font-display text-xl font-extrabold uppercase leading-none tracking-tight text-black">
-                  {o.city}
-                </p>
-                <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500">
-                  {o.activeFor}
-                </p>
-                <div className="mt-auto pt-5">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-400">
-                    Contact
-                  </p>
+
+                {/* Type chip (desktop only column) */}
+                <div className="hidden lg:block">
+                  <span
+                    className={`inline-flex items-center rounded-sm px-2 py-1 font-mono text-[0.58rem] font-bold uppercase tracking-[0.28em] ${o.type === 'Branch'
+                      ? 'bg-jd-green text-white'
+                      : 'border border-gray-400 text-gray-600'
+                      }`}
+                  >
+                    {o.type === 'Branch' ? '◆ Branch' : '◇ Sales pt.'}
+                  </span>
+                </div>
+
+                {/* Address */}
+                <p className="text-sm leading-snug text-gray-700">{o.address}</p>
+
+                {/* Manager */}
+                <div className="flex items-center gap-3">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-jd-green/10 font-mono text-[0.55rem] font-bold tracking-[0.05em] text-jd-green">
+                    {initials(o.manager)}
+                  </span>
+                  <span className="text-[0.85rem] leading-tight text-gray-800">
+                    {o.manager}
+                  </span>
+                </div>
+
+                {/* Phone */}
+                <div className="lg:text-right">
                   <a
                     href={`tel:+977${o.phone}`}
-                    className="mt-1 inline-block font-mono text-sm tabular-nums tracking-tight text-gray-700 transition-colors hover:text-jd-green"
+                    className="inline-flex items-baseline gap-1.5 font-mono text-sm font-semibold tabular-nums text-black transition-colors hover:text-jd-green"
                   >
+                    <span
+                      aria-hidden
+                      className="text-[0.6rem] text-gray-400 transition-transform group-hover:translate-x-0.5 group-hover:text-jd-green"
+                    >
+                      ↗
+                    </span>
                     {o.phone}
                   </a>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
 
-          <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-gray-300 pt-8 sm:flex-row sm:items-center">
-            <p className="text-xs uppercase tracking-[0.25em] text-gray-500">
+          {/* Footer ribbon */}
+          <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-black/15 pt-8 sm:flex-row sm:items-center">
+            <p className="font-mono text-[0.6rem] uppercase tracking-[0.32em] text-gray-500">
               Need help reaching a remote site?
             </p>
             <a
-              href="tel:+9779801571065"
+              href="tel:+97714012628"
               className="group inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.25em] text-black transition-colors hover:text-jd-green"
             >
-              Call toll-free · +977 9801571065
+              Call head office · 01 - 4012628
               <span aria-hidden className="transition-transform group-hover:translate-x-1">↗</span>
             </a>
           </div>
@@ -655,6 +882,38 @@ function PageStyles() {
         0%, 100% { transform: scale(1); opacity: 1; }
         50%      { transform: scale(2.4); opacity: 0; }
       }
+      /* Leaflet branch labels — black slab, white display caps */
+      .leaflet-tooltip.mvd-branch-label {
+        background: #16210f !important;
+        color: #ffffff !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        padding: 4px 9px !important;
+        font-family: var(--font-display), 'Bricolage Grotesque', sans-serif !important;
+        font-size: 11px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.16em !important;
+        text-transform: uppercase !important;
+        line-height: 1.1 !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25) !important;
+        white-space: nowrap !important;
+      }
+      .leaflet-tooltip.mvd-branch-label::before { display: none !important; }
+      .leaflet-tooltip.mvd-sales-label {
+        background: #ffffff !important;
+        color: #16210f !important;
+        border: 1px solid #367c2b !important;
+        border-radius: 0 !important;
+        padding: 3px 7px !important;
+        font-family: var(--font-display), 'Bricolage Grotesque', sans-serif !important;
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        white-space: nowrap !important;
+      }
+      .leaflet-tooltip.mvd-sales-label::before { display: none !important; }
+      .leaflet-container { background: #f4f6f0 !important; font-family: inherit; }
       @media (prefers-reduced-motion: reduce) {
         [style*="fade-up"], [style*="status-pulse"] { animation: none !important; }
       }
