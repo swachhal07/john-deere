@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import Reveal from '../components/Reveal'
 import { products as staticProducts, categories } from '../data/products'
@@ -464,8 +465,8 @@ export default function Products() {
 
                       {/* CTAs */}
                       <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-                        <a
-                          href="/contact"
+                        <Link
+                          to="/contact"
                           className="group relative inline-flex items-center gap-3 overflow-hidden bg-jd-green px-7 py-3.5 text-sm font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-jd-green-deep"
                         >
                           <span className="relative z-10">Request a quote</span>
@@ -479,13 +480,13 @@ export default function Products() {
                             aria-hidden
                             className="absolute inset-y-0 left-0 w-0 bg-jd-yellow/15 transition-[width] duration-500 ease-out group-hover:w-full"
                           />
-                        </a>
-                        <a
-                          href="/contact"
+                        </Link>
+                        <Link
+                          to="/contact"
                           className="group inline-flex items-center gap-3 border border-mist/25 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.2em] text-mist transition-colors hover:border-jd-green hover:text-jd-green"
                         >
                           Book a demo
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </Reveal>

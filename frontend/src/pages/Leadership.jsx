@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import motiImg from '../assets/af0b8ecf-4ddc-41f9-9dd1-ba5c0df1b212.webp'
 import vivekImg from '../assets/ae68fbad-4028-45aa-81d5-44d526f4f5af.webp'
 import shubhamImg from '../assets/af5ea000-e8c5-4f03-ac64-9fd3a8bb8009.webp'
@@ -229,13 +230,13 @@ export default function Leadership() {
             <p className="mt-6 max-w-4xl font-display text-3xl font-extrabold uppercase leading-tight tracking-tight text-mist md:text-5xl lg:text-6xl">
               One family. One business. Every district in Nepal.
             </p>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="group mt-10 inline-flex items-center gap-3 border-b-2 border-jd-yellow pb-1 text-xs font-bold uppercase tracking-[0.28em] text-mist transition-colors hover:text-jd-green"
             >
               Speak with our team
               <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
