@@ -10,6 +10,7 @@ import hero2 from '../assets/wp3183062.jpg'
 import hero3 from '../assets/john-deere-tractor-and-harvesters-8vy92xu1qcrorfub.jpg'
 import hero4 from '../assets/wp3183064.jpg'
 import hero5 from '../assets/power-and-technology-background.avif'
+import hero6 from '../assets/69892118-tracteur-travail-dans-champ-a-le-coucher-du-soleil-agriculture-agriculture-recolte-rural-paysage-et-durable-les-pratiques-gratuit-photo.jpg'
 
 const heroSlides = [
   { type: 'video', src: heroVideo },
@@ -18,6 +19,7 @@ const heroSlides = [
   { type: 'image', src: hero3 },
   { type: 'image', src: hero4 },
   { type: 'image', src: hero5 },
+  { type: 'image', src: hero6 },
 ]
 
 const TERRAIN =
@@ -318,14 +320,6 @@ function ReviewSlideshow({ items, interval = 7000 }) {
   )
 }
 
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden>
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  )
-}
-
 // Common pre-sale and ownership questions. PLACEHOLDER answers — confirm warranty,
 // financing and service-network details with MV Dugar before launch.
 const faqs = [
@@ -358,27 +352,34 @@ const faqs = [
 function FaqAccordion() {
   const [open, setOpen] = useState(0)
   return (
-    <ul className="border-t border-black/10">
+    <ul className="border-t border-black/80">
       {faqs.map((f, i) => {
         const isOpen = open === i
+        const num = String(i + 1).padStart(2, '0')
         return (
           <li key={i} className="border-b border-black/10">
             <button
               type="button"
               onClick={() => setOpen(isOpen ? -1 : i)}
               aria-expanded={isOpen}
-              className="group flex w-full items-center justify-between gap-6 py-6 text-left"
+              className="group grid w-full grid-cols-[auto_1fr_auto] items-center gap-8 py-8 text-left md:gap-12 md:py-10"
             >
               <span
-                className={`font-display text-lg font-extrabold tracking-tight transition-colors ${isOpen ? 'text-jd-green' : 'text-mist group-hover:text-jd-green'}`}
+                className={`font-display text-3xl font-light tabular-nums tracking-tight transition-colors md:text-4xl ${isOpen ? 'text-mist' : 'text-mist/25 group-hover:text-mist/50'}`}
+                aria-hidden
+              >
+                {num}
+              </span>
+              <span
+                className={`font-display text-xl font-semibold tracking-tight transition-colors md:text-2xl lg:text-3xl ${isOpen ? 'text-jd-green' : 'text-mist group-hover:text-jd-green'}`}
               >
                 {f.q}
               </span>
               <span
-                className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-all duration-300 ${isOpen ? 'rotate-45 border-jd-green bg-jd-green text-white' : 'border-black/20 text-mist group-hover:border-jd-green group-hover:bg-jd-green group-hover:text-white'}`}
+                className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border transition-all duration-300 ${isOpen ? 'rotate-45 border-jd-green bg-jd-green text-white' : 'border-black/25 text-mist group-hover:border-jd-green group-hover:bg-jd-green group-hover:text-white'}`}
                 aria-hidden
               >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <path d="M12 5v14M5 12h14" />
                 </svg>
               </span>
@@ -387,7 +388,11 @@ function FaqAccordion() {
               className={`grid transition-all duration-300 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
             >
               <div className="overflow-hidden">
-                <p className="pb-7 pr-10 leading-relaxed text-mist-dim">{f.a}</p>
+                <div className="grid grid-cols-[auto_1fr_auto] gap-8 md:gap-12">
+                  <span aria-hidden className="invisible font-display text-3xl md:text-4xl">{num}</span>
+                  <p className="pb-9 pr-4 text-base leading-relaxed text-mist-dim md:text-lg">{f.a}</p>
+                  <span aria-hidden className="invisible h-11 w-11" />
+                </div>
               </div>
             </div>
           </li>
@@ -558,15 +563,15 @@ export default function Home() {
       </section>
 
       {/* ============ WHAT WE DO (interactive split) ============ */}
-      <section className="relative overflow-hidden pt-20 pb-24 md:pt-24 md:pb-32">
+      <section className="relative overflow-hidden pt-10 pb-24 md:pt-12 md:pb-32">
         <div className="relative mx-auto max-w-[92rem] px-6">
           <Reveal className="mb-14 mx-auto max-w-5xl text-center">
-            <div className="mb-6 flex items-center justify-center gap-3 text-base font-bold uppercase tracking-[0.3em] text-jd-green md:text-lg">
-              <span className="h-px w-12 bg-jd-green" />
+            <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
+              <span className="h-px w-16 bg-jd-green" />
               What we do
-              <span className="h-px w-12 bg-jd-green" />
+              <span className="h-px w-16 bg-jd-green" />
             </div>
-            <h2 className="font-display text-5xl font-extrabold uppercase leading-[0.95] tracking-tight text-mist md:text-6xl lg:text-7xl">
+            <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-mist md:text-6xl lg:text-7xl">
               More than machines.
               <br />
               <span className="relative inline-block text-jd-green">
@@ -589,54 +594,57 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="grid items-start gap-10 lg:grid-cols-[24rem_1fr] lg:gap-16 lg:items-center">
+          <div className="grid items-start gap-10 lg:grid-cols-[34rem_1fr] lg:gap-20 lg:items-center">
             {/* Service list */}
             <ul
-              className="border-t border-black/10"
+              className="flex flex-col gap-2"
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
-              {specialties.map((s, i) => (
-                <li key={s.title} className="border-b border-black/10">
-                  <div
-                    onMouseEnter={() => setActive(i)}
-                    onFocus={() => setActive(i)}
-                    tabIndex={0}
-                    className="group flex items-center gap-5 py-7 transition-colors"
+              {specialties.map((s, i) => {
+                const isActive = active === i
+                const num = String(i + 1).padStart(2, '0')
+                return (
+                  <li
+                    key={s.title}
+                    className={`border-b transition-colors duration-300 ${isActive ? 'border-transparent' : 'border-black/10'
+                      }`}
                   >
-                    {/* Thumbnail (mobile) */}
-                    <span className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-lg lg:hidden">
-                      {s.image ? (
-                        <img src={s.image} alt="" className="h-full w-full object-cover" />
-                      ) : (
-                        <span className="grid h-full w-full place-items-center bg-jd-green text-white">
-                          {s.icon}
-                        </span>
-                      )}
-                    </span>
+                    <div
+                      onMouseEnter={() => setActive(i)}
+                      onFocus={() => setActive(i)}
+                      tabIndex={0}
+                      className={`group flex cursor-pointer items-center gap-4 rounded-full px-6 py-5 transition-[background-color,box-shadow] duration-300 ${isActive ? 'bg-jd-yellow shadow-md' : 'bg-transparent'
+                        }`}
+                    >
+                      {/* Arrow icon — reserves space in both states */}
+                      <span
+                        className={`shrink-0 text-2xl transition-opacity duration-300 ${isActive ? 'text-black opacity-100' : 'opacity-0'
+                          }`}
+                        aria-hidden
+                      >
+                        ↗
+                      </span>
 
-                    <div className="flex-1">
                       <h3
-                        className={`font-display text-2xl font-extrabold leading-tight transition-colors md:text-3xl whitespace-nowrap ${active === i ? 'text-jd-green' : 'text-mist'
+                        className={`flex-1 whitespace-nowrap font-display text-2xl font-extrabold leading-tight transition-colors md:text-3xl ${isActive ? 'text-black' : 'text-mist-dim/70'
                           }`}
                       >
                         {s.title}
                       </h3>
-                      <p className="mt-1.5 max-w-md leading-relaxed text-mist-dim">
-                        {s.blurb}
-                      </p>
-                    </div>
 
-                    <span
-                      className={`hidden shrink-0 text-2xl text-jd-green transition-all md:block ${active === i ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
-                        }`}
-                      aria-hidden
-                    >
-                      →
-                    </span>
-                  </div>
-                </li>
-              ))}
+                      {/* Number badge */}
+                      <span
+                        className={`shrink-0 text-xs font-semibold transition-colors ${isActive ? 'text-black/70' : 'text-mist-dim/60'
+                          }`}
+                        aria-hidden
+                      >
+                        {num}
+                      </span>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
 
             {/* Sticky image preview (desktop) */}
@@ -761,32 +769,118 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ FAQ (split intro + accordion) ============ */}
-      <section className="relative bg-ink-soft py-24 md:py-32">
-        <div className="relative mx-auto grid max-w-[88rem] items-start gap-12 px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
-          <Reveal className="lg:sticky lg:top-24 lg:self-start">
-            <div className="mb-5 flex items-center gap-3">
-              <span className="h-px w-10 bg-jd-green" />
-              <span className="eyebrow !text-base text-jd-green">Got questions?</span>
-            </div>
-            <h2 className="text-6xl font-extrabold uppercase leading-[0.92] text-mist md:text-7xl">
-              Let’s clear
+      {/* ============ TRUST STRIP (yellow banner) ============ */}
+      <section className="relative overflow-hidden bg-jd-yellow">
+        <div className="relative mx-auto flex max-w-[88rem] flex-col items-center gap-10 px-6 py-12 md:flex-row md:justify-between md:py-14">
+          {/* Left: image + headline */}
+          <div className="flex items-center gap-5">
+            <img
+              src={hero6}
+              alt=""
+              className="h-24 w-32 shrink-0 rounded-xl object-cover shadow-md md:h-28 md:w-40"
+            />
+            <p className="font-display text-2xl font-extrabold leading-tight text-black md:text-3xl">
+              Nepal's Trusted
               <br />
-              it up.
-            </h2>
-            <p className="mt-7 max-w-lg text-xl leading-relaxed text-mist-dim">
-              Straight answers to what Nepal’s farmers, fleet owners and operators
-              ask us most often.
+              John Deere Partner
             </p>
-            <a
-              href="tel:9802960739"
-              className="mt-9 inline-flex items-center gap-3 rounded-sm bg-mist px-8 py-5 text-sm font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-jd-green"
+          </div>
+
+          {/* Center: rotating badge */}
+          <a
+            href="/products"
+            className="group relative grid h-36 w-36 shrink-0 place-items-center rounded-full border-2 border-black/80 bg-white md:h-40 md:w-40"
+            aria-label="Explore more"
+          >
+            <svg
+              viewBox="0 0 200 200"
+              className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite]"
+              aria-hidden
             >
-              <PhoneIcon /> Still unsure? Just call: 980-2960739
-            </a>
+              <defs>
+                <path
+                  id="badge-circle"
+                  d="M 100,100 m -76,0 a 76,76 0 1,1 152,0 a 76,76 0 1,1 -152,0"
+                />
+              </defs>
+              <text
+                className="fill-black font-display text-[15px] font-bold uppercase"
+              >
+                <textPath
+                  href="#badge-circle"
+                  startOffset="0"
+                  textLength="477"
+                  lengthAdjust="spacingAndGlyphs"
+                >
+                  EXPLORES MORE  •  EXPLORES MORE  •
+                </textPath>
+              </text>
+            </svg>
+            <span className="grid h-16 w-16 place-items-center rounded-full border-2 border-black bg-jd-yellow text-black transition-transform group-hover:scale-110 md:h-20 md:w-20">
+              <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="9 7 17 7 17 15" />
+              </svg>
+            </span>
+          </a>
+
+          {/* Right: trust + avatars */}
+          <div className="flex items-center gap-5">
+            <p className="font-display text-2xl font-extrabold leading-tight text-black md:text-3xl">
+              5,000+ Nepali Farmers
+              <br />
+              Trust MV Dugar.
+            </p>
+            <div className="flex -space-x-3">
+              <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full border-[3px] border-jd-yellow bg-jd-green text-white md:h-14 md:w-14">
+                <img src={serviceTeam} alt="" className="h-full w-full object-cover" />
+              </span>
+              <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full border-[3px] border-jd-yellow bg-jd-green-deep text-white md:h-14 md:w-14">
+                <img src={genuineParts} alt="" className="h-full w-full object-cover" />
+              </span>
+              <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full border-[3px] border-jd-yellow bg-jd-green-bright text-white md:h-14 md:w-14">
+                <img src={hero2} alt="" className="h-full w-full object-cover" />
+              </span>
+              <span className="grid h-12 w-12 place-items-center rounded-full border-[3px] border-jd-yellow bg-white text-xl font-bold text-black md:h-14 md:w-14">
+                +
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ FAQ ============ */}
+      <section className="relative overflow-hidden py-24 md:py-32">
+        <div className="relative mx-auto max-w-[88rem] px-6">
+          <Reveal className="mx-auto max-w-5xl text-center">
+            <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
+              <span className="h-px w-16 bg-jd-green" />
+              MV Dugar FAQs
+              <span className="h-px w-16 bg-jd-green" />
+            </div>
+            <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-mist md:text-6xl lg:text-7xl">
+              Questions{' '}
+              <span className="relative inline-block text-jd-green">
+                about our work.
+                <svg
+                  className="absolute -bottom-3 left-0 h-4 w-full"
+                  viewBox="0 0 240 16"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M2 11 C 60 4, 130 4, 238 9"
+                    stroke="#ffde00"
+                    strokeWidth="10"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </h2>
           </Reveal>
 
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="mt-12 md:mt-16">
             <FaqAccordion />
           </Reveal>
         </div>

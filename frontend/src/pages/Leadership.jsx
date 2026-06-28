@@ -1,8 +1,14 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import motiImg from '../assets/af0b8ecf-4ddc-41f9-9dd1-ba5c0df1b212.webp'
 import vivekImg from '../assets/ae68fbad-4028-45aa-81d5-44d526f4f5af.webp'
 import shubhamImg from '../assets/af5ea000-e8c5-4f03-ac64-9fd3a8bb8009.webp'
 import namanImg from '../assets/eb7eb529-8d15-4359-8ac0-df51b7393d00.webp'
+import salesHeadImg from '../assets/sales head.jpeg'
+import customerSupportHeadImg from '../assets/customer support head.jpeg'
+import sparepartsHeadImg from '../assets/spareparts head .jpeg'
+import financeHeadImg from '../assets/finance head.jpeg'
+import remarketingHeadImg from '../assets/remarketing head.jpeg'
 
 const directors = [
   {
@@ -36,10 +42,11 @@ const directors = [
 ]
 
 const management = [
-  { name: 'Team Member', title: 'General Manager', photo: null },
-  { name: 'Team Member', title: 'Sales Head', photo: null },
-  { name: 'Team Member', title: 'Service Head', photo: null },
-  { name: 'Team Member', title: 'Parts & Logistics', photo: null },
+  { name: 'Team Member', title: 'Sales Head', photo: salesHeadImg },
+  { name: 'Team Member', title: 'Customer Support Head', photo: customerSupportHeadImg },
+  { name: 'Team Member', title: 'Spareparts Head', photo: sparepartsHeadImg },
+  { name: 'Team Member', title: 'Finance Head', photo: financeHeadImg },
+  { name: 'Team Member', title: 'Remarketing Head', photo: remarketingHeadImg },
 ]
 
 function initialsOf(name) {
@@ -52,48 +59,76 @@ function initialsOf(name) {
     .toUpperCase()
 }
 
-function LeaderColumn({ leader, index }) {
+function DirectorsRow({ directors }) {
+  // All cards equal by default — only expand the one the user is hovering.
+  const [active, setActive] = useState(null)
+  return (
+    <div
+      className="flex flex-col gap-4 sm:flex-row sm:h-[34rem] md:h-[36rem] lg:h-[40rem] lg:gap-6"
+      onMouseLeave={() => setActive(null)}
+    >
+      {directors.map((leader, i) => (
+        <LeaderColumn
+          key={leader.name}
+          leader={leader}
+          index={i}
+          isActive={active === i}
+          isAnyActive={active !== null}
+          onActivate={() => setActive(i)}
+        />
+      ))}
+    </div>
+  )
+}
+
+function LeaderColumn({ leader, index, isActive, isAnyActive, onActivate }) {
+  // Hovered card expands; others shrink to balance the row.
+  const flexGrow = isAnyActive ? (isActive ? 2.2 : 0.6) : 1
+
   return (
     <article
-      className="group relative transition-transform duration-500 ease-out hover:-translate-y-1.5"
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
+      className="group relative h-[26rem] cursor-pointer transition-[flex-grow] duration-700 ease-out sm:h-full"
       style={{
+        flexGrow,
+        flexBasis: 0,
         animation: `roster-in 0.65s ease-out ${0.08 * index}s both`,
       }}
     >
-      {/* Portrait */}
-      <div className="relative overflow-hidden">
-        {/* Yellow top edge — grows full width on hover */}
+      {/* Portrait — tall card, expands on hover to reveal info box */}
+      <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[#16210f]">
+        {/* Yellow top edge — grows full width when active */}
         <span
           aria-hidden
-          className="absolute left-0 top-0 z-20 h-[3px] w-12 bg-jd-yellow transition-[width] duration-500 ease-out group-hover:w-full"
+          className={`absolute left-0 top-0 z-30 h-[3px] bg-jd-yellow transition-[width] duration-700 ease-out ${isActive ? 'w-full' : 'w-12'}`}
         />
 
         {/* Image */}
         <img
           src={leader.photo}
           alt={leader.name}
-          className="aspect-[4/5] w-full object-cover grayscale-[20%] brightness-[0.97] transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-[1.06]"
+          className="h-full w-full object-cover"
         />
 
-      </div>
+        {/* (01) number tag — always visible top-left */}
+        <span className="absolute left-5 top-5 z-20 font-mono text-sm font-semibold tracking-wider text-white/85 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]">
+          ({leader.no})
+        </span>
 
-      {/* Name block */}
-      <div className="relative mt-6">
-        {/* Sliding green underline behind the name */}
-        <span
-          aria-hidden
-          className="absolute -bottom-2 left-0 h-[3px] w-0 bg-jd-green transition-[width] duration-500 ease-out group-hover:w-12"
-        />
-
-        <div className="mb-3 inline-flex items-center gap-2.5">
-          <span className="h-px w-6 bg-jd-green transition-[width] duration-500 ease-out group-hover:w-10" />
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.32em] text-jd-green">
-            {leader.title}
-          </span>
+        {/* Active content — olive-green info box, slides in from the left */}
+        <div
+          className={`absolute bottom-5 left-5 right-12 z-20 transition-all duration-500 ease-out md:bottom-6 md:left-6 md:right-14 ${isActive ? 'translate-x-0 opacity-100' : '-translate-x-6 opacity-0'}`}
+        >
+          <div className="rounded-2xl bg-black/30 p-5 backdrop-blur-md md:p-6">
+            <span className="inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[11px] font-semibold tracking-tight text-[#1a261a]">
+              {leader.title}
+            </span>
+            <h2 className="mt-4 font-display text-xl font-semibold leading-tight tracking-tight text-white md:text-2xl">
+              {leader.name}
+            </h2>
+          </div>
         </div>
-        <h2 className="font-display text-2xl font-extrabold uppercase leading-[0.95] tracking-tight text-mist transition-colors duration-500 ease-out group-hover:text-jd-green md:text-[1.6rem] lg:text-3xl">
-          {leader.name}
-        </h2>
       </div>
     </article>
   )
@@ -215,12 +250,8 @@ export default function Leadership() {
             <span>04 entries · Kathmandu</span>
           </div>
 
-          {/* Four columns */}
-          <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
-            {directors.map((leader, i) => (
-              <LeaderColumn key={leader.name} leader={leader} index={i} />
-            ))}
-          </div>
+          {/* Expanding roster row */}
+          <DirectorsRow directors={directors} />
 
           {/* Colophon — pinned to the end of the BOD section */}
           <div className="mt-20 flex flex-col items-center border-t border-mist/15 pt-14 text-center">
@@ -276,11 +307,11 @@ export default function Leadership() {
           {/* Ledger header */}
           <div className="mb-8 flex items-baseline justify-between border-y border-mist/20 py-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-mist-dim">
             <span className="text-jd-green">Senior Management</span>
-            <span>04 entries · Kathmandu</span>
+            <span>05 entries · Kathmandu</span>
           </div>
 
-          {/* Four columns */}
-          <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
+          {/* Five columns */}
+          <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-8">
             {management.map((m, i) => (
               <ManagerColumn key={`${m.title}-${i}`} manager={m} index={i} />
             ))}

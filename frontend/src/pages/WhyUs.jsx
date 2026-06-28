@@ -67,6 +67,50 @@ export default function WhyUs() {
 
       {/* ─── Hero ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#f4f6f0] pt-20 pb-28 md:pt-28 md:pb-36">
+        {/* Floating "25+ years" badge */}
+        <div
+          aria-hidden
+          className="badge-25 pointer-events-none absolute right-6 top-2 hidden md:right-12 md:top-4 md:block lg:right-20 lg:top-6"
+        >
+          <div className="badge-25-bob relative grid h-36 w-36 place-items-center rounded-full bg-jd-yellow shadow-[0_22px_50px_-22px_rgba(0,0,0,0.35)] md:h-40 md:w-40 lg:h-44 lg:w-44">
+            <span
+              aria-hidden
+              className="badge-25-ring absolute inset-2 rounded-full border-2 border-dashed border-black/70"
+            />
+            <div className="relative text-center leading-tight">
+              <div className="font-display text-4xl font-extrabold text-black md:text-5xl">
+                25<span className="text-[0.7em]">+</span>
+              </div>
+              <div className="mt-1 font-display text-sm font-bold leading-[1.15] text-black md:text-base">
+                Years
+                <br />
+                Experience
+              </div>
+            </div>
+          </div>
+
+          <style>{`
+            .badge-25 { animation: badge-25-in 0.8s ease-out 0.2s both; }
+            .badge-25-bob { animation: badge-25-bob 4.5s ease-in-out infinite; transform-origin: center; }
+            .badge-25-ring { animation: badge-25-spin 18s linear infinite; }
+            @keyframes badge-25-in {
+              from { opacity: 0; transform: translateY(-24px) scale(0.85) rotate(-20deg); }
+              to   { opacity: 1; transform: translateY(0)     scale(1)    rotate(0deg); }
+            }
+            @keyframes badge-25-bob {
+              0%,100% { transform: translateY(0)    rotate(-6deg); }
+              50%     { transform: translateY(-10px) rotate(6deg); }
+            }
+            @keyframes badge-25-spin {
+              from { transform: rotate(0deg); }
+              to   { transform: rotate(360deg); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .badge-25, .badge-25-bob, .badge-25-ring { animation: none; }
+            }
+          `}</style>
+        </div>
+
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
           <div className="text-center" style={{ animation: 'fade-up 0.7s ease-out both' }}>
             <div className="mb-6 flex items-center justify-center gap-3 text-sm font-bold uppercase tracking-[0.32em] text-jd-green md:text-base">

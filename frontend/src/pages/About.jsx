@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import jdLogo from '../assets/john-deere-logo.png'
 import coverFieldBg from '../assets/wp9212100.jpg'
+import whyChoose01 from '../assets/wp12729928.jpg'
 import storySlide1 from '../assets/WhatsApp Image 2026-06-26 at 8.30.45 AM.jpeg'
 import storySlide2 from '../assets/WhatsApp Image 2026-06-26 at 8.30.46 AM.jpeg'
 import storySlide3 from '../assets/WhatsApp Image 2026-06-26 at 8.30.47 AM.jpeg'
 import storySlide4 from '../assets/WhatsApp Image 2026-06-26 at 8.33.10 AM.jpeg'
 import serviceTeamPhoto from '../assets/_DSC5954.jpg.jpeg'
 import serviceTeamPhoto2 from '../assets/_DSC5898.jpg.jpeg'
+import whyChoose1 from '../assets/wp9633811.jpg'
+import whyChoose2 from '../assets/premium_photo-1661935875460-f239deafada1.avif'
+import whyChoose3 from '../assets/premium_photo-1661836105117-2a6641fa7510.avif'
+import whyChoose4 from '../assets/69892118-tracteur-travail-dans-champ-a-le-coucher-du-soleil-agriculture-agriculture-recolte-rural-paysage-et-durable-les-pratiques-gratuit-photo.jpg'
 
 /* ────────────────────────────────────────────────────────────
    ABOUT — "Field Almanac"
@@ -20,11 +25,94 @@ import serviceTeamPhoto2 from '../assets/_DSC5898.jpg.jpeg'
 const storySlides = [storySlide1, storySlide2, storySlide3, storySlide4]
 
 const trustPillars = [
-  { num: '01', label: 'Authorized distributor', detail: 'Direct from John Deere — no resellers in the chain, no grey market.' },
-  { num: '02', label: 'Factory-trained service', detail: 'Technicians trained on every model we put on Nepali ground.' },
-  { num: '03', label: 'Manufacturer warranty',  detail: 'Standard coverage on every machine — honoured at any branch.' },
-  { num: '04', label: 'Genuine parts supply',   detail: 'OEM stock at the central warehouse and at every one of sixteen branches.' },
+  { num: '01', label: 'Authorized distributor', detail: 'Direct from John Deere — no resellers in the chain, no grey market.', image: whyChoose01 },
+  { num: '02', label: 'Factory-trained service', detail: 'Technicians trained on every model we put on Nepali ground.', image: whyChoose2 },
+  { num: '03', label: 'Manufacturer warranty',  detail: 'Standard coverage on every machine — honoured at any branch.', image: whyChoose3 },
+  { num: '04', label: 'Genuine parts supply',   detail: 'OEM stock at the central warehouse and at every one of sixteen branches.', image: whyChoose4 },
 ]
+
+const LIGHT_GREEN = '#f1f5ea'
+
+function WhyChooseScroll() {
+  return (
+    <section
+      className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden text-[#1a261a]"
+      style={{ backgroundColor: LIGHT_GREEN }}
+    >
+      {/* ── Heading ─────────────────────────────────────── */}
+      <div className="relative mx-auto max-w-[1400px] px-6 pb-12 pt-16 md:pb-14 md:pt-20 lg:px-12">
+        <div className="cx-rise text-center">
+          <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
+            <span className="h-px w-16 bg-jd-green" />
+            A nationwide network
+            <span className="h-px w-16 bg-jd-green" />
+          </div>
+          <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#1a261a] md:text-6xl lg:text-7xl">
+            Backed by{' '}
+            <span className="relative whitespace-nowrap text-jd-green">
+              180+ years
+              <svg
+                className="absolute -bottom-1.5 left-0 w-full"
+                viewBox="0 0 300 16"
+                fill="none"
+                preserveAspectRatio="none"
+                aria-hidden
+              >
+                <path
+                  d="M2 11 C 70 4, 150 4, 298 9"
+                  stroke="#ffde00"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>{' '}
+            of John Deere<span className="text-[#1a261a]">.</span>
+          </h2>
+        </div>
+      </div>
+
+      {/* ── City marquee — full-bleed ───────────────────── */}
+      <div className="overflow-hidden border-y border-[#1a261a]/15 py-6" style={{ backgroundColor: LIGHT_GREEN }}>
+        <div className="cx-marquee-track flex items-center gap-12 whitespace-nowrap font-['Fraunces'] text-4xl text-[#1a261a] md:text-5xl">
+          {[...Array(2)].flatMap((_, copy) =>
+            ['Kathmandu', 'Biratnagar', 'Jeetpur', 'Bardibaas', 'Nepalgunj', 'Dhangadi', 'Surkhet', 'Dang', 'Pokhara', 'Butwal'].map((city) => (
+              <span key={`${copy}-${city}`} className="flex items-center gap-12">
+                <span aria-hidden className="inline-block h-3 w-3 rounded-full bg-jd-green" />
+                <span>{city}</span>
+              </span>
+            ))
+          )}
+        </div>
+      </div>
+
+      {/* ── What you can count on — 4-row list ──────────── */}
+      <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 md:pb-32 md:pt-24 lg:px-12">
+        <p className="cx-rise mb-12 text-center text-sm font-bold uppercase tracking-[0.45em] text-jd-green md:mb-16 md:text-base">
+          What you can count on
+        </p>
+
+        <ul className="cx-rise-slow border-t border-[#1a261a]/15">
+          {trustPillars.map((p) => (
+            <li
+              key={p.num}
+              className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-4 border-b border-[#1a261a]/15 py-10 md:grid-cols-[6rem_minmax(0,18rem)_1fr] md:gap-x-12 md:py-14"
+            >
+              <span className="font-display text-4xl font-extrabold leading-none tracking-tight text-jd-green md:text-5xl lg:text-6xl">
+                {p.num}
+              </span>
+              <h3 className="self-center font-display text-2xl font-extrabold leading-[1.1] tracking-tight text-[#1a261a] md:text-3xl lg:text-[34px]">
+                {p.label}
+              </h3>
+              <p className="col-span-2 text-lg leading-[1.55] text-[#3a4a36] md:col-span-1 md:self-center md:text-xl">
+                {p.detail}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
 
 const SALES_PHOTO = serviceTeamPhoto2
 const SERVICE_PHOTO = serviceTeamPhoto
@@ -322,79 +410,11 @@ export default function About() {
 
       {/* ── VOLUME II — THE TRUSTED PARTNER ─────────────── */}
       <section className="border-b border-[#1a261a]/15 bg-[#f4f6f0]">
-        <div className="mx-auto max-w-[1400px] px-6 pt-10 pb-20 md:pt-14 md:pb-28 lg:px-12">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <div>
             <div className="cx-rise">
-              <header className="mb-12 text-center md:-mt-6">
-                <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
-                  <span className="h-px w-16 bg-jd-green" />
-                  A nationwide network
-                  <span className="h-px w-16 bg-jd-green" />
-                </div>
-                <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#1a261a] md:text-6xl lg:text-7xl">
-                  Backed by{' '}
-                  <span className="relative whitespace-nowrap text-jd-green">
-                    180+ years
-                    <svg
-                      className="absolute -bottom-1.5 left-0 w-full"
-                      viewBox="0 0 300 16"
-                      fill="none"
-                      preserveAspectRatio="none"
-                      aria-hidden
-                    >
-                      <path
-                        d="M2 11 C 70 4, 150 4, 298 9"
-                        stroke="#ffde00"
-                        strokeWidth="6"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>{' '}
-                  of John Deere<span className="text-[#1a261a]">.</span>
-                </h2>
-              </header>
-
-              {/* Footprint marquee — full-bleed across viewport */}
-              <div className="relative left-1/2 right-1/2 mb-16 -ml-[50vw] -mr-[50vw] w-screen">
-                <div className="overflow-hidden border-y border-[#1a261a]/15 bg-[#f4f6f0] py-6">
-                  <div className="cx-marquee-track flex items-center gap-12 whitespace-nowrap font-['Fraunces'] text-4xl text-[#1a261a] md:text-5xl">
-                    {[...Array(2)].flatMap((_, copy) =>
-                      ['Kathmandu', 'Biratnagar', 'Jeetpur', 'Bardibaas', 'Nepalgunj', 'Dhangadi', 'Surkhet', 'Dang', 'Pokhara', 'Butwal'].map((city) => (
-                        <span key={`${copy}-${city}`} className="flex items-center gap-12">
-                          <span aria-hidden className="inline-block h-3 w-3 rounded-full bg-jd-green" />
-                          <span>{city}</span>
-                        </span>
-                      ))
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Trust pillars as ledger rows */}
-              <div className="mx-auto max-w-5xl">
-                <p className="mb-6 text-center font-mono text-sm font-bold uppercase tracking-[0.35em] text-jd-green md:text-base">
-                  What you can count on
-                </p>
-                <ul>
-                  {trustPillars.map((p, i) => (
-                    <li
-                      key={p.num}
-                      className="cx-stagger grid grid-cols-[auto_1fr] items-baseline gap-x-6 border-t border-[#1a261a]/15 py-6 first:border-t-0 md:grid-cols-[auto_minmax(0,1fr)_2fr] md:gap-x-10 md:py-8"
-                      style={{ animationDelay: `${i * 0.08}s` }}
-                    >
-                      <span className="font-display text-3xl font-extrabold tabular-nums text-jd-green md:text-4xl">
-                        {p.num}
-                      </span>
-                      <h3 className="font-display text-2xl font-extrabold uppercase leading-tight tracking-tight md:text-3xl">
-                        {p.label}
-                      </h3>
-                      <p className="col-span-2 max-w-xl text-base leading-relaxed text-[#3a4a36] md:col-span-1 md:text-lg">
-                        {p.detail}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {/* Trust pillars — scroll-pinned hero, one card per step */}
+              <WhyChooseScroll />
             </div>
           </div>
         </div>
@@ -402,10 +422,10 @@ export default function About() {
 
       {/* ── VOLUME III — OUR TEAM ──────────────────────── */}
       <section className="border-b border-[#1a261a]/15">
-        <div className="mx-auto max-w-[1400px] px-6 pt-10 pb-20 md:pt-14 md:pb-28 lg:px-12">
+        <div className="mx-auto max-w-[1400px] px-6 pt-16 pb-20 md:pt-20 md:pb-28 lg:px-12">
           <div>
             <div className="cx-rise">
-              <header className="mb-16 text-center md:-mt-6">
+              <header className="mb-16 text-center">
                 <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
                   <span className="h-px w-16 bg-jd-green" />
                   Our team
@@ -552,9 +572,9 @@ export default function About() {
             </div>
 
             <blockquote className="font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.02em] text-[#1a261a] md:text-6xl lg:text-7xl">
-              &ldquo;If a tractor is on{' '}
+              &ldquo;Every John Deere we sell, we{' '}
               <span className="relative whitespace-nowrap text-jd-green">
-                Nepali ground
+                stand behind
                 <svg
                   className="absolute -bottom-1.5 left-0 w-full"
                   viewBox="0 0 300 16"
@@ -570,7 +590,7 @@ export default function About() {
                   />
                 </svg>
               </span>
-              , our work is to keep it working.&rdquo;
+              {' '}&mdash; from the showroom to your last harvest.&rdquo;
             </blockquote>
 
             <div className="mt-12 flex items-center justify-center gap-4 text-[#1a261a]/55">
