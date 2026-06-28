@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import jdLogo from '../assets/john-deere-logo.png'
+import mvDugarLogo from '../assets/MVDUGAR-01.png'
 import coverFieldBg from '../assets/wp9212100.jpg'
 import whyChoose01 from '../assets/wp12729928.jpg'
 import storySlide1 from '../assets/WhatsApp Image 2026-06-26 at 8.30.45 AM.jpeg'
@@ -232,30 +233,63 @@ export default function About() {
               terraces to the Terai plains.
             </p>
 
-            {/* Rotated dispatch stamp */}
-            <div className="cx-rise-slow mt-14 flex justify-center">
-              <div
-                className="relative inline-block border-[3px] border-jd-green bg-[#f4f6f0] px-9 py-7 text-center"
-                style={{ transform: 'rotate(-2.4deg)', boxShadow: '6px 8px 0 -2px rgba(54,124,43,0.18)' }}
-              >
-                <span
-                  aria-hidden
-                  className="absolute -left-3 -top-3 grid h-7 w-7 place-items-center rounded-full bg-jd-yellow font-mono text-[10px] font-bold uppercase tracking-tighter text-[#1a261a]"
+            {/* Paired dispatch stamps */}
+            <div className="mt-14 flex flex-wrap items-center justify-center gap-10 md:gap-14">
+              {/* MV Dugar stamp */}
+              <div className="cx-stamp-drop" style={{ animationDelay: '0.2s' }}>
+                <a
+                  href="https://www.mvdugar.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit MV Dugar website"
+                  className="stamp-card relative inline-block cursor-pointer border-[3px] border-jd-green bg-[#f4f6f0] px-9 py-7 text-center no-underline"
+                  style={{ '--tilt': '2.4deg', boxShadow: '-6px 8px 0 -2px rgba(54,124,43,0.18)' }}
                 >
-                  ✦
-                </span>
-                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-jd-green">
-                  Authorized
-                </p>
-                <img
-                  src={jdLogo}
-                  alt="John Deere"
-                  className="my-4 mx-auto h-14 w-auto md:h-16"
-                />
-                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-[#1a261a]">
-                  Dealer &middot; Nepal
-                </p>
-                <span aria-hidden className="absolute -bottom-3 -right-3 block h-7 w-7 border-2 border-jd-green bg-[#f4f6f0]" />
+                  <span
+                    aria-hidden
+                    className="stamp-spark absolute -right-3 -top-3 grid h-7 w-7 place-items-center rounded-full bg-jd-yellow font-mono text-[10px] font-bold uppercase tracking-tighter text-[#1a261a]"
+                  >
+                    ✦
+                  </span>
+                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-jd-green">
+                    Distributor
+                  </p>
+                  <img
+                    src={mvDugarLogo}
+                    alt="MV Dugar"
+                    className="my-4 mx-auto h-20 w-auto md:h-24"
+                  />
+                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-[#1a261a]">
+                    Est. 2002 &middot; Nepal
+                  </p>
+                </a>
+              </div>
+
+              {/* John Deere stamp */}
+              <div className="cx-stamp-drop" style={{ animationDelay: '0.5s' }}>
+                <div
+                  className="stamp-card relative inline-block border-[3px] border-jd-green bg-[#f4f6f0] px-9 py-7 text-center"
+                  style={{ '--tilt': '-2.4deg', boxShadow: '6px 8px 0 -2px rgba(54,124,43,0.18)' }}
+                >
+                  <span
+                    aria-hidden
+                    className="stamp-spark absolute -left-3 -top-3 grid h-7 w-7 place-items-center rounded-full bg-jd-yellow font-mono text-[10px] font-bold uppercase tracking-tighter text-[#1a261a]"
+                    style={{ animationDelay: '0.8s' }}
+                  >
+                    ✦
+                  </span>
+                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-jd-green">
+                    Authorized
+                  </p>
+                  <img
+                    src={jdLogo}
+                    alt="John Deere"
+                    className="my-4 mx-auto h-14 w-auto md:h-16"
+                  />
+                  <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-[#1a261a]">
+                    Dealer &middot; Nepal
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -644,9 +678,35 @@ function PageStyles() {
         width: max-content;
       }
 
+      @keyframes stampDrop {
+        0%   { opacity: 0; transform: translateY(-32px) scale(1.35); }
+        55%  { opacity: 1; transform: translateY(4px)   scale(0.95); }
+        78%  { opacity: 1; transform: translateY(-1px)  scale(1.012); }
+        100% { opacity: 1; transform: translateY(0)     scale(1); }
+      }
+      .cx-stamp-drop { animation: stampDrop 0.95s cubic-bezier(0.34,1.5,0.64,1) both; }
+
+      .stamp-card {
+        transform: rotate(var(--tilt, 0deg));
+        transition: transform 450ms cubic-bezier(0.22,1,0.36,1),
+                    box-shadow 450ms ease-out;
+      }
+      .stamp-card:hover {
+        transform: rotate(0deg) translateY(-6px) scale(1.025);
+      }
+
+      @keyframes stampSparkle {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50%      { transform: scale(1.18) rotate(20deg); }
+      }
+      .stamp-card .stamp-spark { animation: stampSparkle 2.4s ease-in-out infinite; }
+
       @media (prefers-reduced-motion: reduce) {
         .cx-rise, .cx-rise-slow, .cx-stagger { animation: none; }
         .cx-marquee-track { animation: none; }
+        .cx-stamp-drop { animation: none; opacity: 1; }
+        .stamp-card .stamp-spark { animation: none; }
+        .stamp-card:hover { transform: rotate(var(--tilt, 0deg)); }
       }
     `}</style>
   )
