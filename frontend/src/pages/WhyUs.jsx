@@ -308,7 +308,10 @@ export default function WhyUs() {
                 className="group mt-9 inline-flex items-center gap-3 border-b-2 border-jd-yellow pb-1 text-xs font-bold uppercase tracking-[0.28em] text-white transition-colors hover:text-jd-yellow"
               >
                 Talk to our team
-                <span aria-hidden className="transition-transform group-hover:translate-x-1">↗</span>
+                <svg aria-hidden viewBox="0 0 24 24" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7" />
+                  <polyline points="9 7 17 7 17 15" />
+                </svg>
               </Link>
             </div>
 

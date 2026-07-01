@@ -60,7 +60,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-20 flex flex-col items-center gap-3 border-t border-white/10 pt-8 text-base text-white/55">
-          <p>© {year} Vivek Automobiles · Authorized distributor of John Deere Nepal</p>
+          <p>© {year} Vivek Automobiles · Authorized dealer of John Deere Nepal</p>
           <p>
             Developed by{' '}
             <a

@@ -42,11 +42,11 @@ const directors = [
 ]
 
 const management = [
-  { name: 'Team Member', title: 'Sales Head', photo: salesHeadImg },
-  { name: 'Team Member', title: 'Customer Support Head', photo: customerSupportHeadImg },
-  { name: 'Team Member', title: 'Spareparts Head', photo: sparepartsHeadImg },
-  { name: 'Team Member', title: 'Finance Head', photo: financeHeadImg },
-  { name: 'Team Member', title: 'Remarketing Head', photo: remarketingHeadImg },
+  { name: 'Nanda Kishor Bhatta', title: 'Sales Head', photo: salesHeadImg },
+  { name: 'Siddhant Patel', title: 'Customer Support Head', photo: customerSupportHeadImg },
+  { name: 'Shree Vagwan Sah', title: 'Spare Parts Head', photo: sparepartsHeadImg },
+  { name: 'Santosh Yadav', title: 'Finance Head', photo: financeHeadImg },
+  { name: 'Shiva Kumar Singh', title: 'Remarketing Head', photo: remarketingHeadImg },
 ]
 
 function initialsOf(name) {
@@ -187,7 +187,7 @@ function ManagerColumn({ manager, index }) {
             {manager.title}
           </span>
         </div>
-        <h3 className="font-display text-xl font-extrabold uppercase leading-[0.95] tracking-tight text-mist transition-colors duration-500 ease-out group-hover:text-jd-green md:text-2xl">
+        <h3 className="whitespace-nowrap font-display text-sm font-extrabold uppercase leading-[0.95] tracking-tight text-mist transition-colors duration-500 ease-out group-hover:text-jd-green md:text-base lg:text-lg xl:text-xl">
           {manager.name}
         </h3>
       </div>
@@ -311,7 +311,7 @@ export default function Leadership() {
           </div>
 
           {/* Five columns */}
-          <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-8">
+          <div className="grid grid-cols-5 gap-x-3 gap-y-14 sm:gap-x-5 lg:gap-x-8">
             {management.map((m, i) => (
               <ManagerColumn key={`${m.title}-${i}`} manager={m} index={i} />
             ))}

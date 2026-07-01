@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import jdLogo from '../assets/john-deere-logo.png'
 import mvDugarLogo from '../assets/MVDUGAR-01.png'
 import coverFieldBg from '../assets/wp9212100.jpg'
-import whyChoose01 from '../assets/wp12729928.jpg'
+import whyChoose01 from '../assets/wp3183062.jpg'
 import storySlide1 from '../assets/WhatsApp Image 2026-06-26 at 8.30.45 AM.jpeg'
 import storySlide2 from '../assets/WhatsApp Image 2026-06-26 at 8.30.46 AM.jpeg'
 import storySlide3 from '../assets/WhatsApp Image 2026-06-26 at 8.30.47 AM.jpeg'
 import storySlide4 from '../assets/WhatsApp Image 2026-06-26 at 8.33.10 AM.jpeg'
+
 import serviceTeamPhoto from '../assets/_DSC5954.jpg.jpeg'
 import serviceTeamPhoto2 from '../assets/_DSC5898.jpg.jpeg'
 import whyChoose1 from '../assets/wp9633811.jpg'
@@ -24,6 +25,8 @@ import whyChoose4 from '../assets/69892118-tracteur-travail-dans-champ-a-le-couc
    ──────────────────────────────────────────────────────────── */
 
 const storySlides = [storySlide1, storySlide2, storySlide3, storySlide4]
+
+
 
 const trustPillars = [
   { num: '01', label: 'Authorized distributor', detail: 'Direct from John Deere — no resellers in the chain, no grey market.', image: whyChoose01 },
@@ -161,6 +164,7 @@ const ornament = (
 
 export default function About() {
   const [storyIndex, setStoryIndex] = useState(0)
+
   useEffect(() => {
     const id = setInterval(() => {
       setStoryIndex((i) => (i + 1) % storySlides.length)

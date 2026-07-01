@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import logo from '../assets/john-deere-logo.png'
+import dugarLogo from '../assets/MVDUGAR-01.png'
 
 const leftNavItems = [
   { to: '/', label: 'Home' },
@@ -140,20 +141,28 @@ function NavDropdown({ item, isHome }) {
 }
 
 function Logo({ isHome }) {
+  const shadow = isHome
+    ? 'drop-shadow-[0_1px_5px_rgba(0,0,0,0.55)] group-hover/nav:drop-shadow-none'
+    : 'drop-shadow-[0_1px_3px_rgba(0,0,0,0.18)]'
   return (
     <Link
       to="/"
-      aria-label="John Deere Nepal — home"
-      className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+      aria-label="MV Dugar — authorized John Deere distributor in Nepal"
+      className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center gap-3"
     >
+      <img
+        src={dugarLogo}
+        alt="MV Dugar"
+        className={`relative translate-x-8 h-14 w-auto transition-[filter] duration-300 ${shadow}`}
+      />
+      <span
+        aria-hidden
+        className={`h-9 w-px ${isHome ? 'bg-white/60 group-hover/nav:bg-gray-300' : 'bg-gray-300'}`}
+      />
       <img
         src={logo}
         alt="John Deere"
-        className={`h-10 w-auto transition-[filter] duration-300 ${
-          isHome
-            ? 'drop-shadow-[0_1px_5px_rgba(0,0,0,0.55)] group-hover/nav:drop-shadow-none'
-            : 'drop-shadow-[0_1px_3px_rgba(0,0,0,0.18)]'
-        }`}
+        className={`h-10 w-auto transition-[filter] duration-300 ${shadow}`}
       />
     </Link>
   )
@@ -193,7 +202,7 @@ export default function Navbar() {
       }`}
     >
       {!isHome && (
-        <span className="pointer-events-none absolute inset-x-0 -bottom-0.5 z-10 h-1 bg-jd-green" />
+        <span className="pointer-events-none absolute inset-x-0 -bottom-3 z-10 h-3 bg-gradient-to-b from-black/10 to-transparent" />
       )}
 
       {/* Contact pill — pinned right */}
@@ -213,14 +222,14 @@ export default function Navbar() {
 
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-8">
         {/* Left links */}
-        <nav className="hidden flex-1 items-center justify-end gap-14 md:flex">
+        <nav className="hidden flex-1 translate-x-16 items-center justify-end gap-14 md:flex">
           {leftNavItems.map((item) => (
             <NavItem key={item.to} item={item} isHome={isHome} />
           ))}
         </nav>
 
         {/* Reserve horizontal space for the centered logo */}
-        <div className="hidden w-[26rem] shrink-0 md:block" aria-hidden />
+        <div className="hidden w-[34rem] shrink-0 md:block" aria-hidden />
 
         {/* Right links */}
         <nav className="hidden flex-1 items-center justify-start gap-14 md:flex">

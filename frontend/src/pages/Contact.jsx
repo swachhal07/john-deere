@@ -814,12 +814,19 @@ export default function Contact() {
                     href={`tel:+977${o.phone}`}
                     className="inline-flex items-baseline gap-1.5 font-mono text-sm font-semibold tabular-nums text-black transition-colors hover:text-jd-green"
                   >
-                    <span
+                    <svg
                       aria-hidden
-                      className="text-[0.6rem] text-gray-400 transition-transform group-hover:translate-x-0.5 group-hover:text-jd-green"
+                      viewBox="0 0 24 24"
+                      className="h-2.5 w-2.5 self-center text-gray-400 transition-transform group-hover:translate-x-0.5 group-hover:text-jd-green"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
-                      ↗
-                    </span>
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="9 7 17 7 17 15" />
+                    </svg>
                     {o.phone}
                   </a>
                 </div>
@@ -837,7 +844,10 @@ export default function Contact() {
               className="group inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.25em] text-black transition-colors hover:text-jd-green"
             >
               Call head office · 01 - 4012628
-              <span aria-hidden className="transition-transform group-hover:translate-x-1">↗</span>
+              <svg aria-hidden viewBox="0 0 24 24" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="9 7 17 7 17 15" />
+              </svg>
             </a>
           </div>
         </div>

@@ -4,22 +4,36 @@ import Reveal from '../components/Reveal'
 
 import serviceTeam from '../assets/WhatsApp Image 2026-06-26 at 2.44.17 PM.jpeg'
 import genuineParts from '../assets/WhatsApp Image 2026-06-26 at 3.25.57 PM.jpeg'
-import heroVideo from '../assets/hero-clip.mp4'
+import heroVideo from '../assets/878c2f97-b4c0-4141-bd25-2469d5da7a78.mp4'
 import hero1 from '../assets/wp9633811.jpg'
 import hero2 from '../assets/wp3183062.jpg'
 import hero3 from '../assets/john-deere-tractor-and-harvesters-8vy92xu1qcrorfub.jpg'
 import hero4 from '../assets/wp3183064.jpg'
 import hero5 from '../assets/power-and-technology-background.avif'
 import hero6 from '../assets/69892118-tracteur-travail-dans-champ-a-le-coucher-du-soleil-agriculture-agriculture-recolte-rural-paysage-et-durable-les-pratiques-gratuit-photo.jpg'
+import hero7 from '../assets/wp3183090-john-deere-wallpaper-hd.jpg'
+import hero8 from '../assets/wp3183076-john-deere-wallpaper-hd.jpg'
+import hero9 from '../assets/john-deere-harvester-agriculture.jpg'
+import hero10 from '../assets/Free-HD-John-Deere-Wallpapers-Photos.jpg'
+import hero11 from '../assets/a0d81b1f-4773-4d2c-b8e7-0c2f938df4d9.jpg'
+import hero12 from '../assets/df817e0e-a5a4-4005-8de8-414343315b17.jpg'
+import hero13 from '../assets/83af290a-005b-4889-8daf-f7ad21830cb3.jpg'
+import hero14 from '../assets/28c32bc4-018b-47b0-ab1f-e644ce2e4f78.jpg'
+import hero15 from '../assets/07b91e73-5381-4c06-872d-050270db769c.jpg'
 
 const heroSlides = [
   { type: 'video', src: heroVideo },
   { type: 'image', src: hero1 },
-  { type: 'image', src: hero2 },
   { type: 'image', src: hero3 },
-  { type: 'image', src: hero4 },
-  { type: 'image', src: hero5 },
-  { type: 'image', src: hero6 },
+  { type: 'image', src: hero7 },
+  { type: 'image', src: hero8 },
+  { type: 'image', src: hero9 },
+  { type: 'image', src: hero10 },
+  { type: 'image', src: hero11 },
+  { type: 'image', src: hero12 },
+  { type: 'image', src: hero13 },
+  { type: 'image', src: hero14 },
+  { type: 'image', src: hero15 },
 ]
 
 const TERRAIN =
@@ -31,18 +45,18 @@ const marqueeFacts = [
   {
     node: (
       <>
-        Authorised <span className="text-jd-yellow">John Deere</span> distributor
+        Authorised <span className="text-jd-yellow">John Deere</span> Dealer
       </>
     ),
-    text: 'Authorised John Deere distributor',
+    text: 'Authorised John Deere Dealer',
   },
   {
     node: <>Kathmandu, Nepal</>,
     text: 'Kathmandu, Nepal',
   },
   {
-    node: <>Est. 1995</>,
-    text: 'Est. 1995',
+    node: <>Est. 2002</>,
+    text: 'Est. 2002',
   },
   {
     node: <>7 provinces served</>,
@@ -325,7 +339,7 @@ function ReviewSlideshow({ items, interval = 7000 }) {
 const faqs = [
   {
     q: 'What warranty comes with a new John Deere tractor?',
-    a: 'Every new John Deere ships with the standard manufacturer warranty covering the engine and major driveline components. Extended warranty packages are available — ask your MV Dugar sales contact for the option that fits your usage.',
+    a: 'Every new John Deere ships with the standard manufacturer warranty covering the engine and major driveline components. Extended warranty packages are available. Ask your MV Dugar sales contact for the option that fits your usage.',
   },
   {
     q: 'How do I schedule a service visit?',
@@ -486,7 +500,7 @@ export default function Home() {
                   loop
                   playsInline
                   aria-hidden={i !== slide}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover scale-[1.6]"
                 />
               ) : (
                 <img
@@ -619,11 +633,14 @@ export default function Home() {
                     >
                       {/* Arrow icon — reserves space in both states */}
                       <span
-                        className={`shrink-0 text-2xl transition-opacity duration-300 ${isActive ? 'text-black opacity-100' : 'opacity-0'
+                        className={`shrink-0 transition-opacity duration-300 ${isActive ? 'text-black opacity-100' : 'opacity-0'
                           }`}
                         aria-hidden
                       >
-                        ↗
+                        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7" />
+                          <polyline points="9 7 17 7 17 15" />
+                        </svg>
                       </span>
 
                       <h3
@@ -711,7 +728,7 @@ export default function Home() {
             {/* 14 stacked terrace lines — each drifts horizontally at a different pace,
                 creating a parallax "wind over the terraces" effect */}
             {[
-              { d: "M -60 65   C 180 15, 380 110, 560 60  C 760 5, 980 110, 1180 55  C 1380 0, 1540 95, 1660 60",   t: 4.5, e: 0   },
+              { d: "M -60 65   C 180 15, 380 110, 560 60  C 760 5, 980 110, 1180 55  C 1380 0, 1540 95, 1660 60", t: 4.5, e: 0 },
               { d: "M -60 118  C 190 70, 390 162, 570 110 C 770 55, 990 162, 1190 105 C 1390 50, 1550 145, 1660 112", t: 5.2, e: 0.4 },
               { d: "M -60 172  C 200 125, 400 215, 580 162 C 780 105, 1000 215, 1200 158 C 1400 100, 1560 198, 1660 165", t: 6.1, e: 0.2 },
               { d: "M -60 228  C 210 180, 410 270, 590 218 C 790 160, 1010 270, 1210 212 C 1410 155, 1570 252, 1660 220", t: 4.8, e: 0.7 },
@@ -737,23 +754,23 @@ export default function Home() {
 
             {/* Tiny vertical "step" notches — short marks to suggest terrace walls */}
             <g strokeWidth="0.9" strokeOpacity="0.55">
-              <line x1="120"  y1="65"   x2="120"  y2="118" />
-              <line x1="420"  y1="172"  x2="420"  y2="228" />
-              <line x1="720"  y1="55"   x2="720"  y2="105" />
-              <line x1="980"  y1="240"  x2="980"  y2="300" />
-              <line x1="1240" y1="118"  x2="1240" y2="170" />
-              <line x1="1500" y1="290"  x2="1500" y2="350" />
+              <line x1="120" y1="65" x2="120" y2="118" />
+              <line x1="420" y1="172" x2="420" y2="228" />
+              <line x1="720" y1="55" x2="720" y2="105" />
+              <line x1="980" y1="240" x2="980" y2="300" />
+              <line x1="1240" y1="118" x2="1240" y2="170" />
+              <line x1="1500" y1="290" x2="1500" y2="350" />
 
-              <line x1="200"  y1="380"  x2="200"  y2="440" />
-              <line x1="540"  y1="450"  x2="540"  y2="510" />
-              <line x1="860"  y1="335"  x2="860"  y2="395" />
-              <line x1="1140" y1="470"  x2="1140" y2="528" />
-              <line x1="1400" y1="405"  x2="1400" y2="465" />
+              <line x1="200" y1="380" x2="200" y2="440" />
+              <line x1="540" y1="450" x2="540" y2="510" />
+              <line x1="860" y1="335" x2="860" y2="395" />
+              <line x1="1140" y1="470" x2="1140" y2="528" />
+              <line x1="1400" y1="405" x2="1400" y2="465" />
 
-              <line x1="280"  y1="620"  x2="280"  y2="678" />
-              <line x1="620"  y1="575"  x2="620"  y2="632" />
-              <line x1="940"  y1="685"  x2="940"  y2="734" />
-              <line x1="1280" y1="640"  x2="1280" y2="695" />
+              <line x1="280" y1="620" x2="280" y2="678" />
+              <line x1="620" y1="575" x2="620" y2="632" />
+              <line x1="940" y1="685" x2="940" y2="734" />
+              <line x1="1280" y1="640" x2="1280" y2="695" />
             </g>
           </svg>
         </div>
@@ -771,6 +788,34 @@ export default function Home() {
 
       {/* ============ TRUST STRIP (yellow banner) ============ */}
       <section className="relative overflow-hidden bg-jd-yellow">
+        {/* Himalayan mountain silhouettes */}
+        <svg
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-full w-full"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMax slice"
+          viewBox="0 0 1600 320"
+        >
+          {/* Back range — palest */}
+          <path
+            fill="#000"
+            fillOpacity="0.04"
+            d="M0,250 L120,170 L210,210 L300,140 L380,200 L470,120 L560,190 L640,150 L740,200 L830,130 L930,205 L1010,160 L1110,110 L1200,180 L1290,140 L1380,200 L1470,150 L1560,210 L1600,180 L1600,320 L0,320 Z"
+          />
+          {/* Mid range */}
+          <path
+            fill="#000"
+            fillOpacity="0.07"
+            d="M0,290 L90,230 L180,260 L270,200 L360,250 L450,180 L540,240 L620,210 L720,260 L820,190 L910,240 L1000,200 L1100,170 L1190,240 L1280,210 L1370,250 L1460,210 L1560,260 L1600,240 L1600,320 L0,320 Z"
+          />
+          {/* Front range — darkest */}
+          <path
+            fill="#000"
+            fillOpacity="0.1"
+            d="M0,320 L80,275 L170,300 L260,260 L350,290 L450,250 L540,290 L630,265 L730,295 L820,250 L920,295 L1010,270 L1110,255 L1210,295 L1310,275 L1410,300 L1510,270 L1600,295 L1600,320 Z"
+          />
+        </svg>
+
         <div className="relative mx-auto flex max-w-[88rem] flex-col items-center gap-10 px-6 py-12 md:flex-row md:justify-between md:py-14">
           {/* Left: image + headline */}
           <div className="flex items-center gap-5">
@@ -827,7 +872,7 @@ export default function Home() {
           {/* Right: trust + avatars */}
           <div className="flex items-center gap-5">
             <p className="font-display text-2xl font-extrabold leading-tight text-black md:text-3xl">
-              5,000+ Nepali Farmers
+              12,000+ Nepali Farmers
               <br />
               Trust MV Dugar.
             </p>
