@@ -480,7 +480,7 @@ export default function Home() {
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="relative min-h-screen flex items-end overflow-hidden grain">
+      <section className="relative aspect-video md:aspect-auto md:min-h-screen flex items-end overflow-hidden grain bg-black">
         <div className="absolute inset-0">
           {heroSlides.map((s, i) => (
             <div
@@ -496,14 +496,14 @@ export default function Home() {
                   loop
                   playsInline
                   aria-hidden={i !== slide}
-                  className="h-full w-full object-cover scale-[1.6]"
+                  className="h-full w-full object-cover md:scale-[1.6]"
                 />
               ) : (
                 <img
                   src={s.src}
                   alt=""
                   aria-hidden={i !== slide}
-                  className="h-full w-full object-cover animate-[kenburns_8s_ease-in-out_infinite_alternate]"
+                  className="h-full w-full object-cover md:animate-[kenburns_8s_ease-in-out_infinite_alternate]"
                 />
               )}
             </div>
