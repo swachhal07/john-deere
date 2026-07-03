@@ -29,9 +29,9 @@ const storySlides = [storySlide1, storySlide2, storySlide3, storySlide4]
 
 
 const trustPillars = [
-  { num: '01', label: 'Authorized distributor', detail: 'Direct from John Deere — no resellers in the chain, no grey market.', image: whyChoose01 },
+  { num: '01', label: 'Authorized distributor', detail: 'Direct from John Deere, no resellers in the chain, no grey market.', image: whyChoose01 },
   { num: '02', label: 'Factory-trained service', detail: 'Technicians trained on every model we put on Nepali ground.', image: whyChoose2 },
-  { num: '03', label: 'Manufacturer warranty',  detail: 'Standard coverage on every machine — honoured at any branch.', image: whyChoose3 },
+  { num: '03', label: 'Manufacturer warranty',  detail: 'Standard coverage on every machine, honoured at any branch.', image: whyChoose3 },
   { num: '04', label: 'Genuine parts supply',   detail: 'OEM stock at the central warehouse and at every one of sixteen branches.', image: whyChoose4 },
 ]
 
@@ -129,7 +129,7 @@ const teamProfiles = [
     photo: SALES_PHOTO,
     caption: 'Showroom, Kathmandu · 2026',
     rotate: -1.4,
-    bio: 'Our sales team pairs technical depth with on-the-ground experience. They walk farms, talk through soil, slope and crop, and stay involved long after delivery — because the relationship is the product.',
+    bio: 'Our sales team pairs technical depth with on-the-ground experience. They walk farms, talk through soil, slope and crop, and stay involved long after delivery, because the relationship is the product.',
     capabilities: [
       'Showroom walk-throughs & farm visits',
       'Application sizing & spec advice',
@@ -144,7 +144,7 @@ const teamProfiles = [
     photo: SERVICE_PHOTO,
     caption: 'Service centre, Balaju · 2026',
     rotate: 1.6,
-    bio: 'Factory-trained, parts-stocked, and always reachable. The service team carries the machine from first commissioning to its tenth season — through warranty work, scheduled servicing, and the late-night calls when the monsoon hits.',
+    bio: 'Factory-trained, parts-stocked, and always reachable. The service team carries the machine from first commissioning to its tenth season, through warranty work, scheduled servicing, and the late-night calls when the monsoon hits.',
     capabilities: [
       'Factory-trained technicians',
       'Scheduled servicing & warranty',
@@ -233,7 +233,7 @@ export default function About() {
             </h1>
             <p className="mx-auto mt-12 max-w-xl text-lg leading-[1.6] text-[#3a4a36]">
               The story, the partnership, and the people behind every John
-              Deere machine MV Dugar puts on the ground in Nepal — from hill
+              Deere machine MV Dugar puts on the ground in Nepal, from hill
               terraces to the Terai plains.
             </p>
 
@@ -374,7 +374,7 @@ export default function About() {
                   <p>
                     From the rice paddies of the Terai to the steep terraces of
                     the mid-hills, we match every machine to the land it will
-                    actually work. No two farms in Nepal are alike — and our
+                    actually work. No two farms in Nepal are alike, and our
                     team is trained to spec the right tractor, the right
                     implement, and the right financing for each.
                   </p>
@@ -386,7 +386,7 @@ export default function About() {
                   </p>
                   <p>
                     We aren&rsquo;t just delivering tractors. We&rsquo;re
-                    investing in the productivity of Nepali agriculture — one
+                    investing in the productivity of Nepali agriculture, one
                     farm, one season, one harvest at a time. That&rsquo;s the
                     work we&rsquo;ve been doing for more than twenty years, and
                     it&rsquo;s the work we plan to keep doing for the next
@@ -434,7 +434,7 @@ export default function About() {
               {/* Pull quote breakout */}
               <blockquote className="cx-rise mt-16 text-center md:mt-20">
                 <p className="font-['Fraunces'] text-3xl font-medium leading-[1.15] text-[#1a261a] md:text-4xl lg:text-5xl">
-                  &ldquo;From hill terraces to the Terai plains — wherever
+                  &ldquo;From hill terraces to the Terai plains, wherever
                   there is land to work, there is a Deere built for it.&rdquo;
                 </p>
                 <p className="mt-5 font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-jd-green">

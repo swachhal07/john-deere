@@ -110,7 +110,7 @@ export const products = [
     clutch: 'Dual',
     tagline: '55 HP 2WD with reverse PTO for puddling and rotavating.',
     description:
-      'Reverse PTO is the headline — it turns the 5310 E into a serious puddling and rotavating tractor. 4-pinion oiled rear axle for durability through the wet season.',
+      'Reverse PTO is the headline, it turns the 5310 E into a serious puddling and rotavating tractor. 4-pinion oiled rear axle for durability through the wet season.',
     image: img5310e,
     features: [
       'Dual clutch',
@@ -139,7 +139,7 @@ export const products = [
     clutch: 'Single',
     tagline: '50 HP 2WD economy. Naturally aspirated, easy to service.',
     description:
-      'A dependable workhorse. Naturally aspirated, single-clutch and the MITA Standard rockshaft keep parts simple and repairs quick — a favourite of farmer cooperatives.',
+      'A dependable workhorse. Naturally aspirated, single-clutch and the MITA Standard rockshaft keep parts simple and repairs quick, a favourite of farmer cooperatives.',
     image: img5050d,
     features: [
       'Single clutch',
@@ -194,7 +194,7 @@ export const products = [
     hp: 46,
     drive: '2WD',
     clutch: 'Dual',
-    tagline: '46 HP 2WD with reverse PTO — puddling specialist.',
+    tagline: '46 HP 2WD with reverse PTO, puddling specialist.',
     description:
       'Reverse PTO meets a dual clutch and JD MQRL hitch. Built for the operator who spends most of the season behind a rotavator in flooded paddies.',
     image: img5045dreverse,
@@ -251,7 +251,7 @@ export const products = [
     clutch: 'Single',
     tagline: '46 HP 2WD entry build with MITA rockshaft.',
     description:
-      'Simplest 5045D in the line-up. Single clutch, MITA Standard rockshaft and standard PTO — the lowest cost of ownership entry to the 46 HP class.',
+      'Simplest 5045D in the line-up. Single clutch, MITA Standard rockshaft and standard PTO, the lowest cost of ownership entry to the 46 HP class.',
     image: img5045dsingle,
     features: [
       'Single clutch',

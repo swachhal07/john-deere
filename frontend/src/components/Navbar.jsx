@@ -148,7 +148,7 @@ function Logo({ isHome }) {
     <Link
       to="/"
       aria-label="MV Dugar — authorized John Deere distributor in Nepal"
-      className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center gap-3"
+      className="absolute left-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-3 md:flex"
     >
       <img
         src={dugarLogo}
@@ -220,7 +220,21 @@ export default function Navbar() {
       {/* Oversized logo — overflows below the slim bar */}
       <Logo isHome={isHome} />
 
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:py-8">
+        {/* Mobile logo (left) */}
+        <Link
+          to="/"
+          aria-label="MV Dugar — authorized John Deere distributor in Nepal"
+          className="flex items-center gap-2 md:hidden"
+        >
+          <img src={dugarLogo} alt="MV Dugar" className="h-8 w-auto" />
+          <span
+            aria-hidden
+            className={`h-6 w-px ${isHome ? 'bg-white/60' : 'bg-gray-300'}`}
+          />
+          <img src={logo} alt="John Deere" className="h-6 w-auto" />
+        </Link>
+
         {/* Left links */}
         <nav className="hidden flex-1 translate-x-16 items-center justify-end gap-14 md:flex">
           {leftNavItems.map((item) => (

@@ -215,8 +215,8 @@ function SuccessState({ onReset }) {
       </h3>
       <p className="mt-5 max-w-md text-base leading-relaxed text-gray-600">
         Our team in Kathmandu will be in touch within one working day. For
-        anything urgent — a machine down in the field, a part you need this
-        season — call us directly on the number on the right.
+        anything urgent, a machine down in the field, a part you need this
+        season, call us directly on the number on the right.
       </p>
       <button
         onClick={onReset}
@@ -415,7 +415,7 @@ export default function Contact() {
                           required
                           inputMode="tel"
                           pattern="[0-9+\s-]{7,15}"
-                          title="Digits only — at least 7 numbers"
+                          title="Digits only, at least 7 numbers"
                           value={form.phone}
                           onChange={update('phone')}
                           placeholder="+977 98•••••••"
@@ -441,7 +441,7 @@ export default function Contact() {
                           value={form.message}
                           onChange={update('message')}
                           maxLength={600}
-                          placeholder="Your district, the machine you're interested in, acreage, timeline — anything we should know…"
+                          placeholder="Your district, the machine you're interested in, acreage, timeline, anything we should know…"
                           className={`${inputClass} resize-none`}
                         />
                         <span className="mt-1 block text-right text-[11px] tabular-nums text-gray-400">
@@ -607,8 +607,8 @@ export default function Contact() {
                   </p>
                   <ul className="mt-3 space-y-2 text-sm tabular-nums">
                     <li className="flex items-baseline justify-between">
-                      <span className="text-white">Sun — Fri</span>
-                      <span className="font-bold text-jd-yellow">09:30 — 18:30</span>
+                      <span className="text-white">Sun – Fri</span>
+                      <span className="font-bold text-jd-yellow">09:30 – 18:30</span>
                     </li>
                     <li className="flex items-baseline justify-between">
                       <span className="text-gray-500">Saturday</span>
@@ -672,7 +672,7 @@ export default function Contact() {
           <div className="relative overflow-hidden border border-gray-200">
             <span className="pointer-events-none absolute left-0 top-0 z-10 h-1 w-32 bg-jd-green" />
             <iframe
-              title="MV Dugar — John Deere showroom, Balaju, Kathmandu"
+              title="MV Dugar · John Deere showroom, Balaju, Kathmandu"
               src="https://maps.google.com/maps?q=27.7300363,85.3020595&hl=en&z=17&output=embed"
               width="100%"
               height="520"
@@ -706,7 +706,7 @@ export default function Contact() {
           <div className="mb-14 text-center">
             <div className="mb-6 flex items-center justify-center gap-3 text-base font-bold uppercase tracking-[0.3em] text-jd-green md:text-lg">
               <span className="h-px w-12 bg-jd-green" />
-              Network — {offices.length} sites
+              Network · {offices.length} sites
               <span className="h-px w-12 bg-jd-green" />
             </div>
             <h3 className="font-display text-5xl font-extrabold uppercase leading-[0.95] tracking-tight text-black md:text-7xl">
@@ -739,7 +739,7 @@ export default function Contact() {
           {/* Divider into the detail roster */}
           <div className="mb-6 flex items-baseline justify-between gap-4 border-b border-black/20 pb-3">
             <h4 className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.42em] text-jd-green">
-              Detail roster — every site
+              Detail roster · every site
             </h4>
             <span className="font-mono text-[0.6rem] tabular-nums uppercase tracking-[0.3em] text-gray-500">
               {String(offices.length).padStart(2, '0')} entries

@@ -21,7 +21,7 @@ const reasons = [
   {
     no: '01',
     title: 'Genuine parts, always in stock',
-    body: 'A fully stocked parts network across Nepal means your machine is never idle for long. Every component is genuine John Deere — engineered to last.',
+    body: 'A fully stocked parts network across Nepal means your machine is never idle for long. Every component is genuine John Deere, engineered to last.',
   },
   {
     no: '02',
@@ -36,7 +36,7 @@ const reasons = [
   {
     no: '04',
     title: 'Financing made simple',
-    body: 'Flexible plans built with local farmers in mind, so the right equipment is within reach this season — not next.',
+    body: 'Flexible plans built with local farmers in mind, so the right equipment is within reach this season, not next.',
   },
   {
     no: '05',
@@ -216,7 +216,7 @@ export default function WhyUs() {
             </div>
             <p className="max-w-md text-base leading-relaxed text-gray-700 lg:justify-self-end lg:text-right md:text-lg">
               World-class engineering, paired with a local team that knows
-              Nepali farming — from hill terraces to the Terai plains.
+              Nepali farming, from hill terraces to the Terai plains.
             </p>
           </div>
 
@@ -300,7 +300,7 @@ export default function WhyUs() {
               </h2>
               <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 md:text-lg">
                 Sales, genuine parts, on-farm service, operator training and
-                financing — under one roof, with one team that picks up the
+                financing, under one roof, with one team that picks up the
                 phone when you call.
               </p>
               <Link

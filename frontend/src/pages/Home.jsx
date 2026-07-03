@@ -11,8 +11,6 @@ import hero3 from '../assets/john-deere-tractor-and-harvesters-8vy92xu1qcrorfub.
 import hero4 from '../assets/wp3183064.jpg'
 import hero5 from '../assets/power-and-technology-background.avif'
 import hero6 from '../assets/69892118-tracteur-travail-dans-champ-a-le-coucher-du-soleil-agriculture-agriculture-recolte-rural-paysage-et-durable-les-pratiques-gratuit-photo.jpg'
-import hero7 from '../assets/wp3183090-john-deere-wallpaper-hd.jpg'
-import hero8 from '../assets/wp3183076-john-deere-wallpaper-hd.jpg'
 import hero9 from '../assets/john-deere-harvester-agriculture.jpg'
 import hero10 from '../assets/Free-HD-John-Deere-Wallpapers-Photos.jpg'
 import hero11 from '../assets/a0d81b1f-4773-4d2c-b8e7-0c2f938df4d9.jpg'
@@ -25,8 +23,6 @@ const heroSlides = [
   { type: 'video', src: heroVideo },
   { type: 'image', src: hero1 },
   { type: 'image', src: hero3 },
-  { type: 'image', src: hero7 },
-  { type: 'image', src: hero8 },
   { type: 'image', src: hero9 },
   { type: 'image', src: hero10 },
   { type: 'image', src: hero11 },
@@ -788,35 +784,7 @@ export default function Home() {
 
       {/* ============ TRUST STRIP (yellow banner) ============ */}
       <section className="relative overflow-hidden bg-jd-yellow">
-        {/* Himalayan mountain silhouettes */}
-        <svg
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-full w-full"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="xMidYMax slice"
-          viewBox="0 0 1600 320"
-        >
-          {/* Back range — palest */}
-          <path
-            fill="#000"
-            fillOpacity="0.04"
-            d="M0,250 L120,170 L210,210 L300,140 L380,200 L470,120 L560,190 L640,150 L740,200 L830,130 L930,205 L1010,160 L1110,110 L1200,180 L1290,140 L1380,200 L1470,150 L1560,210 L1600,180 L1600,320 L0,320 Z"
-          />
-          {/* Mid range */}
-          <path
-            fill="#000"
-            fillOpacity="0.07"
-            d="M0,290 L90,230 L180,260 L270,200 L360,250 L450,180 L540,240 L620,210 L720,260 L820,190 L910,240 L1000,200 L1100,170 L1190,240 L1280,210 L1370,250 L1460,210 L1560,260 L1600,240 L1600,320 L0,320 Z"
-          />
-          {/* Front range — darkest */}
-          <path
-            fill="#000"
-            fillOpacity="0.1"
-            d="M0,320 L80,275 L170,300 L260,260 L350,290 L450,250 L540,290 L630,265 L730,295 L820,250 L920,295 L1010,270 L1110,255 L1210,295 L1310,275 L1410,300 L1510,270 L1600,295 L1600,320 Z"
-          />
-        </svg>
-
-        <div className="relative mx-auto flex max-w-[88rem] flex-col items-center gap-10 px-6 py-12 md:flex-row md:justify-between md:py-14">
+<div className="relative mx-auto flex max-w-[88rem] flex-col items-center gap-10 px-6 py-12 md:flex-row md:justify-between md:py-14">
           {/* Left: image + headline */}
           <div className="flex items-center gap-5">
             <img

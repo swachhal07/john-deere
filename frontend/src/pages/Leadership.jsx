@@ -4,6 +4,7 @@ import motiImg from '../assets/af0b8ecf-4ddc-41f9-9dd1-ba5c0df1b212.webp'
 import vivekImg from '../assets/ae68fbad-4028-45aa-81d5-44d526f4f5af.webp'
 import shubhamImg from '../assets/af5ea000-e8c5-4f03-ac64-9fd3a8bb8009.webp'
 import namanImg from '../assets/eb7eb529-8d15-4359-8ac0-df51b7393d00.webp'
+import businessHeadImg from '../assets/WhatsApp Image 2026-06-29 at 9.12.16 PM.jpeg'
 import salesHeadImg from '../assets/sales head.jpeg'
 import customerSupportHeadImg from '../assets/customer support head.jpeg'
 import sparepartsHeadImg from '../assets/spareparts head .jpeg'
@@ -42,6 +43,7 @@ const directors = [
 ]
 
 const management = [
+  { name: 'Ved Prakash Sharma', title: 'Business Head', photo: businessHeadImg },
   { name: 'Nanda Kishor Bhatta', title: 'Sales Head', photo: salesHeadImg },
   { name: 'Siddhant Patel', title: 'Customer Support Head', photo: customerSupportHeadImg },
   { name: 'Shree Vagwan Sah', title: 'Spare Parts Head', photo: sparepartsHeadImg },
@@ -183,11 +185,11 @@ function ManagerColumn({ manager, index }) {
       <div className="mt-6">
         <div className="mb-3 inline-flex items-center gap-2.5">
           <span className="h-px w-6 bg-jd-green transition-[width] duration-500 ease-out group-hover:w-10" />
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.32em] text-jd-green">
+          <span className="whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-jd-green">
             {manager.title}
           </span>
         </div>
-        <h3 className="whitespace-nowrap font-display text-sm font-extrabold uppercase leading-[0.95] tracking-tight text-mist transition-colors duration-500 ease-out group-hover:text-jd-green md:text-base lg:text-lg xl:text-xl">
+        <h3 className="break-words font-display text-sm font-extrabold uppercase leading-[1.05] tracking-tight text-mist transition-colors duration-500 ease-out group-hover:text-jd-green md:text-[15px] lg:text-base xl:text-lg">
           {manager.name}
         </h3>
       </div>
@@ -273,8 +275,8 @@ export default function Leadership() {
       </section>
 
       {/* ─── Management team ─────────────────────────────────── */}
-      <section className="relative bg-white pt-20 pb-24 md:pt-24 md:pb-32">
-        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
+      <section className="relative bg-white pt-20 pb-24 md:pt-28 md:pb-40">
+        <div className="relative mx-auto max-w-[1680px] px-6 lg:px-16">
           {/* Section header */}
           <div className="mb-12 text-center">
             <div className="mb-5 flex items-center justify-center gap-3 text-base font-bold uppercase tracking-[0.3em] text-jd-green md:text-lg">
@@ -307,11 +309,11 @@ export default function Leadership() {
           {/* Ledger header */}
           <div className="mb-8 flex items-baseline justify-between border-y border-mist/20 py-3 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-mist-dim">
             <span className="text-jd-green">Senior Management</span>
-            <span>05 entries · Kathmandu</span>
+            <span>06 entries · Kathmandu</span>
           </div>
 
           {/* Five columns */}
-          <div className="grid grid-cols-5 gap-x-3 gap-y-14 sm:gap-x-5 lg:gap-x-8">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-16 sm:grid-cols-3 sm:gap-x-8 md:grid-cols-6 md:gap-x-10 lg:gap-x-14 lg:gap-y-20">
             {management.map((m, i) => (
               <ManagerColumn key={`${m.title}-${i}`} manager={m} index={i} />
             ))}

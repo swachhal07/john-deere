@@ -92,7 +92,7 @@ function BuildCard({ product }) {
           <ScanLines />
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
             <span className="font-mono text-[0.55rem] font-semibold uppercase tracking-[0.55em] text-white/45">
-              John&nbsp;Deere&nbsp;—&nbsp;5-Series
+              John&nbsp;Deere&nbsp;·&nbsp;5-Series
             </span>
             <span className="mt-3 font-display text-[clamp(4rem,11vw,9rem)] font-extrabold leading-[0.85] tracking-tighter text-white">
               {product.name}
@@ -202,7 +202,7 @@ export default function Products() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.32 }}
             >
-              Ten builds, one chassis lineage — engineered for terraced hills, Terai paddies,
+              Ten builds, one chassis lineage, engineered for terraced hills, Terai paddies,
               and the cooperatives that work both. Stocked, serviced and parted by MV Dugar.
             </motion.p>
 
@@ -407,7 +407,7 @@ export default function Products() {
                       <div className="mt-10">
                         <div className="mb-4 flex items-baseline gap-3">
                           <span className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.42em] text-jd-green">
-                            § 01 — Capabilities
+                            § 01 · Capabilities
                           </span>
                           <span className="h-px flex-1 bg-mist/12" />
                           <span className="font-mono text-[0.6rem] tabular-nums text-mist-dim">
@@ -437,7 +437,7 @@ export default function Products() {
                       <div className="mt-10">
                         <div className="mb-4 flex items-baseline gap-3">
                           <span className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.42em] text-jd-green">
-                            § 02 — Specification
+                            § 02 · Specification
                           </span>
                           <span className="h-px flex-1 bg-mist/12" />
                         </div>
