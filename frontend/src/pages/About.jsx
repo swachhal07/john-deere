@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { gsap, useGSAP } from '../lib/gsap'
 import jdLogo from '../assets/john-deere-logo.png'
 import mvDugarLogo from '../assets/MVDUGAR-01.png'
 import coverFieldBg from '../assets/wp9212100.jpg'
@@ -95,11 +96,11 @@ function WhyChooseScroll() {
           What you can count on
         </p>
 
-        <ul className="cx-rise-slow border-t border-[#1a261a]/15">
+        <ul className="js-pillar-list cx-rise-slow border-t border-[#1a261a]/15">
           {trustPillars.map((p) => (
             <li
               key={p.num}
-              className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-4 border-b border-[#1a261a]/15 py-10 md:grid-cols-[6rem_minmax(0,18rem)_1fr] md:gap-x-12 md:py-14"
+              className="js-pillar grid grid-cols-[auto_1fr] gap-x-8 gap-y-4 border-b border-[#1a261a]/15 py-10 md:grid-cols-[6rem_minmax(0,18rem)_1fr] md:gap-x-12 md:py-14"
             >
               <span className="font-display text-4xl font-extrabold leading-none tracking-tight text-jd-green md:text-5xl lg:text-6xl">
                 {p.num}
@@ -164,6 +165,7 @@ const ornament = (
 
 export default function About() {
   const [storyIndex, setStoryIndex] = useState(0)
+  const rootRef = useRef(null)
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -172,8 +174,56 @@ export default function About() {
     return () => clearInterval(id)
   }, [])
 
+  // GSAP scroll polish, gated on prefers-reduced-motion and reverted on
+  // unmount by useGSAP.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // Story polaroid settles from a stronger tilt as it scrolls in.
+        gsap.fromTo(
+          '.js-story-plate',
+          { rotate: 4.5, y: 24 },
+          {
+            rotate: 1.2,
+            y: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.js-story',
+              start: 'top 85%',
+              end: 'top 30%',
+              scrub: 0.8,
+            },
+          },
+        )
+
+        // Trust pillar rows rise in one after another.
+        gsap.from('.js-pillar', {
+          y: 48,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          stagger: 0.12,
+          scrollTrigger: { trigger: '.js-pillar-list', start: 'top 80%' },
+        })
+
+        // Pull quote breathes in.
+        gsap.from('.js-pullquote', {
+          y: 36,
+          opacity: 0,
+          scale: 0.97,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '.js-pullquote', start: 'top 82%' },
+        })
+
+      })
+    },
+    { scope: rootRef },
+  )
+
   return (
-    <main className="relative bg-white text-[#1a261a]">
+    <main ref={rootRef} className="relative bg-white text-[#1a261a]">
       <PageStyles />
 
       {/* ── COVER ─────────────────────────────────────────── */}
@@ -341,7 +391,7 @@ export default function About() {
               </header>
 
               {/* Story body with breakout image */}
-              <div className="grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+              <div className="js-story grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
                 <article className="space-y-7 text-lg leading-[1.65] text-[#23311f] lg:order-2">
                   <p>
                     <span className="float-left mr-3 mt-1 font-display text-[6.5rem] font-extrabold leading-[0.8] text-jd-green sm:text-[7.5rem]">
@@ -397,7 +447,7 @@ export default function About() {
                 {/* Image side — paper-framed slideshow */}
                 <figure className="cx-rise-slow lg:order-1 lg:sticky lg:top-28 lg:self-start">
                   <div
-                    className="relative bg-white p-3 md:p-4"
+                    className="js-story-plate relative bg-white p-3 md:p-4"
                     style={{
                       transform: 'rotate(1.2deg)',
                       boxShadow: '0 20px 60px -30px rgba(26,38,26,0.45)',
@@ -432,7 +482,7 @@ export default function About() {
               </div>
 
               {/* Pull quote breakout */}
-              <blockquote className="cx-rise mt-16 text-center md:mt-20">
+              <blockquote className="js-pullquote mt-16 text-center md:mt-20">
                 <p className="font-['Fraunces'] text-3xl font-medium leading-[1.15] text-[#1a261a] md:text-4xl lg:text-5xl">
                   &ldquo;From hill terraces to the Terai plains, wherever
                   there is land to work, there is a Deere built for it.&rdquo;
@@ -642,10 +692,14 @@ export default function About() {
             <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-3 bg-jd-green px-7 py-4 text-xs font-bold uppercase tracking-[0.28em] text-white transition hover:bg-[#16210f]"
+                className="group relative inline-flex items-center gap-3 overflow-hidden bg-jd-green px-7 py-4 text-xs font-bold uppercase tracking-[0.28em] text-white transition-colors hover:bg-jd-green-deep"
               >
-                Visit the showroom
-                <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>
+                <span className="relative z-10">Visit the showroom</span>
+                <span aria-hidden className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                <span
+                  aria-hidden
+                  className="absolute inset-y-0 left-0 w-0 bg-jd-yellow/15 transition-[width] duration-500 ease-out group-hover:w-full"
+                />
               </Link>
               <Link
                 to="/products"

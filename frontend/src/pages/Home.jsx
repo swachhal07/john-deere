@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import Reveal from '../components/Reveal'
+import { gsap, useGSAP } from '../lib/gsap'
 
 import serviceTeam from '../assets/WhatsApp Image 2026-06-26 at 2.44.17 PM.jpeg'
 import genuineParts from '../assets/WhatsApp Image 2026-06-26 at 3.25.57 PM.jpeg'
@@ -362,12 +363,12 @@ const faqs = [
 function FaqAccordion() {
   const [open, setOpen] = useState(0)
   return (
-    <ul className="border-t border-black/80">
+    <ul className="js-faq-list border-t border-black/80">
       {faqs.map((f, i) => {
         const isOpen = open === i
         const num = String(i + 1).padStart(2, '0')
         return (
-          <li key={i} className="border-b border-black/10">
+          <li key={i} className="js-faq-item border-b border-black/10">
             <button
               type="button"
               onClick={() => setOpen(isOpen ? -1 : i)}
@@ -453,6 +454,88 @@ export default function Home() {
   const [slide, setSlide] = useState(0)
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  const rootRef = useRef(null)
+
+  // GSAP scroll polish. Everything lives inside a reduced-motion media
+  // query and is reverted automatically on route change by useGSAP.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // Hero media drifts slower than the page as the hero scrolls away.
+        gsap.to('.js-hero-media', {
+          yPercent: 18,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.js-hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        })
+
+        // "What we do" rows rise in one after another.
+        gsap.from('.js-spec-item', {
+          y: 44,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          stagger: 0.09,
+          scrollTrigger: { trigger: '.js-spec-list', start: 'top 82%' },
+        })
+
+        // Terraced-hillside backdrop drifts against the reviews section.
+        gsap.fromTo(
+          '.js-terrace',
+          { yPercent: -7 },
+          {
+            yPercent: 7,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.js-reviews',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.1,
+            },
+          },
+        )
+
+        // Trust strip: photo parallax + badge pops in.
+        gsap.fromTo(
+          '.js-trust-img',
+          { y: 26 },
+          {
+            y: -26,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.js-trust',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          },
+        )
+        gsap.from('.js-trust-badge', {
+          scale: 0.5,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'back.out(1.7)',
+          scrollTrigger: { trigger: '.js-trust', start: 'top 75%' },
+        })
+
+        // FAQ rows cascade in.
+        gsap.from('.js-faq-item', {
+          y: 30,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power3.out',
+          stagger: 0.07,
+          scrollTrigger: { trigger: '.js-faq-list', start: 'top 80%' },
+        })
+      })
+    },
+    { scope: rootRef },
+  )
 
   useEffect(() => {
     const duration = heroSlides[slide].type === 'video' ? 60000 : 5500
@@ -478,10 +561,10 @@ export default function Home() {
   const next = () => setSlide((s) => (s + 1) % heroSlides.length)
 
   return (
-    <>
+    <div ref={rootRef}>
       {/* ============ HERO ============ */}
-      <section className="relative aspect-video md:aspect-auto md:min-h-screen flex items-end overflow-hidden grain bg-black">
-        <div className="absolute inset-0">
+      <section className="js-hero relative min-h-screen flex items-end overflow-hidden grain bg-black">
+        <div className="js-hero-media absolute inset-0">
           {heroSlides.map((s, i) => (
             <div
               key={i}
@@ -496,7 +579,7 @@ export default function Home() {
                   loop
                   playsInline
                   aria-hidden={i !== slide}
-                  className="h-full w-full object-cover md:scale-[1.6]"
+                  className="h-full w-full scale-[1.4] object-cover md:scale-[1.6]"
                 />
               ) : (
                 <img
@@ -607,7 +690,7 @@ export default function Home() {
           <div className="grid items-start gap-10 lg:grid-cols-[34rem_1fr] lg:gap-20 lg:items-center">
             {/* Service list */}
             <ul
-              className="flex flex-col gap-2"
+              className="js-spec-list flex flex-col gap-2"
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
@@ -617,7 +700,7 @@ export default function Home() {
                 return (
                   <li
                     key={s.title}
-                    className={`border-b transition-colors duration-300 ${isActive ? 'border-transparent' : 'border-black/10'
+                    className={`js-spec-item border-b transition-colors duration-300 ${isActive ? 'border-transparent' : 'border-black/10'
                       }`}
                   >
                     <div
@@ -689,11 +772,11 @@ export default function Home() {
       </section>
 
       {/* ============ REVIEWS (farmer testimonials) ============ */}
-      <section className="relative overflow-hidden bg-white py-24 md:py-32">
+      <section className="js-reviews relative overflow-hidden bg-white py-24 md:py-32">
         {/* Terraced hillside lines — curvy stepped contour bands with gentle drift animation */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 opacity-[0.08]"
+          className="js-terrace pointer-events-none absolute inset-0 z-0 opacity-[0.08]"
         >
           <svg
             className="h-full w-full"
@@ -783,14 +866,14 @@ export default function Home() {
       </section>
 
       {/* ============ TRUST STRIP (yellow banner) ============ */}
-      <section className="relative overflow-hidden bg-jd-yellow">
+      <section className="js-trust relative overflow-hidden bg-jd-yellow">
 <div className="relative mx-auto flex max-w-[88rem] flex-col items-center gap-10 px-6 py-12 md:flex-row md:justify-between md:py-14">
           {/* Left: image + headline */}
           <div className="flex items-center gap-5">
             <img
               src={hero6}
               alt=""
-              className="h-24 w-32 shrink-0 rounded-xl object-cover shadow-md md:h-28 md:w-40"
+              className="js-trust-img h-24 w-32 shrink-0 rounded-xl object-cover shadow-md md:h-28 md:w-40"
             />
             <p className="font-display text-2xl font-extrabold leading-tight text-black md:text-3xl">
               Nepal's Trusted
@@ -802,7 +885,7 @@ export default function Home() {
           {/* Center: rotating badge */}
           <a
             href="/products"
-            className="group relative grid h-36 w-36 shrink-0 place-items-center rounded-full border-2 border-black/80 bg-white md:h-40 md:w-40"
+            className="js-trust-badge group relative grid h-36 w-36 shrink-0 place-items-center rounded-full border-2 border-black/80 bg-white md:h-40 md:w-40"
             aria-label="Explore more"
           >
             <svg
@@ -893,11 +976,11 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <Reveal delay={0.1} className="mt-12 md:mt-16">
+          <div className="mt-12 md:mt-16">
             <FaqAccordion />
-          </Reveal>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
