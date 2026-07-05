@@ -60,6 +60,15 @@ export default function Footer() {
         </div>
 
         <div className="mt-20 flex flex-col items-center gap-3 border-t border-white/10 pt-8 text-base text-white/55">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+            <Link to="/privacy-policy" className="transition-colors hover:text-white">
+              Privacy Policy
+            </Link>
+            <span className="h-1 w-1 rounded-full bg-white/30" aria-hidden />
+            <Link to="/terms-of-use" className="transition-colors hover:text-white">
+              Terms &amp; Conditions
+            </Link>
+          </div>
           <p>© {year} Vivek Automobiles · Authorized dealer of John Deere Nepal</p>
           <p>
             Developed by{' '}

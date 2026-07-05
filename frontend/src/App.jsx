@@ -8,6 +8,9 @@ import WhyUs from './pages/WhyUs'
 import About from './pages/About'
 import Leadership from './pages/Leadership'
 import Contact from './pages/Contact'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfUse from './pages/TermsOfUse'
+import NotFound from './pages/NotFound'
 import AdminLogin from './pages/admin/Login'
 import AdminDashboard from './pages/admin/Dashboard'
 import VehicleForm from './pages/admin/VehicleForm'
@@ -28,12 +31,17 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/leadership" element={<Leadership />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
 
           {/* Admin */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/new" element={<VehicleForm mode="new" />} />
           <Route path="/admin/edit/:slug" element={<VehicleForm mode="edit" />} />
+
+          {/* Catch-all 404 */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       {!isAdmin && <Footer />}
