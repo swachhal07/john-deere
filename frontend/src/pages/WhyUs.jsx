@@ -7,46 +7,53 @@ import { Link } from 'react-router-dom'
    testimonial, and a final yellow CTA strip.
    ──────────────────────────────────────────────────────────── */
 
-const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=2400&q=80'
-
 const metrics = [
-  { value: '180+',   label: 'Years of John Deere engineering' },
-  { value: '10',     label: 'Sales · Service · Parts branches' },
-  { value: '24 hrs', label: 'Average parts dispatch nationwide' },
-  { value: '100%',   label: 'Genuine parts. Always.' },
+  { value: '2002',    label: 'Established as authorised John Deere dealer' },
+  { value: '27',      label: 'Company-owned outlets across Nepal' },
+  { value: '30+',     label: 'Authorised service and spare parts centres' },
+  { value: '12,000+', label: 'Farmers served, Terai to Himalaya' },
 ]
 
 const reasons = [
   {
     no: '01',
-    title: 'Genuine parts, always in stock',
-    body: 'A fully stocked parts network across Nepal means your machine is never idle for long. Every component is genuine John Deere, engineered to last.',
+    title: 'Two decades of authorised expertise',
+    body: 'Since 2002, Vivek Automobile has accumulated unparalleled expertise in John Deere products. Our team’s in-depth understanding of Nepal’s farming conditions, diverse terrain, and evolving crop cycles enables us to recommend the right machinery and implement combination for every farm, every field, and every season.',
   },
   {
     no: '02',
-    title: 'Service that comes to you',
-    body: 'Trained field technicians and mobile workshops reach you on the farm. Scheduled maintenance keeps small problems from becoming downtime.',
+    title: 'Authorised John Deere dealer',
+    body: 'As an official authorised dealer, every tractor, implement, and spare part we supply meets John Deere’s rigorous global quality standards. Our customers receive genuine products, manufacturer-backed warranties, and the assurance of dealing through an authorised channel, not a substitute.',
   },
   {
     no: '03',
-    title: 'Specified for Nepali conditions',
-    body: 'From hill-terrace clearance to monsoon-grade durability, every machine is matched to the terrain it will actually work.',
+    title: '12,000+ farmers, all terrains',
+    body: 'From the Terai plains to the Pahad hills and the Himalayan regions, over 12,000 Nepali farmers have entrusted Vivek Automobile to power their operations. Our machinery has proven its reliability across every season and every terrain condition Nepal presents.',
   },
   {
     no: '04',
-    title: 'Financing made simple',
-    body: 'Flexible plans built with local farmers in mind, so the right equipment is within reach this season, not next.',
+    title: 'Complete lifecycle solutions',
+    body: 'A tractor alone does not complete a harvest; it is the right implement that does. We provide a comprehensive range of John Deere implements matched to every stage of the agricultural cycle: land preparation, sowing and planting, crop care, and harvesting. One integrated solution for the entire growing season.',
   },
   {
     no: '05',
-    title: 'Operators, trained right',
-    body: 'Hands-on training programmes help your team get the most from every machine, safely and efficiently.',
+    title: 'Nepal’s most extensive network',
+    body: 'With 27 company-owned outlets and 30+ authorised partners strategically located across Nepal, professional sales advice, expert servicing, and genuine spare parts are never far from any farmer, whether in the Terai, the hills, or the mountains.',
   },
   {
     no: '06',
-    title: 'A name you can trust',
-    body: 'Backed by 180+ years of John Deere engineering and a local team that knows Nepali farming inside out.',
+    title: 'Comprehensive after-sales support',
+    body: 'Our commitment does not end at the point of sale. Our network of trained, certified technicians provides timely maintenance, diagnostics, and repair. A well-maintained machine is a productive machine, and we ensure minimum downtime during critical seasons when every hour counts.',
+  },
+  {
+    no: '07',
+    title: 'Strength of the MV Dugar Group',
+    body: 'Vivek Automobile is backed by the established legacy, financial strength, and institutional credibility of the MV Dugar Group. This heritage of integrity and business excellence gives customers and partners the confidence of an organisation built for the long term.',
+  },
+  {
+    no: '08',
+    title: 'A team rooted in agriculture',
+    body: 'Our sales and service professionals are not generalist product representatives. They are individuals with a deep, genuine understanding of Nepali agriculture: practical insights, guidance grounded in field experience, and an authentic commitment to farmer success.',
   },
 ]
 
@@ -59,6 +66,30 @@ const capabilities = [
   { code: '06', title: 'Warranty',      note: 'Backed factory-direct' },
 ]
 
+
+function ReasonCard({ r, i }) {
+  return (
+    <article
+      className="group relative flex flex-col bg-white p-8 transition-colors hover:bg-[#f4f6f0] md:p-10"
+      style={{ animation: `fade-up 0.6s ease-out ${0.05 * i}s both` }}
+    >
+      <div className="mb-8 flex items-center justify-between">
+        <span className="font-display text-5xl font-extrabold tabular-nums tracking-tight text-jd-green md:text-6xl">
+          {r.no}
+        </span>
+        <span className="text-[11px] uppercase tracking-[0.25em] text-gray-400 transition-colors group-hover:text-jd-green">
+          NP
+        </span>
+      </div>
+      <h3 className="font-display text-xl font-extrabold uppercase leading-tight tracking-tight text-black md:text-2xl">
+        {r.title}
+      </h3>
+      <p className="mt-4 text-base leading-relaxed text-gray-600">
+        {r.body}
+      </p>
+    </article>
+  )
+}
 
 export default function WhyUs() {
   return (
@@ -190,12 +221,12 @@ export default function WhyUs() {
             <div>
               <p className="mb-5 flex items-center gap-3 text-sm font-bold uppercase tracking-[0.3em] text-jd-green md:text-base">
                 <span className="h-px w-10 bg-jd-green" />
-                Six reasons
+                Eight reasons
               </p>
               <h2 className="font-display text-4xl font-extrabold leading-[0.98] tracking-tight text-[#16210f] md:text-5xl lg:text-6xl">
                 Why choose{' '}
                 <span className="relative whitespace-nowrap text-jd-green">
-                  John&nbsp;Deere
+                  us
                   <svg
                     className="absolute -bottom-2 left-0 w-full"
                     viewBox="0 0 240 16"
@@ -215,35 +246,22 @@ export default function WhyUs() {
               </h2>
             </div>
             <p className="max-w-md text-base leading-relaxed text-gray-700 lg:justify-self-end lg:text-right md:text-lg">
-              World-class engineering, paired with a local team that knows
-              Nepali farming, from hill terraces to the Terai plains.
+              World-class John Deere engineering, paired with a team that has
+              served Nepali farming since 2002, from hill terraces to the
+              Terai plains.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-px overflow-hidden border border-gray-300 bg-gray-300 sm:grid-cols-2 lg:grid-cols-3">
-            {reasons.map((r, i) => (
-              <article
-                key={r.no}
-                className="group relative flex flex-col bg-white p-8 transition-colors hover:bg-[#f4f6f0] md:p-10"
-                style={{
-                  animation: `fade-up 0.6s ease-out ${0.05 * i}s both`,
-                }}
-              >
-                <div className="mb-8 flex items-center justify-between">
-                  <span className="font-display text-5xl font-extrabold tabular-nums tracking-tight text-jd-green md:text-6xl">
-                    {r.no}
-                  </span>
-                  <span className="text-[11px] uppercase tracking-[0.25em] text-gray-400 transition-colors group-hover:text-jd-green">
-                    NP
-                  </span>
-                </div>
-                <h3 className="font-display text-xl font-extrabold uppercase leading-tight tracking-tight text-black md:text-2xl">
-                  {r.title}
-                </h3>
-                <p className="mt-4 text-base leading-relaxed text-gray-600">
-                  {r.body}
-                </p>
-              </article>
+            {reasons.slice(0, 6).map((r, i) => (
+              <ReasonCard key={r.no} r={r} i={i} />
+            ))}
+          </div>
+
+          {/* Last two reasons — centred beneath the main grid */}
+          <div className="mx-auto grid grid-cols-1 gap-px overflow-hidden border border-t-0 border-gray-300 bg-gray-300 sm:grid-cols-2 lg:w-2/3">
+            {reasons.slice(6).map((r, i) => (
+              <ReasonCard key={r.no} r={r} i={i + 6} />
             ))}
           </div>
         </div>

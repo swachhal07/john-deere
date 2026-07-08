@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { gsap, useGSAP } from '../lib/gsap'
 import jdLogo from '../assets/john-deere-logo.png'
 import mvDugarLogo from '../assets/MVDUGAR-01.png'
 import coverFieldBg from '../assets/wp9212100.jpg'
-import whyChoose01 from '../assets/wp3183062.jpg'
 import storySlide1 from '../assets/WhatsApp Image 2026-06-26 at 8.30.45 AM.jpeg'
 import storySlide2 from '../assets/WhatsApp Image 2026-06-26 at 8.30.46 AM.jpeg'
 import storySlide3 from '../assets/WhatsApp Image 2026-06-26 at 8.30.47 AM.jpeg'
@@ -12,10 +10,6 @@ import storySlide4 from '../assets/WhatsApp Image 2026-06-26 at 8.33.10 AM.jpeg'
 
 import serviceTeamPhoto from '../assets/_DSC5954.jpg.jpeg'
 import serviceTeamPhoto2 from '../assets/_DSC5898.jpg.jpeg'
-import whyChoose1 from '../assets/wp9633811.jpg'
-import whyChoose2 from '../assets/premium_photo-1661935875460-f239deafada1.avif'
-import whyChoose3 from '../assets/premium_photo-1661836105117-2a6641fa7510.avif'
-import whyChoose4 from '../assets/69892118-tracteur-travail-dans-champ-a-le-coucher-du-soleil-agriculture-agriculture-recolte-rural-paysage-et-durable-les-pratiques-gratuit-photo.jpg'
 
 /* ────────────────────────────────────────────────────────────
    ABOUT — "Field Almanac"
@@ -29,55 +23,42 @@ const storySlides = [storySlide1, storySlide2, storySlide3, storySlide4]
 
 
 
-const trustPillars = [
-  { num: '01', label: 'Authorized distributor', detail: 'Direct from John Deere, no resellers in the chain, no grey market.', image: whyChoose01 },
-  { num: '02', label: 'Factory-trained service', detail: 'Technicians trained on every model we put on Nepali ground.', image: whyChoose2 },
-  { num: '03', label: 'Manufacturer warranty',  detail: 'Standard coverage on every machine, honoured at any branch.', image: whyChoose3 },
-  { num: '04', label: 'Genuine parts supply',   detail: 'OEM stock at the central warehouse and at every one of sixteen branches.', image: whyChoose4 },
+const roadAhead = [
+  { n: '01', title: 'Network expansion', body: 'Extending our outlet network beyond 27 locations to reach agricultural districts that remain underserved.' },
+  { n: '02', title: 'Growing our farmer community', body: 'Targeted outreach across remote hill and mountain regions, building on our base of 12,000+ farmers.' },
+  { n: '03', title: 'Expanding the implements portfolio', body: 'Broadening our John Deere implement range to cover every crop type and terrain condition in Nepal.' },
+  { n: '04', title: 'Digital transformation', body: 'Online spare parts procurement, service scheduling, and farmer support, available anytime, from anywhere.' },
+  { n: '05', title: 'Precision agriculture', body: 'Smart farming technologies, GPS-guided machinery, and data-driven tools for higher yields and lower input costs.' },
+  { n: '06', title: 'Farmer knowledge & capability', body: 'Structured training, field demonstrations, and workshops so every owner runs their machine at peak performance.' },
+  { n: '07', title: 'A stronger dealer network', body: 'Elevating service standards and parts availability across our 30+ authorised partner network.' },
 ]
 
-const LIGHT_GREEN = '#f1f5ea'
+const BAND_YELLOW = '#ffde00'
 
 function WhyChooseScroll() {
   return (
     <section
       className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden text-[#1a261a]"
-      style={{ backgroundColor: LIGHT_GREEN }}
+      style={{ backgroundColor: BAND_YELLOW }}
     >
       {/* ── Heading ─────────────────────────────────────── */}
-      <div className="relative mx-auto max-w-[1400px] px-6 pb-12 pt-16 md:pb-14 md:pt-20 lg:px-12">
+      <div className="relative mx-auto max-w-[1400px] px-6 pb-12 pt-10 md:pb-14 md:pt-14 lg:px-12">
         <div className="cx-rise text-center">
-          <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
-            <span className="h-px w-16 bg-jd-green" />
+          <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-[#1a261a] md:text-xl">
+            <span className="h-px w-16 bg-[#1a261a]" />
             A nationwide network
-            <span className="h-px w-16 bg-jd-green" />
+            <span className="h-px w-16 bg-[#1a261a]" />
           </div>
           <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#1a261a] md:text-6xl lg:text-7xl">
             Backed by{' '}
-            <span className="relative whitespace-nowrap text-jd-green">
-              180+ years
-              <svg
-                className="absolute -bottom-1.5 left-0 w-full"
-                viewBox="0 0 300 16"
-                fill="none"
-                preserveAspectRatio="none"
-                aria-hidden
-              >
-                <path
-                  d="M2 11 C 70 4, 150 4, 298 9"
-                  stroke="#ffde00"
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>{' '}
+            <span className="whitespace-nowrap text-jd-green">180+ years</span>{' '}
             of John Deere<span className="text-[#1a261a]">.</span>
           </h2>
         </div>
       </div>
 
       {/* ── City marquee — full-bleed ───────────────────── */}
-      <div className="overflow-hidden border-y border-[#1a261a]/15 py-6" style={{ backgroundColor: LIGHT_GREEN }}>
+      <div className="overflow-hidden border-t border-[#1a261a]/15 py-6" style={{ backgroundColor: BAND_YELLOW }}>
         <div className="cx-marquee-track flex items-center gap-12 whitespace-nowrap font-['Fraunces'] text-4xl text-[#1a261a] md:text-5xl">
           {[...Array(2)].flatMap((_, copy) =>
             ['Kathmandu', 'Biratnagar', 'Jeetpur', 'Bardibaas', 'Nepalgunj', 'Dhangadi', 'Surkhet', 'Dang', 'Pokhara', 'Butwal'].map((city) => (
@@ -88,32 +69,6 @@ function WhyChooseScroll() {
             ))
           )}
         </div>
-      </div>
-
-      {/* ── What you can count on — 4-row list ──────────── */}
-      <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-20 md:pb-32 md:pt-24 lg:px-12">
-        <p className="cx-rise mb-12 text-center text-sm font-bold uppercase tracking-[0.45em] text-jd-green md:mb-16 md:text-base">
-          What you can count on
-        </p>
-
-        <ul className="js-pillar-list cx-rise-slow border-t border-[#1a261a]/15">
-          {trustPillars.map((p) => (
-            <li
-              key={p.num}
-              className="js-pillar grid grid-cols-[auto_1fr] gap-x-8 gap-y-4 border-b border-[#1a261a]/15 py-10 md:grid-cols-[6rem_minmax(0,18rem)_1fr] md:gap-x-12 md:py-14"
-            >
-              <span className="font-display text-4xl font-extrabold leading-none tracking-tight text-jd-green md:text-5xl lg:text-6xl">
-                {p.num}
-              </span>
-              <h3 className="self-center font-display text-2xl font-extrabold leading-[1.1] tracking-tight text-[#1a261a] md:text-3xl lg:text-[34px]">
-                {p.label}
-              </h3>
-              <p className="col-span-2 text-lg leading-[1.55] text-[#3a4a36] md:col-span-1 md:self-center md:text-xl">
-                {p.detail}
-              </p>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   )
@@ -174,53 +129,54 @@ export default function About() {
     return () => clearInterval(id)
   }, [])
 
-  // GSAP scroll polish, gated on prefers-reduced-motion and reverted on
-  // unmount by useGSAP.
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        // Story polaroid settles from a stronger tilt as it scrolls in.
-        gsap.fromTo(
-          '.js-story-plate',
-          { rotate: 4.5, y: 24 },
-          {
-            rotate: 1.2,
-            y: 0,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: '.js-story',
-              start: 'top 85%',
-              end: 'top 30%',
-              scrub: 0.8,
-            },
-          },
-        )
+  // Scroll reveals — native IntersectionObserver + CSS transitions.
+  // Fail-safe by design: elements are visible by default, and the hidden
+  // "pre-reveal" state only exists while `rv-armed` is on the root. If this
+  // effect never runs (or errors), every section still renders.
+  useEffect(() => {
+    const root = rootRef.current
+    if (!root) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-        // Trust pillar rows rise in one after another.
-        gsap.from('.js-pillar', {
-          y: 48,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          stagger: 0.12,
-          scrollTrigger: { trigger: '.js-pillar-list', start: 'top 80%' },
-        })
+    const els = root.querySelectorAll('[data-rv]')
+    if (!els.length) return
 
-        // Pull quote breathes in.
-        gsap.from('.js-pullquote', {
-          y: 36,
-          opacity: 0,
-          scale: 0.97,
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: '.js-pullquote', start: 'top 82%' },
-        })
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const el = entry.target
+            el.classList.add('rv-in')
+            io.unobserve(el)
+            // Once the reveal has played (delay + duration), strip the
+            // reveal styling so the element's own (faster) hover
+            // transitions apply again.
+            setTimeout(() => {
+              el.removeAttribute('data-rv')
+              el.classList.remove('rv-in')
+            }, 1400)
+          }
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' },
+    )
 
-      })
-    },
-    { scope: rootRef },
-  )
+    root.classList.add('rv-armed')
+    els.forEach((el) => {
+      // Anything already scrolled past (e.g. reload with scroll restoration)
+      // shows instantly instead of waiting to be scrolled back into view.
+      if (el.getBoundingClientRect().bottom < 0) {
+        el.removeAttribute('data-rv')
+      } else {
+        io.observe(el)
+      }
+    })
+
+    return () => {
+      io.disconnect()
+      root.classList.remove('rv-armed')
+    }
+  }, [])
 
   return (
     <main ref={rootRef} className="relative bg-white text-[#1a261a]">
@@ -245,7 +201,7 @@ export default function About() {
         {/* Top masthead ribbon */}
         <div className="relative z-10 border-b border-[#1a261a]/15">
           <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.45em] text-[#1a261a]/55 lg:px-12">
-            <span>MV Dugar &middot; John Deere Nepal</span>
+            <span>Vivek Automobile &middot; MV Dugar Group</span>
             <span className="hidden sm:inline">Field Almanac &middot; Issue I</span>
             <span>EST. 2002</span>
           </div>
@@ -282,9 +238,10 @@ export default function About() {
               <span className="text-[#1a261a]">.</span>
             </h1>
             <p className="mx-auto mt-12 max-w-xl text-lg leading-[1.6] text-[#3a4a36]">
-              The story, the partnership, and the people behind every John
-              Deere machine MV Dugar puts on the ground in Nepal, from hill
-              terraces to the Terai plains.
+              The story, the philosophy, and the people behind Vivek
+              Automobile, a member of the MV Dugar Group and John Deere&rsquo;s
+              authorised dealer in Nepal, from the hill terraces to the Terai
+              plains.
             </p>
 
             {/* Paired dispatch stamps */}
@@ -306,7 +263,7 @@ export default function About() {
                     ✦
                   </span>
                   <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-jd-green">
-                    Distributor
+                    A part of
                   </p>
                   <img
                     src={mvDugarLogo}
@@ -314,7 +271,7 @@ export default function About() {
                     className="my-4 mx-auto h-20 w-auto md:h-24"
                   />
                   <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-[#1a261a]">
-                    Est. 2002 &middot; Nepal
+                    MV Dugar Group
                   </p>
                 </a>
               </div>
@@ -391,63 +348,66 @@ export default function About() {
               </header>
 
               {/* Story body with breakout image */}
-              <div className="js-story grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+              <div className="grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
                 <article className="space-y-7 text-lg leading-[1.65] text-[#23311f] lg:order-2">
                   <p>
                     <span className="float-left mr-3 mt-1 font-display text-[6.5rem] font-extrabold leading-[0.8] text-jd-green sm:text-[7.5rem]">
-                      M
+                      V
                     </span>
-                    V Dugar has been an authorized dealer of John Deere
-                    agricultural machinery in Nepal since 2002, offering
-                    tractors, implements, harvesters, genuine spare parts, and
-                    dependable after-sales service support across the country.
+                    ivek Automobile Pvt. Ltd., a distinguished member of the MV
+                    Dugar Group, was established in 2002 as an authorised dealer
+                    for John Deere, the world&rsquo;s foremost name in
+                    agricultural machinery. From the very beginning, our mandate
+                    has been clear: to bring world-class tractors, implements,
+                    and agricultural solutions to the farming communities of
+                    Nepal, with the highest standards of sales, service, and
+                    spare parts support.
                   </p>
                   <p>
-                    With an extensive network of{' '}
+                    Over more than two decades of dedicated service, we have
+                    established ourselves as Nepal&rsquo;s most trusted
+                    agricultural machinery partner. Our John Deere tractors and
+                    implements have proven their performance across the full
+                    breadth of Nepal&rsquo;s terrain, from the fertile plains of
+                    the Terai to the challenging slopes of the Pahad hills, and
+                    the demanding high-altitude conditions of the Himalayas.
+                  </p>
+                  <p>
+                    Today, Vivek Automobile operates{' '}
                     <strong className="font-semibold text-[#1a261a]">
-                      16 fully-equipped 3S branches
+                      27 company-owned outlets
                     </strong>{' '}
-                    and{' '}
+                    and supports an extended network of{' '}
                     <strong className="font-semibold text-[#1a261a]">
-                      35 authorized service points
+                      30+ authorised service and spare parts centres
                     </strong>{' '}
-                    nationwide, MV Dugar has built a strong reputation in the
-                    agricultural machinery industry through quality products
-                    and customer-focused service.
+                    across the country. With{' '}
+                    <strong className="font-semibold text-[#1a261a]">
+                      over 12,000 farmers
+                    </strong>{' '}
+                    served to date, we have built more than a dealership; we
+                    have forged a lasting partnership with Nepal&rsquo;s
+                    agricultural community.
                   </p>
                   <p>
-                    As part of a diversified automotive group representing
-                    several market-leading brands, we bring world-class
-                    engineering and a local team that understands the realities
-                    of farming in Nepal.
+                    No geography presents a barrier, and no condition is beyond
+                    our machinery&rsquo;s capability. We match every machine to
+                    the land it will actually work, because no two farms in
+                    Nepal are alike, specifying the right tractor, the right
+                    implement, and the right support for each.
                   </p>
                   <p>
-                    From the rice paddies of the Terai to the steep terraces of
-                    the mid-hills, we match every machine to the land it will
-                    actually work. No two farms in Nepal are alike, and our
-                    team is trained to spec the right tractor, the right
-                    implement, and the right financing for each.
-                  </p>
-                  <p>
-                    Behind every sale is a long-term commitment: factory-trained
-                    technicians, mobile workshops that reach you on the farm,
-                    and a parts network that keeps your machine running through
-                    every monsoon and every harvest.
-                  </p>
-                  <p>
-                    We aren&rsquo;t just delivering tractors. We&rsquo;re
-                    investing in the productivity of Nepali agriculture, one
-                    farm, one season, one harvest at a time. That&rsquo;s the
-                    work we&rsquo;ve been doing for more than twenty years, and
-                    it&rsquo;s the work we plan to keep doing for the next
-                    twenty.
+                    Our purpose remains as resolute as it was on the first day:
+                    when farmers thrive, Nepal thrives. That is the work
+                    we&rsquo;ve been doing for more than twenty years, and the
+                    work we intend to keep doing for the next twenty.
                   </p>
                 </article>
 
                 {/* Image side — paper-framed slideshow */}
                 <figure className="cx-rise-slow lg:order-1 lg:sticky lg:top-28 lg:self-start">
                   <div
-                    className="js-story-plate relative bg-white p-3 md:p-4"
+                    className="story-plate relative bg-white p-3 md:p-4"
                     style={{
                       transform: 'rotate(1.2deg)',
                       boxShadow: '0 20px 60px -30px rgba(26,38,26,0.45)',
@@ -482,7 +442,7 @@ export default function About() {
               </div>
 
               {/* Pull quote breakout */}
-              <blockquote className="js-pullquote mt-16 text-center md:mt-20">
+              <blockquote data-rv="quote" className="mt-16 text-center md:mt-20">
                 <p className="font-['Fraunces'] text-3xl font-medium leading-[1.15] text-[#1a261a] md:text-4xl lg:text-5xl">
                   &ldquo;From hill terraces to the Terai plains, wherever
                   there is land to work, there is a Deere built for it.&rdquo;
@@ -496,7 +456,90 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── VOLUME II — THE TRUSTED PARTNER ─────────────── */}
+      {/* ── VOLUME II — OUR PHILOSOPHY ──────────────────── */}
+      <section className="border-b border-[#1a261a]/15 bg-[#f4f6f0]">
+        <div className="mx-auto max-w-[1400px] px-6 pt-20 pb-14 md:pt-28 md:pb-16 lg:px-12">
+          <header className="cx-rise mx-auto max-w-3xl text-center">
+            <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
+              <span className="h-px w-16 bg-jd-green" />
+              Our philosophy
+              <span className="h-px w-16 bg-jd-green" />
+            </div>
+            <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#1a261a] md:text-6xl lg:text-7xl">
+              Transcend:{' '}
+              <span className="relative whitespace-nowrap text-jd-green">
+                from good to great
+                <svg
+                  className="absolute -bottom-2.5 left-0 h-3 w-full md:-bottom-3.5 md:h-4"
+                  viewBox="0 0 300 16"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M2 11 C 70 4, 150 4, 298 9"
+                    stroke="#ffde00"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <span className="text-[#1a261a]">.</span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-[1.6] text-[#3a4a36]">
+              At Vivek Automobile, mediocrity is not an option. We share a
+              philosophy with John Deere, Transcend: From Good to Great, a
+              principle that shapes every decision we make, every service we
+              deliver, and every relationship we build.
+            </p>
+          </header>
+
+          {/* Three tenets — boxed cards, matching the Road Ahead grid */}
+          <div className="mt-16 grid grid-cols-1 gap-5 md:mt-20 md:grid-cols-3">
+            {[
+              { n: '01', lead: 'Reject the merely good', rest: 'We do not accept good service when exceptional service is achievable.' },
+              { n: '02', lead: 'No farmer out of reach', rest: 'We do not settle for adequate coverage when every farmer in Nepal deserves quality machinery and support.' },
+              { n: '03', lead: 'Never rest on the past', rest: 'We do not rest on our achievements when there is always more ground to cover, and more farmers to serve.' },
+            ].map((item, i) => (
+              <div
+                key={item.n}
+                data-rv="rise"
+                style={{ '--rv-delay': `${i * 0.12}s` }}
+                className="group relative border border-[#1a261a]/15 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-jd-green/40 hover:shadow-[0_24px_48px_-30px_rgba(26,38,26,0.55)] md:p-9"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="font-display text-4xl font-extrabold leading-none text-jd-green md:text-5xl">
+                    {item.n}
+                  </span>
+                  <span className="h-px flex-1 bg-jd-green/25" />
+                </div>
+                <h3 className="mt-5 font-display text-xl font-extrabold leading-[1.15] tracking-tight text-[#1a261a] md:text-2xl">
+                  {item.lead}
+                </h3>
+                <p className="mt-3 text-base leading-[1.55] text-[#3a4a36] md:text-[17px]">
+                  {item.rest}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Manifesto pull quote */}
+          <blockquote data-rv="quote" className="mx-auto mt-20 max-w-4xl text-center md:mt-24">
+            <p className="font-['Fraunces'] text-3xl font-medium leading-[1.15] text-[#1a261a] md:text-4xl lg:text-5xl">
+              &ldquo;We are not simply selling tractors and implements. We are{' '}
+              <span className="text-jd-green">
+                redefining what agricultural support means for Nepal
+              </span>
+              .&rdquo;
+            </p>
+            <p className="mt-5 font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-[#1a261a]">
+              Field Notes &middot; Vol. II
+            </p>
+          </blockquote>
+        </div>
+      </section>
+
+      {/* ── VOLUME III — THE TRUSTED PARTNER ────────────── */}
       <section className="border-b border-[#1a261a]/15 bg-[#f4f6f0]">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <div>
@@ -508,7 +551,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── VOLUME III — OUR TEAM ──────────────────────── */}
+      {/* ── VOLUME IV — OUR TEAM ───────────────────────── */}
       <section className="border-b border-[#1a261a]/15">
         <div className="mx-auto max-w-[1400px] px-6 pt-16 pb-20 md:pt-20 md:pb-28 lg:px-12">
           <div>
@@ -533,7 +576,7 @@ export default function About() {
                       <path
                         d="M2 11 C 70 4, 150 4, 298 9"
                         stroke="#ffde00"
-                        strokeWidth="6"
+                        strokeWidth="10"
                         strokeLinecap="round"
                       />
                     </svg>
@@ -649,8 +692,73 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── VOLUME V — THE ROAD AHEAD ──────────────────── */}
+      <section className="border-b border-[#1a261a]/15 bg-[#f4f6f0]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 md:py-28 lg:px-12">
+          <header className="cx-rise mb-14 text-center md:mb-16">
+            <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
+              <span className="h-px w-16 bg-jd-green" />
+              The road ahead
+              <span className="h-px w-16 bg-jd-green" />
+            </div>
+            <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-[#1a261a] md:text-6xl lg:text-7xl">
+              The ground{' '}
+              <span className="relative whitespace-nowrap text-jd-green">
+                still ahead
+                <svg
+                  className="absolute -bottom-1.5 left-0 w-full"
+                  viewBox="0 0 300 16"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M2 11 C 70 4, 150 4, 298 9"
+                    stroke="#ffde00"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+              <span className="text-[#1a261a]">.</span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-[1.6] text-[#3a4a36]">
+              We regard our achievements not as a destination, but as the
+              foundation from which we continue to build. Our strategic
+              priorities for the years ahead:
+            </p>
+          </header>
+
+          <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {roadAhead.map((r, i) => (
+              <li
+                key={r.n}
+                data-rv="rise"
+                style={{ '--rv-delay': `${(i % 3) * 0.1}s` }}
+                className={`group relative border border-[#1a261a]/15 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-jd-green/40 hover:shadow-[0_24px_48px_-30px_rgba(26,38,26,0.55)] md:p-9 ${
+                  i === roadAhead.length - 1 ? 'sm:col-span-2 lg:col-span-1 lg:col-start-2' : ''
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <span className="font-display text-3xl font-extrabold leading-none text-jd-green md:text-4xl">
+                    {r.n}
+                  </span>
+                  <span className="h-px flex-1 bg-jd-green/25" />
+                </div>
+                <h3 className="mt-5 font-display text-xl font-extrabold leading-[1.12] tracking-tight text-[#1a261a] md:text-2xl">
+                  {r.title}
+                </h3>
+                <p className="mt-3 text-base leading-[1.55] text-[#3a4a36]">
+                  {r.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ── CODA — Sign-off ────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#f4f6f0]">
+      <section className="relative overflow-hidden bg-white">
         <div className="mx-auto max-w-[1400px] px-6 pt-12 pb-24 md:pt-16 md:pb-32 lg:px-12">
           <div className="cx-rise mx-auto max-w-4xl text-center md:-mt-6">
             <div className="mb-8 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
@@ -684,7 +792,7 @@ export default function About() {
             <div className="mt-12 flex items-center justify-center gap-4 text-[#1a261a]/55">
               <span className="h-px w-12 bg-[#1a261a]/25" />
               <p className="font-mono text-[11px] font-bold uppercase tracking-[0.4em]">
-                With every machine &mdash; the team at MV Dugar
+                With every machine &mdash; the team at Vivek Automobile
               </p>
               <span className="h-px w-12 bg-[#1a261a]/25" />
             </div>
@@ -758,6 +866,45 @@ function PageStyles() {
         50%      { transform: scale(1.18) rotate(20deg); }
       }
       .stamp-card .stamp-spark { animation: stampSparkle 2.4s ease-in-out infinite; }
+
+      /* ── Scroll reveals ─────────────────────────────────
+         Hidden state exists only under .rv-armed (added by the
+         IntersectionObserver effect), so content is never stranded
+         invisible if JS fails or reduced motion is on. */
+      .rv-armed [data-rv] {
+        opacity: 0;
+        transform: translateY(34px);
+      }
+      .rv-armed [data-rv='quote'] {
+        transform: translateY(36px) scale(0.97);
+      }
+      /* The 0.9s transition lives only on the reveal itself; once played,
+         the JS strips data-rv so cards get their fast hover transition back. */
+      .rv-armed [data-rv].rv-in {
+        opacity: 1;
+        transform: none;
+        transition:
+          opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        transition-delay: var(--rv-delay, 0s);
+      }
+
+      /* Story polaroid settles from a stronger tilt as it scrolls in —
+         pure CSS scroll-driven animation; browsers without support just
+         show the resting 1.2deg tilt from the inline style. */
+      @media (prefers-reduced-motion: no-preference) {
+        @supports (animation-timeline: view()) {
+          .story-plate {
+            animation: plateSettle linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 45%;
+          }
+        }
+      }
+      @keyframes plateSettle {
+        from { transform: rotate(4.5deg) translateY(24px); }
+        to   { transform: rotate(1.2deg) translateY(0); }
+      }
 
       @media (prefers-reduced-motion: reduce) {
         .cx-rise, .cx-rise-slow, .cx-stagger { animation: none; }
