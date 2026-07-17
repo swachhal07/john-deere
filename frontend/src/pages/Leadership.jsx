@@ -46,7 +46,7 @@ const management = [
   { name: 'Ved Prakash Sharma', title: 'Business Head', photo: businessHeadImg },
   { name: 'Nanda Kishor Bhatta', title: 'Sales Head', photo: salesHeadImg },
   { name: 'Siddhant Patel', title: 'Customer Support Head', photo: customerSupportHeadImg },
-  { name: 'Shree Vagwan Sah', title: 'Spare Parts Head', photo: sparepartsHeadImg },
+  { name: 'Shree Bhagwan Sah', title: 'Spare Parts Head', photo: sparepartsHeadImg },
   { name: 'Santosh Yadav', title: 'Finance Head', photo: financeHeadImg },
   { name: 'Shiva Kumar Singh', title: 'Remarketing Head', photo: remarketingHeadImg },
 ]
@@ -214,9 +214,9 @@ export default function Leadership() {
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
           {/* Top meta row */}
           <div className="mb-12 grid grid-cols-2 items-baseline gap-4 border-b border-mist/15 pb-5 font-mono text-[10px] uppercase tracking-[0.4em] text-mist-dim md:grid-cols-3">
-            <span className="text-jd-green">MV Dugar · Nepal</span>
+            <span className="text-jd-green">Vivek Automobiles · Nepal</span>
             <span className="hidden text-center md:inline">Roster · 04 entries · 2026</span>
-            <span className="text-right">Authorized John Deere distributor</span>
+            <span className="text-right">Authorised John Deere dealer</span>
           </div>
 
           {/* Headline */}

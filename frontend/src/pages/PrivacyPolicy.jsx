@@ -1,7 +1,7 @@
 import LegalPage from '../components/LegalPage'
 
 // Content sourced from mvdugar.com/privacy-policy, adapted for the
-// MV Dugar · John Deere Nepal site.
+// Vivek Automobiles · John Deere Nepal site.
 const sections = [
   {
     heading: 'Information We Collect',
@@ -33,7 +33,7 @@ const sections = [
       [
         'With service providers who help us operate our website, marketing, or customer support.',
         'With our affiliated centers to arrange your bookings or provide local assistance.',
-        'When required by law or to protect the rights, safety, and property of MV Dugar or others.',
+        'When required by law or to protect the rights, safety, and property of Vivek Automobiles Pvt. Ltd or others.',
       ],
     ],
   },
@@ -63,7 +63,7 @@ const sections = [
   {
     heading: 'Data Security',
     body: [
-      'We use appropriate technical and organizational measures to protect your information from unauthorized access, loss, misuse, or alteration. However, no method of transmission over the Internet is 100% secure.',
+      'We use appropriate technical and organizational measures to protect your information from unauthorised access, loss, misuse, or alteration. However, no method of transmission over the Internet is 100% secure.',
     ],
   },
   {
@@ -95,11 +95,11 @@ const sections = [
 export default function PrivacyPolicy() {
   return (
     <LegalPage
-      label="MV Dugar · Legal"
+      label="Vivek Automobiles · Legal"
       title="Privacy"
       accent="policy."
       updated="July 5, 2026"
-      intro="Welcome to MV Dugar’s website. By accessing or using our site, you agree to be bound by the following Privacy Policy. Please read it carefully before using our website or services."
+      intro="Welcome to Vivek Automobiles’ website. By accessing or using our site, you agree to be bound by the following Privacy Policy. Please read it carefully before using our website or services."
       sections={sections}
     />
   )

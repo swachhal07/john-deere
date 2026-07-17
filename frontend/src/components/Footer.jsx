@@ -69,7 +69,7 @@ export default function Footer() {
               Terms &amp; Conditions
             </Link>
           </div>
-          <p>© {year} Vivek Automobiles · Authorized dealer of John Deere Nepal</p>
+          <p>© {year} Vivek Automobiles Pvt. Ltd · Authorised dealer of John Deere Nepal</p>
           <p>
             Developed by{' '}
             <a

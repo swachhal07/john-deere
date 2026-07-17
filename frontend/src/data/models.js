@@ -1,5 +1,5 @@
 // John Deere 5-Series tractors distributed in Nepal by MV Dugar
-// (authorized John Deere distributor).
+// (authorised John Deere dealer).
 //
 // NOTE: HP figures are indicative for layout — please confirm the exact
 // specifications with John Deere / MV Dugar before publishing.

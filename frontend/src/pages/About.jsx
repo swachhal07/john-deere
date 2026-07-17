@@ -201,7 +201,7 @@ export default function About() {
         {/* Top masthead ribbon */}
         <div className="relative z-10 border-b border-[#1a261a]/15">
           <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.45em] text-[#1a261a]/55 lg:px-12">
-            <span>Vivek Automobile &middot; MV Dugar Group</span>
+            <span>Vivek Automobiles &middot; MV Dugar Group</span>
             <span className="hidden sm:inline">Field Almanac &middot; Issue I</span>
             <span>EST. 2002</span>
           </div>
@@ -239,7 +239,7 @@ export default function About() {
             </h1>
             <p className="mx-auto mt-12 max-w-xl text-lg leading-[1.6] text-[#3a4a36]">
               The story, the philosophy, and the people behind Vivek
-              Automobile, a member of the MV Dugar Group and John Deere&rsquo;s
+              Automobiles, a member of the MV Dugar Group and John Deere&rsquo;s
               authorised dealer in Nepal, from the hill terraces to the Terai
               plains.
             </p>
@@ -290,7 +290,7 @@ export default function About() {
                     ✦
                   </span>
                   <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-jd-green">
-                    Authorized
+                    Authorised
                   </p>
                   <img
                     src={jdLogo}
@@ -373,7 +373,7 @@ export default function About() {
                     the demanding high-altitude conditions of the Himalayas.
                   </p>
                   <p>
-                    Today, Vivek Automobile operates{' '}
+                    Today, Vivek Automobiles operates{' '}
                     <strong className="font-semibold text-[#1a261a]">
                       27 company-owned outlets
                     </strong>{' '}
@@ -486,41 +486,135 @@ export default function About() {
               </span>
               <span className="text-[#1a261a]">.</span>
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-[1.6] text-[#3a4a36]">
-              At Vivek Automobile, mediocrity is not an option. We share a
-              philosophy with John Deere, Transcend: From Good to Great, a
-              principle that shapes every decision we make, every service we
-              deliver, and every relationship we build.
-            </p>
           </header>
 
-          {/* Three tenets — boxed cards, matching the Road Ahead grid */}
-          <div className="mt-16 grid grid-cols-1 gap-5 md:mt-20 md:grid-cols-3">
-            {[
-              { n: '01', lead: 'Reject the merely good', rest: 'We do not accept good service when exceptional service is achievable.' },
-              { n: '02', lead: 'No farmer out of reach', rest: 'We do not settle for adequate coverage when every farmer in Nepal deserves quality machinery and support.' },
-              { n: '03', lead: 'Never rest on the past', rest: 'We do not rest on our achievements when there is always more ground to cover, and more farmers to serve.' },
-            ].map((item, i) => (
-              <div
-                key={item.n}
-                data-rv="rise"
-                style={{ '--rv-delay': `${i * 0.12}s` }}
-                className="group relative border border-[#1a261a]/15 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-jd-green/40 hover:shadow-[0_24px_48px_-30px_rgba(26,38,26,0.55)] md:p-9"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="font-display text-4xl font-extrabold leading-none text-jd-green md:text-5xl">
-                    {item.n}
-                  </span>
-                  <span className="h-px flex-1 bg-jd-green/25" />
-                </div>
-                <h3 className="mt-5 font-display text-xl font-extrabold leading-[1.15] tracking-tight text-[#1a261a] md:text-2xl">
-                  {item.lead}
-                </h3>
-                <p className="mt-3 text-base leading-[1.55] text-[#3a4a36] md:text-[17px]">
-                  {item.rest}
+          {/* Editorial spread — creed on the left, tenet ledger on the right */}
+          <div className="mt-14 grid grid-cols-1 gap-12 md:mt-20 lg:grid-cols-[5fr_7fr] lg:gap-20">
+            {/* The creed */}
+            <div className="cx-rise lg:sticky lg:top-28 lg:self-start">
+              <p className="font-display text-[32px] font-extrabold leading-[1.1] tracking-[-0.01em] text-[#1a261a] md:text-4xl">
+                At Vivek Automobiles,{' '}
+                <span className="text-jd-green">mediocrity is not an option.</span>
+              </p>
+              <p className="mt-6 text-lg leading-[1.6] text-[#3a4a36] md:text-xl">
+                We share a philosophy with John Deere, Transcend: From Good to
+                Great, a principle that shapes every decision we make, every
+                service we deliver, and every relationship we build. This is
+                not merely a corporate statement. It is the standard by which
+                we measure ourselves each day.
+              </p>
+
+              {/* Where it shows — the improvement paragraph, as an index */}
+              <div className="mt-10">
+                <p className="flex items-center gap-3 font-mono text-sm font-bold uppercase tracking-[0.3em] text-jd-green">
+                  <span className="h-px w-8 bg-jd-green" />
+                  Where it shows
+                </p>
+                <p className="mt-4 text-base leading-[1.6] text-[#3a4a36] md:text-lg">
+                  This philosophy manifests in continuous improvement across
+                  every dimension of our business:
+                </p>
+                <ul className="mt-5 space-y-3.5">
+                  {[
+                    { word: 'Calibre', of: 'of our outlets' },
+                    { word: 'Expertise', of: 'of our technicians' },
+                    { word: 'Reliability', of: 'of our spare parts supply chain' },
+                    { word: 'Depth', of: 'of our engagement with farming communities' },
+                  ].map((d) => (
+                    <li key={d.word} className="flex items-baseline gap-3 text-base md:text-lg">
+                      <span
+                        aria-hidden
+                        className="h-2 w-2 flex-none translate-y-px rotate-45 bg-jd-yellow"
+                      />
+                      <span>
+                        <span className="font-display font-extrabold tracking-tight text-[#1a261a]">
+                          {d.word}
+                        </span>{' '}
+                        <span className="text-[#3a4a36]">{d.of}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-7 font-display text-2xl font-extrabold leading-tight tracking-[-0.01em] text-jd-green md:text-[26px]">
+                  Each year, we raise the bar.
+                  <br />
+                  Each year, we push further.
                 </p>
               </div>
-            ))}
+            </div>
+
+            {/* The four refusals — dark manifesto panel */}
+            <div
+              className="cx-rise relative overflow-hidden bg-[#1a261a] px-7 py-2 md:px-12 md:py-4"
+              style={{ boxShadow: '0 40px 90px -50px rgba(26,38,26,0.9)' }}
+            >
+              {/* Corner label */}
+              <div className="flex items-center justify-between border-b border-[#f4f6f0]/15 py-5">
+                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-jd-yellow">
+                  The four refusals
+                </p>
+                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-[#f4f6f0]/40">
+                  No. I &ndash; IV
+                </p>
+              </div>
+
+              <div className="divide-y divide-[#f4f6f0]/10">
+                {[
+                  {
+                    n: '01',
+                    lead: 'Reject the merely good',
+                    pre: 'We do not accept good service when ',
+                    em: 'exceptional service',
+                    post: ' is achievable.',
+                  },
+                  {
+                    n: '02',
+                    lead: 'Nothing ordinary',
+                    pre: 'We do not offer ordinary products when John Deere represents ',
+                    em: 'the pinnacle of agricultural engineering',
+                    post: '.',
+                  },
+                  {
+                    n: '03',
+                    lead: 'No farmer out of reach',
+                    pre: 'We do not settle for adequate coverage when ',
+                    em: 'every farmer in Nepal',
+                    post: ' deserves quality machinery and support.',
+                  },
+                  {
+                    n: '04',
+                    lead: 'Never rest on the past',
+                    pre: 'We do not rest on our achievements when there is always more ground to cover, and ',
+                    em: 'more farmers to serve',
+                    post: '.',
+                  },
+                ].map((item, i) => (
+                  <div
+                    key={item.n}
+                    data-rv="rise"
+                    style={{ '--rv-delay': `${i * 0.1}s` }}
+                    className="group grid grid-cols-[3.25rem_1fr] items-start gap-x-5 py-7 md:grid-cols-[4.5rem_1fr] md:gap-x-8 md:py-8"
+                  >
+                    <span
+                      className="font-display text-4xl font-extrabold leading-none text-transparent transition-colors duration-300 group-hover:text-jd-yellow md:text-5xl"
+                      style={{ WebkitTextStroke: '1.5px rgba(255,222,0,0.75)' }}
+                    >
+                      {item.n}
+                    </span>
+                    <div className="transition-transform duration-300 group-hover:translate-x-1.5">
+                      <h3 className="font-display text-2xl font-extrabold leading-[1.1] tracking-tight text-[#f4f6f0] md:text-[27px]">
+                        {item.lead}
+                      </h3>
+                      <p className="mt-2.5 max-w-xl text-[15px] leading-[1.55] text-[#f4f6f0]/65 md:text-base">
+                        {item.pre}
+                        <span className="font-semibold text-jd-yellow">{item.em}</span>
+                        {item.post}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Manifesto pull quote */}
@@ -760,17 +854,18 @@ export default function About() {
       {/* ── CODA — Sign-off ────────────────────────────── */}
       <section className="relative overflow-hidden bg-white">
         <div className="mx-auto max-w-[1400px] px-6 pt-12 pb-24 md:pt-16 md:pb-32 lg:px-12">
-          <div className="cx-rise mx-auto max-w-4xl text-center md:-mt-6">
+          <div className="cx-rise mx-auto max-w-6xl text-center md:-mt-6">
             <div className="mb-8 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
               <span className="h-px w-16 bg-jd-green" />
               In closing
               <span className="h-px w-16 bg-jd-green" />
             </div>
 
-            <blockquote className="font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.02em] text-[#1a261a] md:text-6xl lg:text-7xl">
-              &ldquo;Every John Deere we sell, we{' '}
+            <blockquote className="font-display text-[32px] font-extrabold leading-[1.12] tracking-[-0.015em] text-[#1a261a] md:text-5xl lg:text-[56px]">
+              &ldquo;Together with Nepal&rsquo;s farmers, we are building a more
+              productive, more prosperous, and a{' '}
               <span className="relative whitespace-nowrap text-jd-green">
-                stand behind
+                truly great
                 <svg
                   className="absolute -bottom-1.5 left-0 w-full"
                   viewBox="0 0 300 16"
@@ -786,13 +881,13 @@ export default function About() {
                   />
                 </svg>
               </span>
-              {' '}&mdash; from the showroom to your last harvest.&rdquo;
+              {' '}agricultural nation.&rdquo;
             </blockquote>
 
             <div className="mt-12 flex items-center justify-center gap-4 text-[#1a261a]/55">
               <span className="h-px w-12 bg-[#1a261a]/25" />
               <p className="font-mono text-[11px] font-bold uppercase tracking-[0.4em]">
-                With every machine &mdash; the team at Vivek Automobile
+                With every machine &mdash; the team at Vivek Automobiles
               </p>
               <span className="h-px w-12 bg-[#1a261a]/25" />
             </div>

@@ -1,18 +1,18 @@
 import LegalPage from '../components/LegalPage'
 
 // Content sourced from mvdugar.com/terms-of-use, adapted for the
-// MV Dugar · John Deere Nepal site.
+// Vivek Automobiles · John Deere Nepal site.
 const sections = [
   {
     heading: 'Acceptance of Terms',
     body: [
-      'By visiting or using MV Dugar’s website, you agree to comply with these Terms & Conditions and all applicable laws and regulations. If you do not agree, you must not use our website.',
+      'By visiting or using Vivek Automobiles’ website, you agree to comply with these Terms & Conditions and all applicable laws and regulations. If you do not agree, you must not use our website.',
     ],
   },
   {
-    heading: 'About MV Dugar',
+    heading: 'About Vivek Automobiles',
     body: [
-      'MV Dugar (“we,” “our,” or “us”) is a leading business conglomerate in Nepal, with diversified interests across energy, trading, manufacturing, and other sectors, and is the authorized distributor of John Deere in Nepal. MV Dugar is committed to powering Nepal’s growth through innovation, sustainability, and excellence.',
+      'Vivek Automobiles Pvt. Ltd (“we,” “our,” or “us”) is the authorised dealer of John Deere in Nepal and a member of the MV Dugar Group, a leading business conglomerate with diversified interests across energy, trading, manufacturing, and other sectors. We are committed to powering Nepal’s growth through innovation, sustainability, and excellence.',
       'All content provided on our website is for informational purposes only. Always verify details with our team before making any business decisions based on information found on this site.',
     ],
   },
@@ -30,7 +30,7 @@ const sections = [
   {
     heading: 'Intellectual Property',
     body: [
-      'All content on this website — including text, images, descriptions, logos, and designs — is owned by or licensed to MV Dugar and is protected by copyright, trademark, and other intellectual property laws. You may not use, copy, or reproduce any content without our prior written consent.',
+      'All content on this website — including text, images, descriptions, logos, and designs — is owned by or licensed to Vivek Automobiles Pvt. Ltd and is protected by copyright, trademark, and other intellectual property laws. You may not use, copy, or reproduce any content without our prior written consent.',
     ],
   },
   {
@@ -42,7 +42,7 @@ const sections = [
   {
     heading: 'Limitation of Liability',
     body: [
-      'To the fullest extent permitted by law, MV Dugar will not be liable for any direct, indirect, incidental, or consequential damages arising from:',
+      'To the fullest extent permitted by law, Vivek Automobiles Pvt. Ltd will not be liable for any direct, indirect, incidental, or consequential damages arising from:',
       [
         'Use or inability to use our website or products.',
         'Reliance on any content provided on our site.',
@@ -59,13 +59,13 @@ const sections = [
   {
     heading: 'User-Generated Content',
     body: [
-      'If you submit inquiries, feedback, or other content to our site, you grant MV Dugar a non-exclusive, royalty-free license to use, display, and distribute that content for promotional purposes.',
+      'If you submit inquiries, feedback, or other content to our site, you grant Vivek Automobiles Pvt. Ltd a non-exclusive, royalty-free license to use, display, and distribute that content for promotional purposes.',
     ],
   },
   {
     heading: 'Indemnification',
     body: [
-      'You agree to indemnify and hold MV Dugar, its affiliates, and employees harmless from any claims, damages, or expenses resulting from your violation of these Terms & Conditions.',
+      'You agree to indemnify and hold Vivek Automobiles Pvt. Ltd, its affiliates, and employees harmless from any claims, damages, or expenses resulting from your violation of these Terms & Conditions.',
     ],
   },
   {
@@ -85,11 +85,11 @@ const sections = [
 export default function TermsOfUse() {
   return (
     <LegalPage
-      label="MV Dugar · Legal"
+      label="Vivek Automobiles · Legal"
       title="Terms &"
       accent="conditions."
       updated="July 5, 2026"
-      intro="Welcome to MV Dugar’s website. By accessing or using our site, you agree to be bound by the following Terms & Conditions. Please read them carefully before using our website or services."
+      intro="Welcome to Vivek Automobiles’ website. By accessing or using our site, you agree to be bound by the following Terms & Conditions. Please read them carefully before using our website or services."
       sections={sections}
     />
   )

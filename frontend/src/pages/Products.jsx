@@ -203,7 +203,7 @@ export default function Products() {
               transition={{ duration: 0.7, delay: 0.32 }}
             >
               Ten builds, one chassis lineage, engineered for terraced hills, Terai paddies,
-              and the cooperatives that work both. Stocked, serviced and parted by MV Dugar.
+              and the cooperatives that work both. Stocked, serviced and parted by Vivek Automobiles.
             </motion.p>
 
             <motion.div
@@ -347,7 +347,7 @@ export default function Products() {
                       {p.clutch} clutch · {p.drive}
                     </span>
                     <span className="hidden h-3 w-px bg-mist/20 sm:inline-block" />
-                    <span className="hidden text-mist md:inline">MV Dugar · Nepal</span>
+                    <span className="hidden text-mist md:inline">Vivek Automobiles · Nepal</span>
                   </div>
                 </Reveal>
 

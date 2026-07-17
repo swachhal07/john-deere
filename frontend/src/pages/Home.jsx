@@ -8,12 +8,9 @@ import genuineParts from '../assets/WhatsApp Image 2026-06-26 at 3.25.57 PM.jpeg
 import heroVideo from '../assets/878c2f97-b4c0-4141-bd25-2469d5da7a78.mp4'
 import hero1 from '../assets/wp9633811.jpg'
 import hero2 from '../assets/wp3183062.jpg'
-import hero3 from '../assets/john-deere-tractor-and-harvesters-8vy92xu1qcrorfub.jpg'
 import hero4 from '../assets/wp3183064.jpg'
 import hero5 from '../assets/power-and-technology-background.avif'
 import hero6 from '../assets/69892118-tracteur-travail-dans-champ-a-le-coucher-du-soleil-agriculture-agriculture-recolte-rural-paysage-et-durable-les-pratiques-gratuit-photo.jpg'
-import hero9 from '../assets/john-deere-harvester-agriculture.jpg'
-import hero10 from '../assets/Free-HD-John-Deere-Wallpapers-Photos.jpg'
 import hero11 from '../assets/a0d81b1f-4773-4d2c-b8e7-0c2f938df4d9.jpg'
 import hero12 from '../assets/df817e0e-a5a4-4005-8de8-414343315b17.jpg'
 import hero13 from '../assets/83af290a-005b-4889-8daf-f7ad21830cb3.jpg'
@@ -23,9 +20,6 @@ import hero15 from '../assets/07b91e73-5381-4c06-872d-050270db769c.jpg'
 const heroSlides = [
   { type: 'video', src: heroVideo },
   { type: 'image', src: hero1 },
-  { type: 'image', src: hero3 },
-  { type: 'image', src: hero9 },
-  { type: 'image', src: hero10 },
   { type: 'image', src: hero11 },
   { type: 'image', src: hero12 },
   { type: 'image', src: hero13 },
@@ -86,7 +80,7 @@ const reviews = [
     name: 'Ramesh Thapa',
     location: 'Chitwan, Bagmati',
     quote:
-      'The 5310 handles my Terai plots without strain, and MV Dugar had parts ready when I needed them. No downtime in two seasons.',
+      'The 5310 handles my Terai plots without strain, and Vivek Automobiles had parts ready when I needed them. No downtime in two seasons.',
     highlight: 'No downtime in two seasons',
   },
   {
@@ -107,7 +101,7 @@ const reviews = [
     name: 'Anita Rai',
     location: 'Jhapa, Koshi',
     quote:
-      'From paperwork to delivery, the MV Dugar team made buying my first tractor simple. The financing options actually fit a farmer’s budget.',
+      'From paperwork to delivery, the Vivek Automobiles team made buying my first tractor simple. The financing options actually fit a farmer’s budget.',
     highlight: 'made buying my first tractor simple',
   },
   {
@@ -336,11 +330,11 @@ function ReviewSlideshow({ items, interval = 7000 }) {
 const faqs = [
   {
     q: 'What warranty comes with a new John Deere tractor?',
-    a: 'Every new John Deere ships with the standard manufacturer warranty covering the engine and major driveline components. Extended warranty packages are available. Ask your MV Dugar sales contact for the option that fits your usage.',
+    a: 'Every new John Deere ships with the standard manufacturer warranty covering the engine and major driveline components. Extended warranty packages are available. Ask your Vivek Automobiles sales contact for the option that fits your usage.',
   },
   {
     q: 'How do I schedule a service visit?',
-    a: 'Call any MV Dugar branch or our service line and we’ll arrange it. We offer both on-site field service and workshop appointments, scheduled around your season.',
+    a: 'Call any Vivek Automobiles branch or our service line and we’ll arrange it. We offer both on-site field service and workshop appointments, scheduled around your season.',
   },
   {
     q: 'Are genuine John Deere spare parts stocked in Nepal?',
@@ -352,7 +346,7 @@ const faqs = [
   },
   {
     q: 'Where are your service centres located?',
-    a: 'MV Dugar serves all 7 provinces through its branches and trained field technicians. Get in touch and we’ll point you to the nearest service point.',
+    a: 'Vivek Automobiles serves all 7 provinces through its branches and trained field technicians. Get in touch and we’ll point you to the nearest service point.',
   },
   {
     q: 'Is operator training included at the time of delivery?',
@@ -417,7 +411,7 @@ function FaqAccordion() {
 // service tiles use icons. Confirm/adjust this offering list with the client.
 const specialties = [
   {
-    title: 'Tractor Sales',
+    title: 'Tractors',
     blurb: 'The complete John Deere 5000 Series, from 45 to 63 HP, matched to your land.',
     image: hero2,
     to: '/products',
@@ -425,19 +419,13 @@ const specialties = [
     feature: true,
   },
   {
-    title: 'Harvesting Equipment',
-    blurb: 'Combine harvesters that bring the crop home faster, with less grain loss.',
-    image: hero3,
-    to: '/products',
-  },
-  {
-    title: 'Implements & Attachments',
+    title: 'Implements',
     blurb: 'Tillers, ploughs and seed drills matched to every John Deere tractor.',
     image: hero4,
     to: '/products',
   },
   {
-    title: 'Genuine Parts',
+    title: 'Spare Parts',
     blurb: 'Authentic John Deere parts, stocked and ready across Nepal.',
     image: genuineParts,
     to: '/about',
@@ -620,7 +608,7 @@ export default function Home() {
 
       {/* ============ STATS MARQUEE ============ */}
       <section
-        aria-label="MV Dugar at a glance"
+        aria-label="Vivek Automobiles at a glance"
         className="relative overflow-hidden border-y border-white/5 bg-jd-green-deep py-4"
       >
         {/* Accessible static copy */}
@@ -867,7 +855,7 @@ export default function Home() {
 
       {/* ============ TRUST STRIP (yellow banner) ============ */}
       <section className="js-trust relative overflow-hidden bg-jd-yellow">
-<div className="relative mx-auto flex max-w-[88rem] flex-col items-center gap-10 px-6 py-12 md:flex-row md:justify-between md:py-14">
+        <div className="relative mx-auto flex max-w-[88rem] flex-col items-center gap-10 px-6 py-12 md:flex-row md:justify-between md:py-14">
           {/* Left: image + headline */}
           <div className="flex items-center gap-5">
             <img
@@ -925,7 +913,7 @@ export default function Home() {
             <p className="font-display text-2xl font-extrabold leading-tight text-black md:text-3xl">
               12,000+ Nepali Farmers
               <br />
-              Trust MV Dugar.
+              Trust Vivek Automobiles.
             </p>
             <div className="flex -space-x-3">
               <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full border-[3px] border-jd-yellow bg-jd-green text-white md:h-14 md:w-14">
@@ -951,7 +939,7 @@ export default function Home() {
           <Reveal className="mx-auto max-w-5xl text-center">
             <div className="mb-6 flex items-center justify-center gap-4 text-base font-bold uppercase tracking-[0.32em] text-jd-green md:text-xl">
               <span className="h-px w-16 bg-jd-green" />
-              MV Dugar FAQs
+              Vivek Automobiles FAQs
               <span className="h-px w-16 bg-jd-green" />
             </div>
             <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.02em] text-mist md:text-6xl lg:text-7xl">

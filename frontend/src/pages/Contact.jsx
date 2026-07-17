@@ -532,7 +532,7 @@ export default function Contact() {
                 >
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-jd-yellow">
-                      Head Office · Naxal, Kathmandu
+                      Head Office · Balaju, Kathmandu
                     </p>
                     <p className="mt-1 font-display text-2xl font-extrabold tracking-tight text-white">
                       01 - 4012628
@@ -672,7 +672,7 @@ export default function Contact() {
           <div className="relative overflow-hidden border border-gray-200">
             <span className="pointer-events-none absolute left-0 top-0 z-10 h-1 w-32 bg-jd-green" />
             <iframe
-              title="MV Dugar · John Deere showroom, Balaju, Kathmandu"
+              title="Vivek Automobiles · John Deere showroom, Balaju, Kathmandu"
               src="https://maps.google.com/maps?q=27.7300363,85.3020595&hl=en&z=17&output=embed"
               width="100%"
               height="520"
@@ -706,7 +706,7 @@ export default function Contact() {
           <div className="mb-14 text-center">
             <div className="mb-6 flex items-center justify-center gap-3 text-base font-bold uppercase tracking-[0.3em] text-jd-green md:text-lg">
               <span className="h-px w-12 bg-jd-green" />
-              Network · {offices.length} sites
+              Network · 27 sites
               <span className="h-px w-12 bg-jd-green" />
             </div>
             <h3 className="font-display text-5xl font-extrabold uppercase leading-[0.95] tracking-tight text-black md:text-7xl">

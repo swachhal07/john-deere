@@ -18,7 +18,7 @@ const reasons = [
   {
     no: '01',
     title: 'Two decades of authorised expertise',
-    body: 'Since 2002, Vivek Automobile has accumulated unparalleled expertise in John Deere products. Our team’s in-depth understanding of Nepal’s farming conditions, diverse terrain, and evolving crop cycles enables us to recommend the right machinery and implement combination for every farm, every field, and every season.',
+    body: 'Since 2002, Vivek Automobiles has accumulated unparalleled expertise in John Deere products. Our team’s in-depth understanding of Nepal’s farming conditions, diverse terrain, and evolving crop cycles enables us to recommend the right machinery and implement combination for every farm, every field, and every season.',
   },
   {
     no: '02',
@@ -28,7 +28,7 @@ const reasons = [
   {
     no: '03',
     title: '12,000+ farmers, all terrains',
-    body: 'From the Terai plains to the Pahad hills and the Himalayan regions, over 12,000 Nepali farmers have entrusted Vivek Automobile to power their operations. Our machinery has proven its reliability across every season and every terrain condition Nepal presents.',
+    body: 'From the Terai plains to the Pahad hills and the Himalayan regions, over 12,000 Nepali farmers have entrusted Vivek Automobiles to power their operations. Our machinery has proven its reliability across every season and every terrain condition Nepal presents.',
   },
   {
     no: '04',
@@ -48,7 +48,7 @@ const reasons = [
   {
     no: '07',
     title: 'Strength of the MV Dugar Group',
-    body: 'Vivek Automobile is backed by the established legacy, financial strength, and institutional credibility of the MV Dugar Group. This heritage of integrity and business excellence gives customers and partners the confidence of an organisation built for the long term.',
+    body: 'Vivek Automobiles is backed by the established legacy, financial strength, and institutional credibility of the MV Dugar Group. This heritage of integrity and business excellence gives customers and partners the confidence of an organisation built for the long term.',
   },
   {
     no: '08',
@@ -98,7 +98,7 @@ export default function WhyUs() {
 
       {/* ─── Hero ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#f4f6f0] pt-20 pb-28 md:pt-28 md:pb-36">
-        {/* Floating "25+ years" badge */}
+        {/* Floating "20+ years" badge */}
         <div
           aria-hidden
           className="badge-25 pointer-events-none absolute right-6 top-2 hidden md:right-12 md:top-4 md:block lg:right-20 lg:top-6"
@@ -110,7 +110,7 @@ export default function WhyUs() {
             />
             <div className="relative text-center leading-tight">
               <div className="font-display text-4xl font-extrabold text-black md:text-5xl">
-                25<span className="text-[0.7em]">+</span>
+                20<span className="text-[0.7em]">+</span>
               </div>
               <div className="mt-1 font-display text-sm font-bold leading-[1.15] text-black md:text-base">
                 Years

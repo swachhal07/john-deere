@@ -147,7 +147,7 @@ function Logo({ isHome }) {
   return (
     <Link
       to="/"
-      aria-label="MV Dugar — authorized John Deere distributor in Nepal"
+      aria-label="MV Dugar — authorised John Deere dealer in Nepal"
       className="absolute left-1/2 top-1/2 z-20 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-3 md:flex"
     >
       <img
@@ -224,7 +224,7 @@ export default function Navbar() {
         {/* Mobile logo (left) */}
         <Link
           to="/"
-          aria-label="MV Dugar — authorized John Deere distributor in Nepal"
+          aria-label="MV Dugar — authorised John Deere dealer in Nepal"
           className="flex items-center gap-2 md:hidden"
         >
           <img src={dugarLogo} alt="MV Dugar" className="h-8 w-auto" />
