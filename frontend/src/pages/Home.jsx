@@ -3,25 +3,25 @@ import { motion } from 'motion/react'
 import Reveal from '../components/Reveal'
 import { gsap, useGSAP } from '../lib/gsap'
 
-import serviceTeam from '../assets/WhatsApp Image 2026-06-26 at 2.44.17 PM.jpeg'
-import genuineParts from '../assets/WhatsApp Image 2026-06-26 at 3.25.57 PM.jpeg'
+import serviceTeam from '../assets/WhatsApp Image 2026-06-26 at 2.44.17 PM.webp'
+import genuineParts from '../assets/WhatsApp Image 2026-06-26 at 3.25.57 PM.webp'
 import heroVideo from '../assets/878c2f97-b4c0-4141-bd25-2469d5da7a78.mp4'
-import hero1 from '../assets/wp9633811.jpg'
-import hero2 from '../assets/wp3183062.jpg'
-import hero4 from '../assets/wp3183064.jpg'
+import hero1 from '../assets/wp9633811.webp'
+import hero2 from '../assets/wp3183062.webp'
+import hero4 from '../assets/wp3183064.webp'
 import hero5 from '../assets/power-and-technology-background.avif'
-import hero6 from '../assets/69892118-tracteur-travail-dans-champ-a-le-coucher-du-soleil-agriculture-agriculture-recolte-rural-paysage-et-durable-les-pratiques-gratuit-photo.jpg'
-import hero11 from '../assets/a0d81b1f-4773-4d2c-b8e7-0c2f938df4d9.jpg'
-import hero12 from '../assets/df817e0e-a5a4-4005-8de8-414343315b17.jpg'
-import hero13 from '../assets/83af290a-005b-4889-8daf-f7ad21830cb3.jpg'
-import hero14 from '../assets/28c32bc4-018b-47b0-ab1f-e644ce2e4f78.jpg'
-import hero15 from '../assets/07b91e73-5381-4c06-872d-050270db769c.jpg'
+import hero6 from '../assets/69892118-tracteur-travail-dans-champ-a-le-coucher-du-soleil-agriculture-agriculture-recolte-rural-paysage-et-durable-les-pratiques-gratuit-photo.webp'
+import hero11 from '../assets/a0d81b1f-4773-4d2c-b8e7-0c2f938df4d9.webp'
+import hero12 from '../assets/05b7b343-dfe0-4c51-b42f-399fb652f4e1.webp'
+import hero13 from '../assets/83af290a-005b-4889-8daf-f7ad21830cb3.webp'
+import hero14 from '../assets/28c32bc4-018b-47b0-ab1f-e644ce2e4f78.webp'
+import hero15 from '../assets/07b91e73-5381-4c06-872d-050270db769c.webp'
 
 const heroSlides = [
   { type: 'video', src: heroVideo },
   { type: 'image', src: hero1 },
   { type: 'image', src: hero11 },
-  { type: 'image', src: hero12 },
+  { type: 'image', src: hero12, position: '50% 30%' },
   { type: 'image', src: hero13 },
   { type: 'image', src: hero14 },
   { type: 'image', src: hero15 },
@@ -574,7 +574,8 @@ export default function Home() {
                   src={s.src}
                   alt=""
                   aria-hidden={i !== slide}
-                  className="h-full w-full object-cover md:animate-[kenburns_8s_ease-in-out_infinite_alternate]"
+                  style={s.position ? { objectPosition: s.position } : undefined}
+                  className="h-full w-full object-cover"
                 />
               )}
             </div>
@@ -582,7 +583,6 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
         </div>
-        <style>{`@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09)}}`}</style>
 
         {/* Prev / Next controls */}
         <button

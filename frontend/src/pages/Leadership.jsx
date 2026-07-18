@@ -4,12 +4,12 @@ import motiImg from '../assets/af0b8ecf-4ddc-41f9-9dd1-ba5c0df1b212.webp'
 import vivekImg from '../assets/ae68fbad-4028-45aa-81d5-44d526f4f5af.webp'
 import shubhamImg from '../assets/af5ea000-e8c5-4f03-ac64-9fd3a8bb8009.webp'
 import namanImg from '../assets/eb7eb529-8d15-4359-8ac0-df51b7393d00.webp'
-import businessHeadImg from '../assets/WhatsApp Image 2026-06-29 at 9.12.16 PM.jpeg'
-import salesHeadImg from '../assets/sales head.jpeg'
-import customerSupportHeadImg from '../assets/customer support head.jpeg'
-import sparepartsHeadImg from '../assets/spareparts head .jpeg'
-import financeHeadImg from '../assets/finance head.jpeg'
-import remarketingHeadImg from '../assets/remarketing head.jpeg'
+import businessHeadImg from '../assets/WhatsApp Image 2026-06-29 at 9.12.16 PM.webp'
+import salesHeadImg from '../assets/sales head.webp'
+import customerSupportHeadImg from '../assets/customer support head.webp'
+import sparepartsHeadImg from '../assets/spareparts head .webp'
+import financeHeadImg from '../assets/finance head.webp'
+import remarketingHeadImg from '../assets/remarketing head.webp'
 
 const directors = [
   {

@@ -1,7 +1,7 @@
 // John Deere Nepal — 5-Series tractor line-up sold by MV Dugar.
 
 import img5075e from '../assets/5075e-4wd-trem- iv-001-5053.avif'
-import img5405e from '../assets/john-deere-5405-tractor-termiv.jpeg'
+import img5405e from '../assets/john-deere-5405-tractor-termiv.webp'
 import img5310mfwd from '../assets/john_deere_india_trem4_5310_right_angle_large_1a5dd6f40ebd3c6aac80321ed0a29f52e44dbe57.avif'
 import img5310e from '../assets/john_deere_india_trem4_5310_right_angle_large_1a5dd6f40ebd3c6aac80321ed0a29f52e44dbe57 (1)e.avif'
 import img5050d from '../assets/5050d_large_cc106457ecc18698f1788e23df3db14e776405e7.avif'

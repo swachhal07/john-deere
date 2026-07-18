@@ -172,8 +172,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
   const lastScrollY = useRef(0)
-  const { pathname } = useLocation()
-  const isHome = pathname === '/'
+  // Navbar renders solid white on every route, including the home hero.
+  const isHome = false
 
   useEffect(() => {
     const handleScroll = () => {

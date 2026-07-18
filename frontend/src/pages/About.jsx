@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import jdLogo from '../assets/john-deere-logo.png'
 import mvDugarLogo from '../assets/MVDUGAR-01.png'
-import coverFieldBg from '../assets/wp9212100.jpg'
-import storySlide1 from '../assets/WhatsApp Image 2026-06-26 at 8.30.45 AM.jpeg'
-import storySlide2 from '../assets/WhatsApp Image 2026-06-26 at 8.30.46 AM.jpeg'
-import storySlide3 from '../assets/WhatsApp Image 2026-06-26 at 8.30.47 AM.jpeg'
-import storySlide4 from '../assets/WhatsApp Image 2026-06-26 at 8.33.10 AM.jpeg'
+import coverFieldBg from '../assets/wp9212100.webp'
+import storySlide1 from '../assets/WhatsApp Image 2026-06-26 at 8.30.45 AM.webp'
+import storySlide2 from '../assets/WhatsApp Image 2026-06-26 at 8.30.46 AM.webp'
+import storySlide3 from '../assets/WhatsApp Image 2026-06-26 at 8.30.47 AM.webp'
+import storySlide4 from '../assets/WhatsApp Image 2026-06-26 at 8.33.10 AM.webp'
 
-import serviceTeamPhoto from '../assets/_DSC5954.jpg.jpeg'
-import serviceTeamPhoto2 from '../assets/_DSC5898.jpg.jpeg'
+import serviceTeamPhoto from '../assets/_DSC5954.jpg.webp'
+import serviceTeamPhoto2 from '../assets/_DSC5898.jpg.webp'
 
 /* ────────────────────────────────────────────────────────────
    ABOUT — "Field Almanac"

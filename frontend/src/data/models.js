@@ -3,9 +3,9 @@
 //
 // NOTE: HP figures are indicative for layout — please confirm the exact
 // specifications with John Deere / MV Dugar before publishing.
-import imgA from '../assets/wp9633811.jpg'
-import imgB from '../assets/wp3183064.jpg'
-import imgC from '../assets/wp3183062.jpg'
+import imgA from '../assets/wp9633811.webp'
+import imgB from '../assets/wp3183064.webp'
+import imgC from '../assets/wp3183062.webp'
 
 export const tractorModels = [
   {

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/john-deere-logo.png'
-import bg from '../assets/john-deere-tractor-and-harvesters-8vy92xu1qcrorfub.jpg'
+import bg from '../assets/john-deere-tractor-and-harvesters-8vy92xu1qcrorfub.webp'
 
 const nav = [
   { to: '/', label: 'Home' },
@@ -59,7 +59,7 @@ export default function Footer() {
           </a>
         </div>
 
-        <div className="mt-20 flex flex-col items-center gap-3 border-t border-white/10 pt-8 text-base text-white/55">
+        <div className="mt-20 flex flex-col items-center gap-6 border-t border-white/10 pt-10 text-base text-white/55">
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
             <Link to="/privacy-policy" className="transition-colors hover:text-white">
               Privacy Policy
