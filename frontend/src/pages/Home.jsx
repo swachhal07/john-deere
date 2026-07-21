@@ -48,11 +48,7 @@ const marqueeFacts = [
   {
     node: <>Est. 2002</>,
     text: 'Est. 2002',
-  },
-  {
-    node: <>7 provinces served</>,
-    text: '7 provinces served',
-  },
+  }
 ]
 
 function PackageIcon() {

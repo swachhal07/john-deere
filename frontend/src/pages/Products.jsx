@@ -5,6 +5,33 @@ import Reveal from '../components/Reveal'
 import { products as staticProducts, categories } from '../data/products'
 
 /* ------------------------------------------------------------------ */
+/*  Series split — the 5D (economy) and 5E (premium) families.        */
+/* ------------------------------------------------------------------ */
+const SERIES_META = {
+  D: {
+    code: '5D',
+    blurb:
+      'The 5D series — 36 to 50 HP. Multi-utility by nature and efficient across both agricultural work and heavy-duty haulage, built simple enough to service anywhere in Nepal.',
+  },
+  E: {
+    code: '5E',
+    blurb:
+      'The 5E series — 50 to 75 HP, purpose-built for heavy-duty work and large implements. More hydraulics, more comfort and more capability for the long working day.',
+  },
+}
+
+// Classify a model into its series. Honours an explicit `series` field when
+// present, otherwise derives it from the model name / trim / horsepower so it
+// works for both the bundled data and rows coming from the API.
+function seriesOf(p) {
+  if (p.series === 'D' || p.series === 'E') return p.series
+  const name = (p.name || '').toUpperCase()
+  if (name.endsWith('E') || p.trim === 'E') return 'E'
+  if (name.endsWith('D')) return 'D'
+  return p.hp > 50 ? 'E' : 'D'
+}
+
+/* ------------------------------------------------------------------ */
 /*  Topographic placeholder — used until real product photos arrive.  */
 /* ------------------------------------------------------------------ */
 function TopoPattern({ stroke = '#ffffff', opacity = 0.16 }) {
@@ -124,7 +151,7 @@ function BuildCard({ product }) {
 /* ------------------------------------------------------------------ */
 /*  Page                                                              */
 /* ------------------------------------------------------------------ */
-export default function Products() {
+export default function Products({ series }) {
   const [active, setActive] = useState('All')
   const [products, setProducts] = useState(staticProducts)
 
@@ -145,21 +172,38 @@ export default function Products() {
     }
   }, [])
 
+  // On a series page, narrow the list to that family; otherwise show everything.
+  const pool = useMemo(
+    () => (series ? products.filter((p) => seriesOf(p) === series) : products),
+    [series, products]
+  )
+
+  // Reset the category filter whenever we switch between all / D / E pages.
+  useEffect(() => {
+    setActive('All')
+  }, [series])
+
   const visible = useMemo(() => {
-    if (active === 'All') return products
-    if (active === 'MFWD' || active === '2WD') return products.filter((p) => p.drive === active)
-    if (active === 'Dual Clutch') return products.filter((p) => p.clutch === 'Dual')
-    if (active === 'Single Clutch') return products.filter((p) => p.clutch === 'Single')
-    return products
-  }, [active, products])
+    if (active === 'All') return pool
+    if (active === 'MFWD' || active === '2WD') return pool.filter((p) => p.drive === active)
+    if (active === 'Dual Clutch') return pool.filter((p) => p.clutch === 'Dual')
+    if (active === 'Single Clutch') return pool.filter((p) => p.clutch === 'Single')
+    return pool
+  }, [active, pool])
+
+  const meta = series ? SERIES_META[series] : null
+  const hpList = pool.map((p) => p.hp)
+  const hpMin = hpList.length ? Math.min(...hpList) : 36
+  const hpMax = hpList.length ? Math.max(...hpList) : 75
+  const mfwdCount = pool.filter((p) => p.drive === 'MFWD').length
 
   return (
     <>
       {/* ============ HERO — asymmetric, type-led ============ */}
-      <section className="relative overflow-hidden bg-ink pt-20 pb-20 md:pt-24 md:pb-24">
+      <section className="relative min-h-screen overflow-hidden bg-ink py-20 md:py-28">
         <div className="absolute -left-40 -bottom-48 h-[520px] w-[520px] rounded-full bg-jd-green/10 blur-3xl" />
 
-        <div className="relative mx-auto grid max-w-[88rem] grid-cols-1 gap-12 px-6 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
+        <div className="relative mx-auto grid w-full max-w-[88rem] grid-cols-1 gap-12 px-6 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
           <div>
             <motion.span
               className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.4em] text-jd-green md:text-base"
@@ -167,7 +211,7 @@ export default function Products() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05 }}
             >
-              <span className="h-px w-10 bg-jd-green" /> The 5-Series · 36–75 HP
+              <span className="h-px w-10 bg-jd-green" /> {meta ? `${meta.code} Series` : 'The 5-Series'} · {hpMin}–{hpMax} HP
             </motion.span>
             <motion.h1
               className="mt-6 font-display text-[clamp(3.5rem,8vw,7.5rem)] font-extrabold leading-[1.02] tracking-tighter text-mist"
@@ -175,26 +219,51 @@ export default function Products() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15 }}
             >
-              One series.<br />
-              <span className="relative whitespace-nowrap text-jd-green">
-                Every farm
-                <svg
-                  className="absolute -bottom-2 left-0 w-full"
-                  viewBox="0 0 300 16"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M2 11 C 70 4, 150 4, 298 9"
-                    stroke="#ffde00"
-                    strokeWidth="6"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
-              <br />
-              in Nepal.
+              {meta ? (
+                <>
+                  The {meta.code}<br />
+                  <span className="relative whitespace-nowrap text-jd-green">
+                    Series
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full"
+                      viewBox="0 0 300 16"
+                      fill="none"
+                      preserveAspectRatio="none"
+                      aria-hidden
+                    >
+                      <path
+                        d="M2 11 C 70 4, 150 4, 298 9"
+                        stroke="#ffde00"
+                        strokeWidth="6"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </>
+              ) : (
+                <>
+                  One series.<br />
+                  <span className="relative whitespace-nowrap text-jd-green">
+                    Every farm
+                    <svg
+                      className="absolute -bottom-2 left-0 w-full"
+                      viewBox="0 0 300 16"
+                      fill="none"
+                      preserveAspectRatio="none"
+                      aria-hidden
+                    >
+                      <path
+                        d="M2 11 C 70 4, 150 4, 298 9"
+                        stroke="#ffde00"
+                        strokeWidth="6"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                  <br />
+                  in Nepal.
+                </>
+              )}
             </motion.h1>
             <motion.p
               className="mt-8 max-w-xl text-lg leading-relaxed text-mist-dim md:text-xl"
@@ -202,8 +271,9 @@ export default function Products() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.32 }}
             >
-              Ten builds, one chassis lineage, engineered for terraced hills, Terai paddies,
-              and the cooperatives that work both. Stocked, serviced and parted by Vivek Automobiles.
+              {meta
+                ? meta.blurb
+                : 'Ten builds, one chassis lineage, engineered for terraced hills, Terai paddies, and the cooperatives that work both. Stocked, serviced and parted by Vivek Automobiles.'}
             </motion.p>
 
             <motion.div
@@ -213,17 +283,17 @@ export default function Products() {
               transition={{ duration: 0.7, delay: 0.45 }}
             >
               <div>
-                <div className="font-display text-4xl font-extrabold text-mist">10</div>
+                <div className="font-display text-4xl font-extrabold text-mist">{pool.length}</div>
                 <div className="text-xs uppercase tracking-[0.28em] text-mist-dim">Models in stock</div>
               </div>
               <div className="h-10 w-px bg-mist/15" />
               <div>
-                <div className="font-display text-4xl font-extrabold text-mist">36–75</div>
+                <div className="font-display text-4xl font-extrabold text-mist">{hpMin}–{hpMax}</div>
                 <div className="text-xs uppercase tracking-[0.28em] text-mist-dim">HP range</div>
               </div>
               <div className="h-10 w-px bg-mist/15" />
               <div>
-                <div className="font-display text-4xl font-extrabold text-mist">4</div>
+                <div className="font-display text-4xl font-extrabold text-mist">{mfwdCount}</div>
                 <div className="text-xs uppercase tracking-[0.28em] text-mist-dim">MFWD builds</div>
               </div>
             </motion.div>
@@ -237,10 +307,10 @@ export default function Products() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="text-xs font-semibold uppercase tracking-[0.4em] text-mist-dim md:text-sm">
-              The line-up
+              {meta ? `The ${meta.code} line-up` : 'The line-up'}
             </div>
             <ol className="mt-5 divide-y divide-mist/10 border-t border-mist/10">
-              {products.map((p, i) => (
+              {pool.map((p, i) => (
                 <li key={p.id}>
                   <a
                     href={`#${p.id}`}
@@ -300,7 +370,7 @@ export default function Products() {
           <span className="absolute right-6 top-1/2 hidden -translate-y-1/2 font-mono text-xs tabular-nums text-mist-dim md:block">
             <span className="text-mist">{String(visible.length).padStart(2, '0')}</span>
             <span className="mx-1.5 text-mist-dim/50">/</span>
-            {String(products.length).padStart(2, '0')}
+            {String(pool.length).padStart(2, '0')}
           </span>
         </div>
       </section>
